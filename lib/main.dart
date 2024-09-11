@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:showcase/screens/auth_screen.dart';
+import 'package:showcase/screens/login_screen.dart';
+import 'package:showcase/screens/signup_screen.dart';
+import 'package:showcase/screens/splash_screen.dart';
 
 void main() {
   runApp(const MainApp());
@@ -11,8 +15,8 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'showcase',
-      home: <screen_name>(),
-      debugShowCheckedModeBanner: false,
+      home: SplashScreen(),
+      debugShowCheckedModeBanner: false,      
     );
   }
 }

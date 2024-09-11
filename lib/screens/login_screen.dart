@@ -13,7 +13,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 75),
+        padding: const EdgeInsets.symmetric(horizontal: 65, vertical: 20), // Equal vertical padding
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,7 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 70),
+            const SizedBox(height: 20), // Adjusted for equal top and bottom spacing
             const Text(
               "Welcome back, you've been missed!",
               style: TextStyle(
@@ -35,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 50),
+            const SizedBox(height: 20), // Adjusted for equal top and bottom spacing
             Form(
               child: Column(
                 children: [
@@ -44,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     cursorColor: Colors.white,
                     style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+                      contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15), // Equal vertical padding
                       labelText: 'Email address',
                       hintText: 'Enter your email address',
                       border: OutlineInputBorder(
@@ -72,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     cursorColor: Colors.white,
                     style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+                      contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15), // Equal vertical padding
                       labelText: 'Password',
                       hintText: 'Enter your password',
                       border: OutlineInputBorder(
@@ -107,7 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 70),
+                  const SizedBox(height: 20), // Adjusted for equal top and bottom spacing
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.black,
@@ -120,13 +120,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: () {},
                     child: const Text('Sign In'),
                   ),
-                  const SizedBox(height: 150),
+                  const SizedBox(height: 30), // Adjusted for equal top and bottom spacing
                   const Text(
                     'Not a member? Register now!',
                     style: TextStyle(
                       fontSize: 12,
                       color: Colors.white,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],

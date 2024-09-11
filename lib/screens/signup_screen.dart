@@ -15,7 +15,7 @@ class _SignupScreenState extends State<SignupScreen> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 75),
+        padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 20), // Equal vertical padding
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,25 +28,25 @@ class _SignupScreenState extends State<SignupScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 50),
+            const SizedBox(height: 25), // Adjusted for equal top and bottom spacing
             Text(
               "Let's create an account for you!",
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 12,
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 40),
+            const SizedBox(height: 25), // Adjusted for equal top and bottom spacing
             Form(
               child: Column(
                 children: [
                   TextFormField(
                     keyboardType: TextInputType.emailAddress,
                     cursorColor: Colors.white,
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+                      contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15), // Equal vertical padding
                       labelText: 'Name',
                       hintText: 'Enter your name',
                       border: OutlineInputBorder(
@@ -56,11 +56,11 @@ class _SignupScreenState extends State<SignupScreen> {
                       fillColor: const Color.fromRGBO(90, 90, 90, 1),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: Colors.white),
+                        borderSide: const BorderSide(color: Colors.white),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: Colors.white),
+                        borderSide: const BorderSide(color: Colors.white),
                       ),
                     ),
                     onChanged: (String value) {},
@@ -68,13 +68,13 @@ class _SignupScreenState extends State<SignupScreen> {
                       return value!.isEmpty ? 'Please enter name' : null;
                     },
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 15),
                   TextFormField(
                     keyboardType: TextInputType.emailAddress,
                     cursorColor: Colors.white,
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+                      contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15), // Equal vertical padding
                       labelText: 'Email address',
                       hintText: 'Enter your email address',
                       border: OutlineInputBorder(
@@ -84,11 +84,11 @@ class _SignupScreenState extends State<SignupScreen> {
                       fillColor: const Color.fromRGBO(90, 90, 90, 1),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: Colors.white),
+                        borderSide: const BorderSide(color: Colors.white),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: Colors.white),
+                        borderSide: const BorderSide(color: Colors.white),
                       ),
                     ),
                     onChanged: (String value) {},
@@ -96,13 +96,13 @@ class _SignupScreenState extends State<SignupScreen> {
                       return value!.isEmpty ? 'Please enter email address' : null;
                     },
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 15),
                   TextFormField(
                     keyboardType: TextInputType.visiblePassword,
                     cursorColor: Colors.white,
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+                      contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15), // Equal vertical padding
                       labelText: 'Password',
                       hintText: 'Enter your password',
                       border: OutlineInputBorder(
@@ -112,11 +112,11 @@ class _SignupScreenState extends State<SignupScreen> {
                       fillColor: const Color.fromRGBO(90, 90, 90, 1),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: Colors.white),
+                        borderSide: const BorderSide(color: Colors.white),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: Colors.white),
+                        borderSide: const BorderSide(color: Colors.white),
                       ),
                     ),
                     onChanged: (String value) {},
@@ -124,13 +124,13 @@ class _SignupScreenState extends State<SignupScreen> {
                       return value!.isEmpty ? 'Please enter password' : null;
                     },
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 15),
                   TextFormField(
                     keyboardType: TextInputType.visiblePassword,
                     cursorColor: Colors.white,
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+                      contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15), // Equal vertical padding
                       labelText: 'Re-enter Password',
                       hintText: 'Re-enter your password',
                       border: OutlineInputBorder(
@@ -140,11 +140,11 @@ class _SignupScreenState extends State<SignupScreen> {
                       fillColor: const Color.fromRGBO(90, 90, 90, 1),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: Colors.white),
+                        borderSide: const BorderSide(color: Colors.white),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: Colors.white),
+                        borderSide: const BorderSide(color: Colors.white),
                       ),
                     ),
                     onChanged: (String value) {},
@@ -152,7 +152,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       return value!.isEmpty ? 'Please re-enter password' : null;
                     },
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 12),
                   Row(
                     children: [
                       Checkbox(
@@ -165,8 +165,8 @@ class _SignupScreenState extends State<SignupScreen> {
                         activeColor: Colors.white,
                         checkColor: Colors.black,
                       ),
-                      Text(
-                        'agree to terms and conditions',
+                      const Text(
+                        'Agree to terms and conditions',
                         style: TextStyle(
                           fontSize: 12,
                           color: Colors.white,
@@ -175,21 +175,21 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 40),
+                  const SizedBox(height: 12),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.black,
                       backgroundColor: Colors.white,
-                      minimumSize: Size(double.infinity, 40),
+                      minimumSize: const Size(double.infinity, 40),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                     onPressed: () {},
-                    child: Text('Sign Up'),
+                    child: const Text('Sign Up'),
                   ),
-                  SizedBox(height: 70),
-                  Text(
+                  const SizedBox(height: 30),
+                  const Text(
                     'Already a member? Sign In!',
                     style: TextStyle(
                       fontSize: 12,
