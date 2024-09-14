@@ -1,5 +1,6 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import '../widgets/carousel_card.dart';
+import '../widgets/horizontal_list.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -83,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(height: 10),
             Flexible(
               child: Container(
-                child: _buildCarousel(),
+                child: CarouselCard(carouselItems: carouselItems),
               ),
             ),
             SizedBox(height: 25),
@@ -97,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(height: 12),
             Flexible(
               child: Container(
-                child: _buildHorizontalList(mustWatchMovies),
+                child: HorizontalList(items: mustWatchMovies),
               ),
             ),
             SizedBox(height: 10),
@@ -111,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(height: 12),
             Flexible(
               child: Container(
-                child: _buildHorizontalList(mustWatchTV),
+                child: HorizontalList(items: mustWatchTV),
               ),
             ),
             //SizedBox(height: 5), // Add bottom padding
@@ -137,86 +138,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildCarousel() {
-    return CarouselSlider(
-      items: carouselItems.map((item) {
-        return Stack(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                image: DecorationImage(
-                  image: NetworkImage(item['image']!),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            Positioned(
-              bottom: 3,
-              left: 3,
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                child: Text(
-                  item['text']!,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 9,
-                    fontStyle: FontStyle.italic,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        );
-      }).toList(),
-      options: CarouselOptions(
-        height: double.infinity,
-        aspectRatio: 16 / 9,
-        viewportFraction: 1.0,
-        autoPlay: true,
-        autoPlayInterval: Duration(seconds: 3),
-        autoPlayAnimationDuration: Duration(milliseconds: 800),
-        enlargeCenterPage: true,
-      ),
-    );
-  }
-
-  Widget _buildHorizontalList(List<Map<String, String>> items) {
-    return ListView.builder(
-      scrollDirection: Axis.horizontal,
-      itemCount: items.length,
-      itemBuilder: (context, index) {
-        final item = items[index];
-        return Container(
-          width: 95,
-          margin: EdgeInsets.symmetric(horizontal: 8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.network(
-                  item['image']!,
-                  width: 95,
-                  height: 142.5,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              SizedBox(height: 7),
-              Text(
-                item['title']!,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 10),
-              ),
-            ],
-          ),
-        );
-      },
     );
   }
 }
