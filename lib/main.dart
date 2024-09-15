@@ -9,6 +9,7 @@ import './screens/home_screen.dart';
 import './screens/genre_screen.dart';
 import './screens/settings_screen.dart';
 import './screens/change_pass_screen.dart';
+import './screens/delete_acc_screen.dart';
 
 void main() {
   runApp(const MainApp());
@@ -21,7 +22,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'showcase',
-      home: ChangePasswordScreen(),
+      home: DeleteAccountScreen(),
       debugShowCheckedModeBanner: false,      
     );
   }
