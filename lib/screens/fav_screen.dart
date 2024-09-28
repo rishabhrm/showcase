@@ -38,7 +38,6 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
         leading: IconButton(
@@ -47,17 +46,15 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
             color: Colors.white,
             size: 40,
           ),
-          onPressed: () {
-            Navigator.pop(context); // Navigate back to the previous screen
-          },
+          onPressed: () {},
         ),
-        elevation: 0, // Remove the shadow of the AppBar
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 45).copyWith(top: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 50),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            SizedBox(height: 20),
             Text(
               'Favourites',
               style: TextStyle(

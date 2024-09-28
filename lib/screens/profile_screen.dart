@@ -1,187 +1,101 @@
 import 'package:flutter/material.dart';
+import 'package:showcase/widgets/navbar.dart';
 
-class UserProfileScreen extends StatelessWidget {
-  const UserProfileScreen({super.key});
+class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({super.key});
 
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        elevation: 0,
-        title: const Text(
-          'Profile',
-          style: TextStyle(color: Colors.white),
-        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.settings, color: Colors.white),
-            onPressed: () {
-              // Action for settings
-            },
+            onPressed: () {},
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+      body: Padding(
+        padding: const EdgeInsets.all(25),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 20),
-            // Profile Picture
             CircleAvatar(
-              backgroundImage: NetworkImage(
-                  'https://via.placeholder.com/150x150'), // Placeholder image URL
+              backgroundImage: NetworkImage('https://via.placeholder.com/150x150'),
               radius: 60,
             ),
-            const SizedBox(height: 20),
-            // Username and handle
+            const SizedBox(height: 10),
             const Text(
               'Test User',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 5),
+            const SizedBox(height: 3),
             const Text(
               '@testusername',
-              style: TextStyle(
-                color: Colors.white70,
-                fontSize: 14,
-              ),
+              style: TextStyle(color: Colors.white70, fontSize: 12),
             ),
-            const SizedBox(height: 20),
-            // Buttons: Change Picture and Edit Profile
+            const SizedBox(height: 15),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton.icon(
-                  onPressed: () {},
-                  icon: const Icon(Icons.camera_alt, color: Colors.white),
-                  label: const Text('Change Picture'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.transparent,
-                    side: BorderSide(color: Colors.white, width: 1),
-                  ),
-                ),
-                const SizedBox(width: 10),
-                ElevatedButton.icon(
-                  onPressed: () {},
-                  icon: const Icon(Icons.edit, color: Colors.white),
-                  label: const Text('Edit Profile'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.transparent,
-                    side: BorderSide(color: Colors.white, width: 1),
-                  ),
-                ),
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: const [
+                ProfileButton(icon: Icons.camera_alt, label: 'Change Picture'),
+                ProfileButton(icon: Icons.edit, label: 'Edit Profile'),
               ],
             ),
-            const SizedBox(height: 30),
-            // About Me Section
-            const Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'About Me',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+            const SizedBox(height: 15),
+            const Text(
+              'About Me',
+              style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
             const Text(
               'Lorem ipsum dolor sit amet. In quia voluptas hic amet blanditiis est quae minus. '
               'Eos nihil tempora ut pariatur sint aut reiciendis eveniet et Quis eligendi est facere '
               'quasi 33 voluptatem aspernatur est velit voluptas.',
-              style: TextStyle(
-                color: Colors.white70,
-                fontSize: 14,
-                height: 1.5,
-              ),
+              style: TextStyle(color: Colors.white70, fontSize: 11),
               textAlign: TextAlign.left,
             ),
-            const SizedBox(height: 20),
-            // Member Since Section
-            const Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Member Since: August 21, 2024',
-                style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 14,
-                ),
-              ),
+            const SizedBox(height: 15),
+            const Text(
+              'Member Since: August 21, 2024',
+              style: TextStyle(color: Colors.white70, fontSize: 12),
             ),
             const SizedBox(height: 30),
-            // Buttons: Already Watched, Want to Watch, Dashboard, Reviews
-            Wrap(
-              alignment: WrapAlignment.center,
-              spacing: 10,
-              runSpacing: 10,
-              children: [
-                ProfileButton(
-                  label: 'Already watched',
-                  icon: Icons.check,
-                ),
-                ProfileButton(
-                  label: 'Want to watch',
-                  icon: Icons.bookmark_border,
-                ),
-                ProfileButton(
-                  label: 'Dashboard',
-                  icon: Icons.dashboard_outlined,
-                ),
-                ProfileButton(
-                  label: 'Reviews',
-                  icon: Icons.reviews_outlined,
-                ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: const [
+                ProfileButton(icon: Icons.visibility, label: 'Already watched'),
+                ProfileButton(icon: Icons.star, label: 'Want to'),
               ],
             ),
-            const SizedBox(height: 20),
-            // Button: Favourites
-            ElevatedButton.icon(
-              onPressed: () {},
-              icon: const Icon(Icons.favorite_border, color: Colors.white),
-              label: const Text('Favourites'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.transparent,
-                side: BorderSide(color: Colors.white, width: 1),
-                minimumSize: const Size(double.infinity, 50),
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: const [
+                ProfileButton(icon: Icons.dashboard, label: 'Dashboard'),
+                ProfileButton(icon: Icons.rate_review, label: 'Reviews'),
+              ],
             ),
-            const SizedBox(height: 30),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: const [
+                Expanded(child: ProfileButton(icon: Icons.favorite, label: 'Favourites')),
+              ],
+            ),
           ],
         ),
       ),
-      // Bottom Navigation Bar
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.black,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white70,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.explore),
-            label: 'Explore',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            label: 'Profile',
-          ),
-        ],
-      ),
+      bottomNavigationBar: const Navbar(),
     );
   }
 }
 
-// Custom button widget for profile page
+// Unified button widget for action buttons
 class ProfileButton extends StatelessWidget {
   final String label;
   final IconData icon;
@@ -194,16 +108,21 @@ class ProfileButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton.icon(
+    return ElevatedButton.icon(
       onPressed: () {},
-      icon: Icon(icon, color: Colors.white),
+      icon: Icon(icon, color: Colors.white, size: 16), // Smaller icon size
       label: Text(
         label,
-        style: const TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white, fontSize: 10), // Smaller text size
       ),
-      style: OutlinedButton.styleFrom(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.transparent,
         side: const BorderSide(color: Colors.white, width: 1),
-        minimumSize: const Size(150, 40),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        minimumSize: const Size(0, 30), // Allow buttons to take equal space
+        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10), // Adjusted padding
       ),
     );
   }

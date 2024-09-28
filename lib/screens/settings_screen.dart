@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../widgets/elevated_button.dart';
+import '../widgets/icon_label.dart';
+import '../widgets/navbar.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -13,7 +16,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       appBar: AppBar(
         backgroundColor: Colors.black,
         leading: IconButton(
@@ -27,12 +29,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
         centerTitle: false,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 55)
-            .copyWith(top: 50), // Added top padding
+        padding: const EdgeInsets.symmetric(horizontal: 50),
         child: Column(
-          crossAxisAlignment:
-              CrossAxisAlignment.stretch, // Ensures buttons fill the width
-          children: <Widget>[
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
             Text(
               'Settings',
               style: TextStyle(
@@ -41,103 +42,36 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 55),
-            ElevatedButton(
+            const SizedBox(height: 60),
+            IconLabelButton(
+              icon: Icons.email,
+              label: 'Help and Support',
               onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color.fromRGBO(90, 90, 90, 1),
-                padding: EdgeInsets.symmetric(vertical: 12),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Icon(
-                      Icons.email,
-                      color: Colors.white,
-                    ),
-                    const SizedBox(width: 10),
-                    Text(
-                      'Help and Support',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ],
-                ),
-              ),
             ),
-            const SizedBox(height: 30),
-            ElevatedButton(
+            const SizedBox(height: 20),
+            IconLabelButton(
+              icon: Icons.delete,
+              label: 'Delete My Account',
               onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color.fromRGBO(90, 90, 90, 1),
-                padding: EdgeInsets.symmetric(vertical: 12),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Icon(
-                      Icons.delete,
-                      color: Colors.white,
-                    ),
-                    const SizedBox(width: 10),
-                    Text(
-                      'Delete My Account',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ],
-                ),
-              ),
             ),
-            const SizedBox(height: 30),
-            ElevatedButton(
+            const SizedBox(height: 20),
+            IconLabelButton(
+              icon: Icons.key,
+              label: 'Change Password',
               onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color.fromRGBO(90, 90, 90, 1),
-                padding: EdgeInsets.symmetric(vertical: 12),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Icon(
-                      Icons.key,
-                      color: Colors.white,
-                    ),
-                    const SizedBox(width: 10),
-                    Text(
-                      'Change Password',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ],
-                ),
-              ),
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 20),
             Container(
               height: 48,
-              padding: EdgeInsets.symmetric(vertical: 12),
               decoration: BoxDecoration(
-                color: Color.fromRGBO(90, 90, 90, 1),
+                color: const Color.fromRGBO(90, 90, 90, 1),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 10.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Row(
                       children: [
                         Icon(
@@ -147,7 +81,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         const SizedBox(width: 10),
                         Text(
                           'Dark Mode',
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                         ),
                       ],
                     ),
@@ -164,42 +98,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ],
               ),
             ),
-            const SizedBox(height: 130),
-            // Logout button
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.black,
-                backgroundColor: Colors.white,
-                minimumSize: const Size(double.infinity, 42),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
+            const SizedBox(height: 140),
+            CustomElevatedButton(
+              label: 'Log Out',
               onPressed: () {},
-              child: const Text('Log Out'),
             ),
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.black,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white.withOpacity(0.6),
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            label: 'Profile',
-          ),
-        ],
-      ),
+      bottomNavigationBar: Navbar(),
     );
   }
 }
