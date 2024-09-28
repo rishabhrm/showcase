@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:showcase/widgets/text_field.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
   const ChangePasswordScreen({super.key});
@@ -15,7 +16,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.chevron_left,
             color: Colors.white,
             size: 40,
@@ -43,93 +44,19 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TextFormField(
-                    keyboardType: TextInputType.emailAddress,
-                    cursorColor: Colors.white,
-                    style: const TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 15, horizontal: 15),
-                      labelText: 'Old password',
-                      hintText: 'Enter your old password',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      filled: true,
-                      fillColor: const Color.fromRGBO(90, 90, 90, 1),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: const BorderSide(color: Colors.white),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: const BorderSide(color: Colors.white),
-                      ),
-                    ),
-                    onChanged: (String value) {},
-                    validator: (value) {
-                      return value!.isEmpty
-                          ? 'Please enter email address'
-                          : null;
-                    },
+                  const CustomTextField(
+                    labelText: 'Old password',
+                    hintText: 'Enter your old password',
                   ),
                   const SizedBox(height: 20),
-                  TextFormField(
-                    keyboardType: TextInputType.visiblePassword,
-                    cursorColor: Colors.white,
-                    style: const TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 15, horizontal: 15),
-                      labelText: 'New Password',
-                      hintText: 'Enter your new password',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      filled: true,
-                      fillColor: const Color.fromRGBO(90, 90, 90, 1),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: const BorderSide(color: Colors.white),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: const BorderSide(color: Colors.white),
-                      ),
-                    ),
-                    onChanged: (String value) {},
-                    validator: (value) {
-                      return value!.isEmpty ? 'Please enter password' : null;
-                    },
+                  const CustomTextField(
+                    labelText: 'New password',
+                    hintText: 'Enter your new password',
                   ),
                   const SizedBox(height: 20),
-                  TextFormField(
-                    keyboardType: TextInputType.visiblePassword,
-                    cursorColor: Colors.white,
-                    style: const TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 15, horizontal: 15),
-                      labelText: 'Re-enter new Password',
-                      hintText: 'Re-enter your new password',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      filled: true,
-                      fillColor: const Color.fromRGBO(90, 90, 90, 1),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: const BorderSide(color: Colors.white),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: const BorderSide(color: Colors.white),
-                      ),
-                    ),
-                    onChanged: (String value) {},
-                    validator: (value) {
-                      return value!.isEmpty ? 'Please re-enter password' : null;
-                    },
+                  const CustomTextField(
+                    labelText: 'Re-enter new password',
+                    hintText: 'Re-enter your new password',
                   ),
                   const SizedBox(height: 25),
                   const Text(

@@ -14,6 +14,10 @@ import './screens/fav_screen.dart';
 import './screens/plan_screen.dart';
 import './screens/watched_screen.dart';
 
+import 'screens/movie_screen.dart';
+import 'screens/profile_edit_screen.dart';
+import 'screens/profile_screen.dart';
+
 void main() {
   runApp(const MainApp());
 }
@@ -25,7 +29,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'showcase',
-      home: WatchedScreen(),
+      home: ChangePasswordScreen(),
       debugShowCheckedModeBanner: false,      
     );
   }
