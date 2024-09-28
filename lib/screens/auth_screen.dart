@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../widgets/elevated_button.dart';
+import '../widgets/text_field.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -11,9 +13,8 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 20), // Equal vertical padding
+        padding: const EdgeInsets.symmetric(horizontal: 50),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,7 +27,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 25),
             const Text(
               "Almost there - check your inbox",
               style: TextStyle(
@@ -35,7 +36,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 15),
             Form(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,52 +49,21 @@ class _AuthScreenState extends State<AuthScreen> {
                     ),
                   ),
                   const SizedBox(height: 30),
-                  TextFormField(
-                    keyboardType: TextInputType.emailAddress,
-                    cursorColor: Colors.white,
-                    style: const TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-                      labelText: 'Code',
-                      hintText: 'Enter the code',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      filled: true,
-                      fillColor: const Color.fromRGBO(90, 90, 90, 1),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: const BorderSide(color: Colors.white),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: const BorderSide(color: Colors.white),
-                      ),
-                    ),
-                    onChanged: (String value) {},
-                    validator: (value) {
-                      return value!.isEmpty ? 'Please enter the code' : null;
-                    },
+                  const CustomTextField(
+                    labelText: 'Code',
+                    hintText: 'Enter the code',
                   ),
-                  const SizedBox(height: 30),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.black,
-                      backgroundColor: Colors.white,
-                      minimumSize: const Size(double.infinity, 40),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
+                  const SizedBox(height: 15),
+                  CustomElevatedButton(
+                    label: 'Continue',
                     onPressed: () {},
-                    child: const Text('Continue'),
                   ),
                   const SizedBox(height: 40),
-                  Center( // Center the "Resend the code" text
+                  Center(
                     child: const Text(
                       "Didn't receive the code? Resend the code.",
                       style: TextStyle(
-                        fontSize: 12,
+                        fontSize: 11,
                         color: Colors.white,
                       ),
                     ),
