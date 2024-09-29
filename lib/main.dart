@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-//import '../screens/movie_screen.dart';
+import '../screens/movie_screen.dart';
 //import '../screens/tv_screen.dart';
-import '../screens/dashboard_screen.dart';
 
 import '../screens/splash_screen.dart';
 import '../screens/login_screen.dart';
@@ -17,6 +16,7 @@ import '../screens/fav_screen.dart';
 import '../screens/watched_screen.dart';
 import '../screens/plan_screen.dart';
 import '../screens/reviews_screen.dart';
+import '../screens/dashboard_screen.dart';
 import '../screens/home_screen.dart';
 import '../screens/search_screen.dart';
 import '../screens/genre_screen.dart';
@@ -34,7 +34,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'showcase',
-      home: SearchScreen(),
+      home:MovieDetailScreen(),
       theme: ThemeData(
         textTheme: GoogleFonts.montserratTextTheme(
           Theme.of(context).textTheme,

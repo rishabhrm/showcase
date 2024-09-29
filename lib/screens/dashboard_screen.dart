@@ -1,25 +1,225 @@
 import 'package:flutter/material.dart';
+import '../widgets/horizontal_list.dart';
 
 class DashboardScreen extends StatefulWidget {
-  const DashboardScreen({super.key});
-
   @override
   State<DashboardScreen> createState() => _DashboardScreenState();
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
+  final List<Map<String, String>> newMovies = [
+    {
+      'image': 'assets/hoc.jpg',
+      'title': 'House of Cards',
+    },
+    {
+      'image': 'assets/td.jpg',
+      'title': 'True Detective',
+    },
+    {
+      'image': 'assets/drw.jpg',
+      'title': 'Doctor Who',
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('data',
+        leading: IconButton(
+          icon: const Icon(
+            Icons.keyboard_arrow_down,
+            color: Colors.white,
+            size: 40,
+          ),
+          onPressed: () {},
         ),
       ),
-      body: Column(
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 30),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 10),
+            const Text(
+              'Dashboard',
+              style: TextStyle(
+                fontSize: 30,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 25),
+            Center(
+              child: CircleAvatar(
+                radius: 60,
+                backgroundImage: AssetImage('assets/pfp.jpg'),
+              ),
+            ),
+            SizedBox(height: 20),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Column(
+                  children: [
+                    Text(
+                      "Watched",
+                      style: TextStyle(fontSize: 12, color: Colors.white),
+                    ),
+                    Text(
+                      "7",
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Text(
+                      "Planned",
+                      style: TextStyle(fontSize: 12, color: Colors.white),
+                    ),
+                    Text(
+                      "70",
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Text(
+                      "Favourites",
+                      style: TextStyle(fontSize: 12, color: Colors.white),
+                    ),
+                    Text(
+                      "4",
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+
+            SizedBox(height: 20),
+            Text(
+              'TIME SPENT WATCHING',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 13,
+                  fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Column(
+                  children: [
+                    Text('Months',
+                        style: TextStyle(fontSize: 12, color: Colors.white)),
+                    Text('12',
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white)),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Text('Days',
+                        style: TextStyle(fontSize: 12, color: Colors.white)),
+                    Text('25',
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white)),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Text('Hours',
+                        style: TextStyle(fontSize: 12, color: Colors.white)),
+                    Text('50',
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white)),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Text('Episodes',
+                        style: TextStyle(fontSize: 12, color: Colors.white)),
+                    Text('100',
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white)),
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(height: 20),
+            Text(
+              'MOST WATCHED SHOWS',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 13,
+                  fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 12),
+            Flexible(
+              child: HorizontalList(items: newMovies),
+            ),
+            Text(
+              'GENRE BREAKDOWN',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 13,
+                  fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 5),
+            genreBar("Comedy", 0.8),
+            genreBar("Action", 0.6),
+            genreBar("Adventure", 0.5),
+            genreBar("Mystery", 0.4),
+          ],
+        ),
+      ),
+    );
+  }
+
+
+  Widget genreBar(String genre, double progress) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 3),
+      child: Row(
         children: [
-          Text('data', style: TextStyle(
-            color: Colors.white,
-          ),)
+          Expanded(
+            flex: 3,
+            child: Text(
+              genre,
+              style: TextStyle(fontSize:12.5, color: Colors.white),
+              
+            ),
+          ),
+          Expanded(
+            flex: 7,
+            child: LinearProgressIndicator(
+              value: progress,
+              backgroundColor: Colors.black,
+              color: Colors.blue,
+            ),
+          ),
         ],
       ),
     );

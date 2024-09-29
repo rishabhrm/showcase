@@ -1,7 +1,37 @@
 import 'package:flutter/material.dart';
 
-class MovieDetailScreen extends StatelessWidget {
+import '../widgets/cast_list.dart';
+import '../widgets/horizontal_list.dart'; // Ensure this imports the correct path to HorizontalList
+
+class MovieDetailScreen extends StatefulWidget {
   const MovieDetailScreen({super.key});
+
+  @override
+  State<MovieDetailScreen> createState() => _MovieDetailScreenState();
+}
+
+class _MovieDetailScreenState extends State<MovieDetailScreen> {
+  final List<Map<String, String>> favouriteMovies = [
+    {
+      'image': 'assets/cai.jpg',
+      'title': 'Cezanne and I',
+    },
+    {
+      'image': 'assets/toe.jpg',
+      'title': 'The Theory of Everything',
+    },
+    {
+      'image': 'assets/abm.jpg',
+      'title': 'A Beautiful Mind',
+    },
+  ];
+
+  final List<Map<String, String>> castData = [
+    {'imageUrl': 'assets/dev.webp', 'name': 'Dev Patel'},
+    {'imageUrl': 'assets/jeremy.webp', 'name': 'Jeremy Irons'},
+    {'imageUrl': 'assets/devika.webp', 'name': 'Devika Bhise'},
+    {'imageUrl': 'assets/toby.webp', 'name': 'Toby Jones'},
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -9,52 +39,43 @@ class MovieDetailScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(            Icons.keyboard_arrow_down, color: Colors.white),
+          icon: const Icon(Icons.keyboard_arrow_down, color: Colors.white),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.of(context)
+                .pop(); // Pop the screen when the back button is pressed
           },
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.more_vert, color: Colors.white),
-            onPressed: () {},
-          )
-        ],
       ),
-      body: SingleChildScrollView(
+      body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Movie Poster and Title
-            Container(
-              alignment: Alignment.center,
-              child: Image.network(
-                'https://media.themoviedb.org/t/p/w220_and_h330_face/6y6R7DW8CVy15jI4Z3YbDypvA61.jpg', // replace with the actual movie image URL
-                height: 300,
-              ),
-            ),
-            const SizedBox(height: 20),
-            const Text(
-              'The Man Who Knew Infinity',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 10),
-            const Text(
-              '2016 • 1h 48m • English',
-              style: TextStyle(
-                color: Colors.white70,
-                fontSize: 14,
-              ),
-            ),
-            const SizedBox(height: 20),
+            // const SizedBox(height: 20),
+            // const Text(
+            //   'The Man Who Knew Infinity',
+            //   style: TextStyle(
+            //     color: Colors.white,
+            //     fontSize: 24,
+            //     fontWeight: FontWeight.bold,
+            //   ),
+            // ),
+            // const SizedBox(height: 10),
+            // const Text(
+            //   '2016 • 1h 48m • English',
+            //   style: TextStyle(
+            //     color: Colors.white70,
+            //     fontSize: 14,
+            //   ),
+            // ),
+            // const SizedBox(height: 20),
             // Play Trailer Button
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                // Implement trailer play functionality here
+              },
               icon: const Icon(Icons.play_arrow),
               label: const Text('Play Trailer'),
               style: ElevatedButton.styleFrom(
@@ -67,9 +88,7 @@ class MovieDetailScreen extends StatelessWidget {
             // Movie Description
             const Text(
               'Drama/History\n\n'
-              'Growing up poor in Madras, India, Srinivasa Ramanujan earns admittance to '
-              'Cambridge University during WWI, where he becomes a pioneer in mathematical '
-              'theories with the guidance of his professor, G.H. Hardy.',
+              'Growing up poor in Madras, Ind.',
               style: TextStyle(
                 color: Colors.white70,
                 fontSize: 14,
@@ -77,144 +96,104 @@ class MovieDetailScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            // Cast Section
-            const Text(
+
+            Text(
               'CAST',
               style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
+                  color: Colors.white,
+                  fontSize: 13,
+                  fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
-            SizedBox(
-              height: 100,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: const [
-                  CastItem(
-                    imageUrl: 'https://via.placeholder.com/100x100',
-                    name: 'Dev Patel',
-                  ),
-                  CastItem(
-                    imageUrl: 'https://via.placeholder.com/100x100',
-                    name: 'Jeremy Irons',
-                  ),
-                  CastItem(
-                    imageUrl: 'https://via.placeholder.com/100x100',
-                    name: 'Devika Bhise',
-                  ),
-                  CastItem(
-                    imageUrl: 'https://via.placeholder.com/100x100',
-                    name: 'Toby Jones',
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20),
-            // Reviews Section
-            const Text(
+            CastSection(castData: castData),
+            const SizedBox(height: 15),
+            Text(
               'REVIEWS',
               style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
+                  color: Colors.white,
+                  fontSize: 13,
+                  fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.grey[800],
-                borderRadius: BorderRadius.circular(10),
-              ),
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
-                    'Person 1',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 5),
-                  Text(
-                    'An exceptional telling of a story...',
-                    style: TextStyle(
-                      color: Colors.white70,
-                      fontSize: 12,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20),
-            // Your Review Section
-            const Text(
+            Text(
               'Your Review',
               style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: 10),
             TextField(
-              style: const TextStyle(color: Colors.white),
+              maxLines: 3,
               decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.grey[800],
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide.none,
-                ),
+                border: OutlineInputBorder(),
                 hintText: 'Write your review here',
-                hintStyle: const TextStyle(color: Colors.white70),
               ),
-              maxLines: 4,
             ),
-            const SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('Post Review'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white,
-                foregroundColor: Colors.black,
-                minimumSize: const Size(double.infinity, 50),
+            //SizedBox(height: 10),
+            Align(
+              alignment: Alignment.centerRight,
+              child: ElevatedButton(
+                onPressed: () {},
+                child: Text('Post Review'),
               ),
             ),
             const SizedBox(height: 20),
-            // Bottom Recommendations
-            const Text(
+            Text(
+              'WHERE TO WATCH',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 13,
+                  fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.asset(
+                    'assets/logo.png',
+                    width: 40,
+                    height: 40,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                SizedBox(width: 20),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Watch Now!',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Text(
+                      'Subscription required',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.white70,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 20),
+            Text(
               'RECOMMENDATIONS',
               style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
+                  color: Colors.white,
+                  fontSize: 13,
+                  fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 10),
-            SizedBox(
-              height: 150,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: const [
-                  RecommendationItem(
-                    imageUrl: 'https://via.placeholder.com/150x200',
-                    title: 'Movie 1',
-                  ),
-                  RecommendationItem(
-                    imageUrl: 'https://via.placeholder.com/150x200',
-                    title: 'Movie 2',
-                  ),
-                  RecommendationItem(
-                    imageUrl: 'https://via.placeholder.com/150x200',
-                    title: 'Movie 3',
-                  ),
-                ],
-              ),
+            const SizedBox(height: 8),
+            Flexible(
+              child: HorizontalList(items: favouriteMovies),
             ),
           ],
         ),
@@ -236,52 +215,19 @@ class CastItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 10),
+      padding: const EdgeInsets.only(right: 14),
       child: Column(
         children: [
           CircleAvatar(
-            backgroundImage: NetworkImage(imageUrl),
-            radius: 30,
+            backgroundImage: imageUrl.startsWith('http')
+                ? NetworkImage(imageUrl)
+                : AssetImage(imageUrl) as ImageProvider,
+            radius: 37,
           ),
-          const SizedBox(height: 5),
+          const SizedBox(height: 4),
           Text(
             name,
             style: const TextStyle(color: Colors.white70, fontSize: 12),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class RecommendationItem extends StatelessWidget {
-  final String imageUrl;
-  final String title;
-
-  const RecommendationItem({
-    required this.imageUrl,
-    required this.title,
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Image.network(
-            imageUrl,
-            width: 100,
-            height: 150,
-            fit: BoxFit.cover,
-          ),
-          const SizedBox(height: 5),
-          Text(
-            title,
-            style: const TextStyle(color: Colors.white70, fontSize: 12),
-            textAlign: TextAlign.center,
           ),
         ],
       ),

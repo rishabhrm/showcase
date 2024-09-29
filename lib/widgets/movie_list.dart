@@ -16,54 +16,24 @@ class MovieList extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Movie Poster with rounded corners
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.network(
-                  movie['image']!,
-                  width: 100,
-                  height: 150,
-                  fit: BoxFit.cover,
-                ),
+                child: (movie['image']!.startsWith('http'))
+                    ? Image.network(movie['image']!, width: 100, height: 150, fit: BoxFit.cover)
+                    : Image.asset(movie['image']!, width: 100, height: 150, fit: BoxFit.cover),
               ),
-              SizedBox(width: 16),
-              // Movie Details
+              const SizedBox(width: 16),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      movie['title']!,
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: 4),
-                    Text(
-                      movie['genre']!,
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.white70,
-                      ),
-                    ),
-                    SizedBox(height: 4),
-                    Text(
-                      movie['rating']!,
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.white70,
-                      ),
-                    ),
-                    SizedBox(height: 4),
-                    Text(
-                      'Added on: ${movie['added on']}',
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.white54,
-                      ),
-                    ),
+                    Text(movie['title']!, style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
+                    const SizedBox(height: 4),
+                    Text(movie['genre']!, style: const TextStyle(fontSize: 14, color: Colors.white70)),
+                    const SizedBox(height: 4),
+                    Text(movie['rating']!, style: const TextStyle(fontSize: 14, color: Colors.white70)),
+                    const SizedBox(height: 4),
+                    Text('Added on: ${movie['added on']}', style: const TextStyle(fontSize: 12, color: Colors.white54)),
                   ],
                 ),
               ),
