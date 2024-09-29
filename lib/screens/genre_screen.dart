@@ -52,9 +52,9 @@ class _GenreScreenState extends State<GenreScreen> {
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(
-            Icons.chevron_left,
+            Icons.keyboard_arrow_down,
             color: Colors.white,
-            size: 40,
+            size: 38,
           ),
           onPressed: () {},
         ),

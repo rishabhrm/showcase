@@ -31,10 +31,9 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
         leading: IconButton(
           icon: Icon(
-            Icons.chevron_left,
+            Icons.keyboard_arrow_down,
             color: Colors.white,
             size: 40,
           ),

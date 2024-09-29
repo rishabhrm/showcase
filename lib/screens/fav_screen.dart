@@ -39,10 +39,9 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
         leading: IconButton(
           icon: Icon(
-            Icons.chevron_left,
+            Icons.keyboard_arrow_down,
             color: Colors.white,
             size: 40,
           ),

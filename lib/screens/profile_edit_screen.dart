@@ -15,10 +15,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
         leading: IconButton(
           icon: const Icon(
-            Icons.chevron_left,
+            Icons.keyboard_arrow_down,
             color: Colors.white,
             size: 40,
           ),
