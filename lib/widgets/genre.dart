@@ -19,8 +19,8 @@ class GenreTile extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            Image.network(
-              genre.image,
+            Image(
+              image: _getImageProvider(genre.image),
               fit: BoxFit.cover,
             ),
             Container(
@@ -31,7 +31,7 @@ class GenreTile extends StatelessWidget {
                   padding: const EdgeInsets.all(10),
                   child: Text(
                     genre.name,
-                    style: const TextStyle(color: Colors.white, fontSize: 16),
+                    style: const TextStyle(color: Colors.white, fontSize: 12),
                   ),
                 ),
               ),
@@ -40,5 +40,13 @@ class GenreTile extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  ImageProvider _getImageProvider(String imagePath) {
+    if (imagePath.startsWith('http')) {
+      return NetworkImage(imagePath);
+    } else {
+      return AssetImage(imagePath);
+    }
   }
 }

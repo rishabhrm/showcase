@@ -19,7 +19,7 @@ class CarouselCard extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(
-                  image: NetworkImage(item['image']!),
+                  image: _getImageProvider(item['image']!),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -52,5 +52,13 @@ class CarouselCard extends StatelessWidget {
         enlargeCenterPage: true,
       ),
     );
+  }
+
+  ImageProvider _getImageProvider(String imagePath) {
+    if (imagePath.startsWith('http')) {
+      return NetworkImage(imagePath);
+    } else {
+      return AssetImage(imagePath);
+    }
   }
 }

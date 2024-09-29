@@ -15,6 +15,9 @@ class HorizontalList extends StatelessWidget {
       itemCount: items.length,
       itemBuilder: (context, index) {
         final item = items[index];
+        final imageUrl = item['image']!;
+        final isAssetImage = imageUrl.startsWith('assets/');
+
         return Container(
           width: 95,
           margin: EdgeInsets.symmetric(horizontal: 8),
@@ -23,12 +26,19 @@ class HorizontalList extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.network(
-                  item['image']!,
-                  width: 95,
-                  height: 142.5,
-                  fit: BoxFit.cover,
-                ),
+                child: isAssetImage
+                    ? Image.asset(
+                        imageUrl,
+                        width: 95,
+                        height: 142.5,
+                        fit: BoxFit.cover,
+                      )
+                    : Image.network(
+                        imageUrl,
+                        width: 95,
+                        height: 142.5,
+                        fit: BoxFit.cover,
+                      ),
               ),
               SizedBox(height: 7),
               Text(
