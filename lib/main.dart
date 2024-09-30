@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../screens/movie_screen.dart';
-//import '../screens/tv_screen.dart';
+import '../screens/tv_screen.dart';
 
 import '../screens/splash_screen.dart';
 import '../screens/login_screen.dart';
@@ -34,7 +34,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'showcase',
-      home:MovieDetailScreen(),
+      home:TVDetailScreen(),
       theme: ThemeData(
         textTheme: GoogleFonts.montserratTextTheme(
           Theme.of(context).textTheme,
