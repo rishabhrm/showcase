@@ -13,8 +13,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final List<Map<String, String>> carouselItems = [
     {
-      'image':
-          "assets/lotr.jpg",
+      'image': "assets/lotr.jpg",
       'text': 'LOTR: Rings of Power',
     },
     {
@@ -22,16 +21,14 @@ class _HomeScreenState extends State<HomeScreen> {
       'text': 'The Perfect Couple',
     },
     {
-      'image':
-          "assets/mitb.jpg",
+      'image': "assets/mitb.jpg",
       'text': 'Only Murders in the Building',
     },
   ];
 
-final List<Map<String, String>> mustWatchMovies = [
+  final List<Map<String, String>> mustWatchMovies = [
     {
-      'image':
-          "assets/tom.jpg",
+      'image': "assets/tom.jpg",
       'title': 'Tomorrowland',
     },
     {
@@ -39,16 +36,14 @@ final List<Map<String, String>> mustWatchMovies = [
       'title': 'The Man Who Knew Infinity',
     },
     {
-      'image':
-          "assets/lll.jpg",
+      'image': "assets/lll.jpg",
       'title': 'La La Land',
     },
   ];
 
-final List<Map<String, String>> mustWatchTV = [
+  final List<Map<String, String>> mustWatchTV = [
     {
-      'image':
-          "assets/himym.jpg",
+      'image': "assets/himym.jpg",
       'title': 'How I Met Your Mother',
     },
     {
@@ -56,8 +51,7 @@ final List<Map<String, String>> mustWatchTV = [
       'title': 'Sherlock',
     },
     {
-      'image':
-          "assets/shogun.jpg",
+      'image': "assets/shogun.jpg",
       'title': 'Shōgun',
     },
   ];
@@ -73,10 +67,7 @@ final List<Map<String, String>> mustWatchTV = [
             const SizedBox(height: 50),
             Text(
               "WHAT'S TRENDING",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 13,
-                  fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 15),
             Flexible(
@@ -85,26 +76,27 @@ final List<Map<String, String>> mustWatchTV = [
             const SizedBox(height: 20),
             Text(
               'MUST WATCH MOVIES',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 13,
-                  fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 15),
             Flexible(
-              child: HorizontalList(items: mustWatchMovies),
+              child: HorizontalList(
+                items: mustWatchMovies,
+                onTap: (index) {
+                  Navigator.pushNamed(context, '/movie');
+                },
+              ),
             ),
             const SizedBox(height: 17),
             Text(
               'MUST WATCH TV SHOWS',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 13,
-                  fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 15),
             Flexible(
-              child: HorizontalList(items: mustWatchTV),
+              child: HorizontalList(items: mustWatchTV,                 onTap: (index) {
+                  Navigator.pushNamed(context, '/tv');
+                },),
             ),
           ],
         ),

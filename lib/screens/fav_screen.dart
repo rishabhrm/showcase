@@ -45,7 +45,9 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
             color: Colors.white,
             size: 40,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, '/profile');
+          },
         ),
       ),
       body: Padding(

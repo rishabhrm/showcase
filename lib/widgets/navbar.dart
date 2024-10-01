@@ -13,11 +13,10 @@ class Navbar extends StatelessWidget {
       unselectedItemColor: Colors.white.withOpacity(0.6),
       selectedLabelStyle: TextStyle(fontSize: 12),
       unselectedLabelStyle: TextStyle(fontSize: 12),
-      items: const [
+      items: [
         BottomNavigationBarItem(
           icon: Icon(Icons.home_rounded),
           label: 'Home',
-          
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.search),
@@ -28,6 +27,19 @@ class Navbar extends StatelessWidget {
           label: 'Profile',
         ),
       ],
+      onTap: (index) {
+        switch (index) {
+          case 0:
+            Navigator.pushNamed(context, '/home');
+            break;
+          case 1:
+            Navigator.pushNamed(context, '/search');
+            break;
+          case 2:
+            Navigator.pushNamed(context, '/profile');
+            break;
+        }
+      },
     );
   }
 }

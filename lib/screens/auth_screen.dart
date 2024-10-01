@@ -23,7 +23,6 @@ class _AuthScreenState extends State<AuthScreen> {
               'Verify Yourself',
               style: TextStyle(
                 fontSize: 30,
-                color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -32,7 +31,6 @@ class _AuthScreenState extends State<AuthScreen> {
               "Almost there - check your inbox",
               style: TextStyle(
                 fontSize: 12,
-                color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -45,7 +43,6 @@ class _AuthScreenState extends State<AuthScreen> {
                     'Enter the code we just sent to testuser@mail.com',
                     style: TextStyle(
                       fontSize: 12,
-                      color: Colors.white,
                     ),
                   ),
                   const SizedBox(height: 30),
@@ -56,15 +53,16 @@ class _AuthScreenState extends State<AuthScreen> {
                   const SizedBox(height: 15),
                   CustomElevatedButton(
                     label: 'Continue',
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/home');
+                    },
                   ),
                   const SizedBox(height: 40),
-                  Center(
-                    child: const Text(
+                  const Center(
+                    child: Text(
                       "Didn't receive the code? Resend the code.",
                       style: TextStyle(
                         fontSize: 11,
-                        color: Colors.white,
                       ),
                     ),
                   ),

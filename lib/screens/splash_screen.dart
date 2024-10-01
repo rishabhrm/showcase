@@ -30,7 +30,6 @@ class _SplashScreenState extends State<SplashScreen> {
               'showcase',
               style: TextStyle(
                 fontSize: 30,
-                color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -39,13 +38,14 @@ class _SplashScreenState extends State<SplashScreen> {
               'a case for all your shows',
               style: TextStyle(
                 fontSize: 12,
-                color: Colors.white,
               ),
             ),
             const SizedBox(height: 100),
             CustomElevatedButton(
               label: 'Get Started',
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/login');
+              },
             ),
           ],
         ),

@@ -22,7 +22,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             size: 40,
           ),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pushNamed(context, '/profile');
           },
         ),
         centerTitle: false,

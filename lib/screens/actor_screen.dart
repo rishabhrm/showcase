@@ -101,7 +101,9 @@ class _ActorProfileScreenState extends State<ActorProfileScreen> {
             ),
             const SizedBox(height: 10),
             Flexible(
-              child: HorizontalList(items: mustWatchMovies),
+              child: HorizontalList(items: mustWatchMovies,                 onTap: (index) {
+                  Navigator.pushNamed(context, '/movie');
+                },),
             ),
             Text(
               'BIOGRAPHY',

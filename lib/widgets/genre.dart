@@ -8,12 +8,14 @@ class Genre {
 
 class GenreTile extends StatelessWidget {
   final Genre genre;
-  const GenreTile({super.key, required this.genre});
+  final VoidCallback onTap;
+
+  const GenreTile({super.key, required this.genre, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: onTap,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(12),
         child: Stack(

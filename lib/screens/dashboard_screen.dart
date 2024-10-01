@@ -32,7 +32,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
             color: Colors.white,
             size: 40,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, '/profile');
+          },
         ),
       ),
       body: Padding(
@@ -178,7 +180,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ),
             const SizedBox(height: 12),
             Flexible(
-              child: HorizontalList(items: newMovies),
+              child: HorizontalList(items: newMovies,                 onTap: (index) {
+                  Navigator.pushNamed(context, '/movie');
+                },),
             ),
             Text(
               'GENRE BREAKDOWN',

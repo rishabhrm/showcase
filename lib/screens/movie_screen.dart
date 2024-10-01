@@ -345,7 +345,9 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
               const SizedBox(height: 8),
               Container( // Changed from Flexible to Container
                 height: 150, // Set a fixed height if needed
-                child: HorizontalList(items: favouriteMovies),
+                child: HorizontalList(items: favouriteMovies,                 onTap: (index) {
+                  Navigator.pushNamed(context, '/movie');
+                },),
               ),
               const SizedBox(height: 20), // Add some spacing at the end
             ],

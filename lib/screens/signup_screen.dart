@@ -25,7 +25,6 @@ class _SignupScreenState extends State<SignupScreen> {
               'Sign Up',
               style: TextStyle(
                 fontSize: 30,
-                color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -34,7 +33,6 @@ class _SignupScreenState extends State<SignupScreen> {
               "Let's create an account for you!",
               style: const TextStyle(
                 fontSize: 12,
-                color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -78,8 +76,6 @@ class _SignupScreenState extends State<SignupScreen> {
                         'Agree to terms and conditions',
                         style: TextStyle(
                           fontSize: 12,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],
@@ -90,14 +86,17 @@ class _SignupScreenState extends State<SignupScreen> {
                     onPressed: () {},
                   ),
                   const SizedBox(height: 30),
-                  const Text(
-                    'Already a member? Sign In!',
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/login');
+                    },
+                    child: const Text(
+                      'Already a member? Sign In.',
+                      style: TextStyle(
+                        fontSize: 12,
+                      ),
                     ),
-                  ),
+                  )
                 ],
               ),
             ),

@@ -432,7 +432,9 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
               const SizedBox(height: 8),
               Container(
                 height: 150,
-                child: HorizontalList(items: favouriteMovies),
+                child: HorizontalList(items: favouriteMovies,                 onTap: (index) {
+                  Navigator.pushNamed(context, '/movie');
+                },),
               ),
               const SizedBox(height: 20),
             ],

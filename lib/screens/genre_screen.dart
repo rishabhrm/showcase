@@ -12,36 +12,30 @@ class GenreScreen extends StatefulWidget {
 class _GenreScreenState extends State<GenreScreen> {
   final List<Map<String, String>> popularMovies = [
     {
-      'image':
-          'assets/tm.jpg',
+      'image': 'assets/tm.jpg',
       'title': 'The Terminal',
     },
     {
-      'image':
-          'assets/ti.jpg',
+      'image': 'assets/ti.jpg',
       'title': 'The Intern',
     },
     {
-      'image':
-          'assets/wm.jpg',
+      'image': 'assets/wm.jpg',
       'title': 'The Secret Life of Walter Mitty',
     },
   ];
 
   final List<Map<String, String>> newMovies = [
     {
-      'image':
-          'assets/jp.jpg',
+      'image': 'assets/jp.jpg',
       'title': 'Jackpot!',
     },
     {
-      'image':
-          'assets/dw.jpg',
+      'image': 'assets/dw.jpg',
       'title': 'Deadpool & Wolverine',
     },
     {
-      'image':
-          'assets/fg.jpg',
+      'image': 'assets/fg.jpg',
       'title': 'Fall Guy',
     },
   ];
@@ -56,7 +50,9 @@ class _GenreScreenState extends State<GenreScreen> {
             color: Colors.white,
             size: 38,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, '/search');
+          },
         ),
       ),
       body: Padding(
@@ -78,10 +74,7 @@ class _GenreScreenState extends State<GenreScreen> {
                   const SizedBox(width: 10),
                   Text(
                     'Comedy',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 35,
-                        fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -91,7 +84,6 @@ class _GenreScreenState extends State<GenreScreen> {
               child: Text(
                 'Find lots of laugh from classic slapsticks to the in-too-deep cult classics.',
                 style: TextStyle(
-                  color: Colors.white,
                   fontSize: 13,
                   fontStyle: FontStyle.italic,
                 ),
@@ -101,26 +93,24 @@ class _GenreScreenState extends State<GenreScreen> {
             const SizedBox(height: 50),
             Text(
               'NEW',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 13,
-                  fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 15),
             Flexible(
-              child: HorizontalList(items: newMovies),
+              child: HorizontalList(items: newMovies,                 onTap: (index) {
+                  Navigator.pushNamed(context, '/movie');
+                },),
             ),
             //const SizedBox(height: 1),
             Text(
               'POPULAR',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 13,
-                  fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 12),
             Flexible(
-              child: HorizontalList(items: popularMovies),
+              child: HorizontalList(items: popularMovies,                 onTap: (index) {
+                  Navigator.pushNamed(context, '/movie');
+                },),
             ),
           ],
         ),

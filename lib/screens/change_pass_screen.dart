@@ -20,7 +20,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
             color: Colors.white,
             size: 40,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, '/settings');
+          },
         ),
         centerTitle: false,
       ),

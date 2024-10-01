@@ -23,7 +23,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             color: Colors.white,
             size: 40,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, '/profile');
+          },
         ),
         centerTitle: false,
       ),
@@ -51,13 +53,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
             IconLabelButton(
               icon: Icons.delete,
               label: 'Delete My Account',
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/delete_acc');
+              },
             ),
             const SizedBox(height: 20),
             IconLabelButton(
               icon: Icons.key,
               label: 'Change Password',
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/change_psw');
+              },
             ),
             const SizedBox(height: 20),
             Container(

@@ -15,8 +15,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
       appBar: AppBar(
         actions: [
           IconButton(
-            icon: const Icon(Icons.settings_outlined, color: Colors.white, size: 30),
-            onPressed: () {},
+            icon: const Icon(Icons.settings_outlined,
+                color: Colors.white, size: 30),
+            onPressed: () {
+              Navigator.pushNamed(context, '/settings');
+            },
           ),
         ],
       ),
@@ -28,40 +31,47 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             const SizedBox(height: 15),
             CircleAvatar(
-              backgroundImage:
-                  const AssetImage('assets/pfp.jpg'), // Local image
+              backgroundImage: const AssetImage('assets/pfp.jpg'), // Local image
               radius: 55,
             ),
             const SizedBox(height: 10),
             const Text(
               'Test User',
               style: TextStyle(
-                  color: Colors.white,
                   fontSize: 22,
                   fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 3),
             const Text(
               '@testusername',
-              style: TextStyle(color: Colors.white70, fontSize: 12),
+              style: TextStyle(fontSize: 12),
             ),
             const SizedBox(height: 10),
             Row(
-              children: const [
+              children: [
                 Expanded(
                     child: ProfileButton(
-                        icon: Icons.image_outlined, label: 'Change Picture')),
-                        SizedBox(width: 10),
+                        icon: Icons.image_outlined,
+                        label: 'Change Picture',
+                        onPressed: () {
+                          // Add your change picture logic here
+                        })),
+                const SizedBox(width: 10),
                 Expanded(
-                    child:
-                        ProfileButton(icon: Icons.edit, label: 'Edit Profile')),
+                  child: ProfileButton(
+                    icon: Icons.edit,
+                    label: 'Edit Profile',
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/profile_edit');
+                    },
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 10),
             const Text(
               'About Me',
               style: TextStyle(
-                  color: Colors.white,
                   fontSize: 18,
                   fontWeight: FontWeight.bold),
             ),
@@ -70,46 +80,86 @@ class _ProfileScreenState extends State<ProfileScreen> {
               'Lorem ipsum dolor sit amet. In quia voluptas hic amet blanditiis est quae minus. '
               'Eos nihil tempora ut pariatur sint aut reiciendis eveniet et Quis eligendi est facere '
               'quasi 33 voluptatem aspernatur est velit voluptas. fvvjnsofvosvnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn',
-              style: TextStyle(color: Colors.white70, fontSize: 12),
+              style: TextStyle(fontSize: 12),
               textAlign: TextAlign.left,
             ),
             const SizedBox(height: 15),
             const Text(
               'Member Since: August 21, 2024',
-              style: TextStyle(color: Colors.white70, fontSize: 14, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 30),
-            Row(
-              children: const [
-                Expanded(
-                    child: ProfileButton(
-                        icon: Icons.check, label: 'Already watched')),
-                        SizedBox(width: 10),
-                Expanded(
-                    child: ProfileButton(
-                        icon: Icons.bookmark_border, label: 'Want to watch')),
+            Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: ProfileButton(
+                        icon: Icons.check,
+                        label: 'Already watched',
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/watched');
+                        },
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: ProfileButton(
+                        icon: Icons.bookmark_border,
+                        label: 'Want to watch',
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/planned');
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 2),
+                Row(
+                  children: [
+                    Expanded(
+                      child: ProfileButton(
+                        icon: Icons.favorite_outline,
+                        label: 'Favourites',
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/favourite');
+                        },
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: ProfileButton(
+                        icon: Icons.note_alt_outlined,
+                        label: 'Reviews',
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/reviews');
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 2),
+                Row(
+                  children: [
+                    Expanded(
+                      child: ProfileButton(
+                        icon: Icons.pie_chart_rounded,
+                        label: 'Dashboard',
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/dashboard');
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ],
-            ),
-            Row(
-              children: const [
-                Expanded(
-                    child: ProfileButton(
-                        icon: Icons.favorite_outline, label: 'Favourites')),
-                        SizedBox(width: 10),
-                Expanded(
-                    child: ProfileButton(icon: Icons.note_alt_outlined, label: 'Reviews')),
-              ],
-            ),
-            Row(
-              children: const [
-                Expanded(
-                    child: ProfileButton(icon: Icons.pie_chart_rounded, label: 'Dashboard')),
-              ],
-            ),
+            )
           ],
         ),
       ),
-      bottomNavigationBar: const Navbar(),
+      bottomNavigationBar: Navbar(),
     );
   }
 }
@@ -118,17 +168,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
 class ProfileButton extends StatelessWidget {
   final String label;
   final IconData icon;
+  final VoidCallback onPressed;
 
   const ProfileButton({
     required this.label,
     required this.icon,
+    required this.onPressed,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
-      onPressed: () {},
+      onPressed: onPressed,
       icon: Icon(icon, color: Colors.white, size: 16), // Smaller icon size
       label: Text(
         label,

@@ -35,7 +35,6 @@ class _SearchScreenState extends State<SearchScreen> {
               'Search',
               style: TextStyle(
                 fontSize: 30,
-                color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -46,7 +45,6 @@ class _SearchScreenState extends State<SearchScreen> {
               'Prefer a specific genre? We’ve got it covered!',
               style: TextStyle(
                 fontSize: 12,
-                color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -61,7 +59,12 @@ class _SearchScreenState extends State<SearchScreen> {
                 itemCount: genres.length,
                 itemBuilder: (context, index) {
                   final genre = genres[index];
-                  return GenreTile(genre: genre);
+                  return GenreTile(
+                    genre: genre,
+                    onTap: () {
+                      Navigator.pushNamed(context, '/genre');
+                    },
+                  );
                 },
               ),
             ),
