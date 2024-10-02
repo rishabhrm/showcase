@@ -15,7 +15,7 @@ class ReviewList extends StatelessWidget {
       itemBuilder: (context, index) {
         final review = movieReviews[index];
         return Card(
-          color: Colors.black,
+          color: Colors.transparent,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: Column(
@@ -24,7 +24,7 @@ class ReviewList extends StatelessWidget {
                 Text(
                   review['title']!,
                   style: TextStyle(
-                    color: Colors.white,
+                    //color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                   ),
@@ -36,7 +36,7 @@ class ReviewList extends StatelessWidget {
                       TextSpan(
                         text: review['review']!,
                         style: TextStyle(
-                          color: Colors.white,
+                          //color: Colors.white,
                           fontSize: 13,
                         ),
                       ),
@@ -47,7 +47,6 @@ class ReviewList extends StatelessWidget {
                 Text(
                   'Reviewed on: ${review['dateReviewed']}',
                   style: TextStyle(
-                    color: Colors.white54,
                     fontSize: 12,
                   ),
                 ),

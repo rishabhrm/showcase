@@ -33,7 +33,7 @@ class CastSection extends StatelessWidget {
                     Text(
                       cast['name']!,
                       textAlign: TextAlign.center,
-                      style: const TextStyle(color: Colors.white70, fontSize: 11),
+                      style: const TextStyle(fontSize: 11),
                     ),
                   ],
                 ),

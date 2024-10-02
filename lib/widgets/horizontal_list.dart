@@ -44,15 +44,15 @@ class HorizontalList extends StatelessWidget {
                           fit: BoxFit.cover,
                         ),
                 ),
-                SizedBox(height: 7),
+                SizedBox(height: 4),
                 Text(
                   item['title']!,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 10,
+                    fontSize: 9,
                   ),
                 ),
+                 SizedBox(height: 4),
               ],
             ),
           ),

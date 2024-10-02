@@ -27,13 +27,13 @@ class MovieList extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(movie['title']!, style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
+                    Text(movie['title']!, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                     const SizedBox(height: 4),
-                    Text(movie['genre']!, style: const TextStyle(fontSize: 14, color: Colors.white70)),
+                    Text(movie['genre']!, style: const TextStyle(fontSize: 14)),
                     const SizedBox(height: 4),
-                    Text(movie['rating']!, style: const TextStyle(fontSize: 14, color: Colors.white70)),
+                    Text(movie['rating']!, style: const TextStyle(fontSize: 14)),
                     const SizedBox(height: 4),
-                    Text('Added on: ${movie['added on']}', style: const TextStyle(fontSize: 12, color: Colors.white54)),
+                    Text('Added on: ${movie['added on']}', style: const TextStyle(fontSize: 12)),
                   ],
                 ),
               ),

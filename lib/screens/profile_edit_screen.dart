@@ -18,7 +18,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         leading: IconButton(
           icon: const Icon(
             Icons.keyboard_arrow_down,
-            color: Colors.white,
             size: 40,
           ),
           onPressed: () {
@@ -37,7 +36,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               'Edit Profile',
               style: TextStyle(
                 fontSize: 30,
-                color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
             ),

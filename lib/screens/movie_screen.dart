@@ -74,7 +74,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                 
                   ),
                 ),
               ),
@@ -83,20 +83,12 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   '2016 • 1h 48m • English',
                   style: TextStyle(
                     fontSize: 13,
-                    color: Colors.white70,
+                  
                   ),
                 ),
               ),
               const SizedBox(height: 10),
               ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.black,
-                  backgroundColor: Colors.white,
-                  minimumSize: const Size(double.infinity, 40),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
                 onPressed: () {},
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -111,7 +103,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
               Text(
                 'Drama | History',
                 style: TextStyle(
-                    color: Colors.white,
+                   
                     fontSize: 13,
                     fontWeight: FontWeight.bold),
               ),
@@ -122,7 +114,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   fontSize: 12,
                   decoration: TextDecoration.underline,
                   fontStyle: FontStyle.italic,
-                  color: Colors.white,
+                 
                 ),
               ),
               const SizedBox(height: 5),
@@ -131,7 +123,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                 'where he becomes a pioneer in mathematical theories with the guidance of his professor, G.H. Hardy.',
                 style: TextStyle(
                   fontSize: 12,
-                  color: Colors.white,
+                
                 ),
               ),
               const SizedBox(height: 5),
@@ -143,7 +135,6 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       IconButton(
                         icon: Icon(
                           Icons.check,
-                          color: Colors.white,
                           size: 22,
                         ),
                         onPressed: () {},
@@ -151,7 +142,6 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       Text(
                         'Add to list',
                         style: TextStyle(
-                          color: Colors.white,
                           fontSize: 12,
                         ),
                       ),
@@ -162,7 +152,6 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       IconButton(
                         icon: Icon(
                           Icons.bookmark_border,
-                          color: Colors.white,
                           size: 22,
                         ),
                         onPressed: () {},
@@ -170,7 +159,6 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       Text(
                         'Want to watch',
                         style: TextStyle(
-                          color: Colors.white,
                           fontSize: 12,
                         ),
                       ),
@@ -181,7 +169,6 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       IconButton(
                         icon: Icon(
                           Icons.favorite_border,
-                          color: Colors.white,
                           size: 22,
                         ),
                         onPressed: () {},
@@ -189,7 +176,6 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       Text(
                         'Favourite',
                         style: TextStyle(
-                          color: Colors.white,
                           fontSize: 12,
                         ),
                       ),
@@ -201,7 +187,6 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
               Text(
                 'CAST',
                 style: TextStyle(
-                    color: Colors.white,
                     fontSize: 13,
                     fontWeight: FontWeight.bold),
               ),
@@ -210,7 +195,6 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
               Text(
                 'REVIEWS',
                 style: TextStyle(
-                    color: Colors.white,
                     fontSize: 13,
                     fontWeight: FontWeight.bold),
               ),
@@ -224,22 +208,21 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   SizedBox(width: 15),
                   Text(
                     "Person 1",
-                    style: TextStyle(fontSize: 18, color: Colors.white),
+                    style: TextStyle(fontSize: 18),
                   ),
                 ],
               ),
               SizedBox(height: 8),
               Text(
                 "An exquisite bit of writing of a story worth retelling and revisited again and again. The story of the mathematician Srinivasa Ramanujam, the unschooled genius who became Fellow of the Royal Society, and who has still left us unsolved riddles",
-                style: TextStyle(fontSize: 12, color: Colors.white),
+                style: TextStyle(fontSize: 12),
               ),
               const SizedBox(height: 15),
               Text(
                 'Your Review',
                 style: TextStyle(
                     fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white),
+                    fontWeight: FontWeight.bold,),
               ),
               SizedBox(height: 8),
               TextField(
@@ -273,14 +256,6 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   widthFactor: 1 / 2.4,
                   child: ElevatedButton(
                     onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.black,
-                      backgroundColor: Colors.white,
-                      minimumSize: const Size(double.infinity, 40),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
                     child: Text(
                       'Post Review',
                       style: TextStyle(
@@ -294,7 +269,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
               Text(
                 'WHERE TO WATCH',
                 style: TextStyle(
-                    color: Colors.white,
+                  
                     fontSize: 13,
                     fontWeight: FontWeight.bold),
               ),
@@ -319,7 +294,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         'Now Streaming',
                         style: TextStyle(
                           fontSize: 14,
-                          color: Colors.white,
+                       
                         ),
                       ),
                       Text(
@@ -327,7 +302,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         style: TextStyle(
                           fontSize: 12,
                           fontStyle: FontStyle.italic,
-                          color: Colors.white70,
+                         
                         ),
                       ),
                     ],
@@ -338,7 +313,6 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
               Text(
                 'RECOMMENDATIONS',
                 style: TextStyle(
-                    color: Colors.white,
                     fontSize: 13,
                     fontWeight: FontWeight.bold),
               ),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../widgets/elevated_button.dart';
 import '../widgets/icon_label.dart';
 import '../widgets/navbar.dart';
+import '../theme_notifier.dart'; // Import the ThemeNotifier
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -11,16 +13,15 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  bool _isDarkMode = true;
-
   @override
   Widget build(BuildContext context) {
+    final themeNotifier = Provider.of<ThemeNotifier>(context);
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(
             Icons.chevron_left,
-            color: Colors.white,
             size: 40,
           ),
           onPressed: () {
@@ -38,7 +39,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             Text(
               'Settings',
               style: TextStyle(
-                color: Colors.white,
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
               ),
@@ -92,11 +92,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                   ),
                   Switch(
-                    value: _isDarkMode,
+                    value: themeNotifier.isDarkMode,
                     onChanged: (bool value) {
-                      setState(() {
-                        _isDarkMode = value;
-                      });
+                      themeNotifier.toggleTheme();
                     },
                     activeColor: Colors.white,
                   ),

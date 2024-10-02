@@ -92,7 +92,6 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
                   ),
                 ),
               ),
@@ -101,20 +100,11 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
                   '2010 • 4 Seasons • English',
                   style: TextStyle(
                     fontSize: 13,
-                    color: Colors.white70,
                   ),
                 ),
               ),
               const SizedBox(height: 10),
               ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.black,
-                  backgroundColor: Colors.white,
-                  minimumSize: const Size(double.infinity, 40),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
                 onPressed: () {},
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -129,7 +119,6 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
               Text(
                 'Crime | Drama | Mystery',
                 style: TextStyle(
-                    color: Colors.white,
                     fontSize: 13,
                     fontWeight: FontWeight.bold),
               ),
@@ -140,7 +129,6 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
                   fontSize: 12,
                   decoration: TextDecoration.underline,
                   fontStyle: FontStyle.italic,
-                  color: Colors.white,
                 ),
               ),
               const SizedBox(height: 5),
@@ -148,7 +136,6 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
                 'A modern update finds the famous sleuth and his doctor partner solving crime in 21st century London.',
                 style: TextStyle(
                   fontSize: 12,
-                  color: Colors.white,
                 ),
               ),
               const SizedBox(height: 5),
@@ -160,7 +147,6 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
                       IconButton(
                         icon: Icon(
                           Icons.check,
-                          color: Colors.white,
                           size: 22,
                         ),
                         onPressed: () {},
@@ -168,7 +154,6 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
                       Text(
                         'Add to list',
                         style: TextStyle(
-                          color: Colors.white,
                           fontSize: 12,
                         ),
                       ),
@@ -179,7 +164,6 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
                       IconButton(
                         icon: Icon(
                           Icons.bookmark_border,
-                          color: Colors.white,
                           size: 22,
                         ),
                         onPressed: () {},
@@ -187,7 +171,6 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
                       Text(
                         'Want to watch',
                         style: TextStyle(
-                          color: Colors.white,
                           fontSize: 12,
                         ),
                       ),
@@ -198,7 +181,6 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
                       IconButton(
                         icon: Icon(
                           Icons.favorite_border,
-                          color: Colors.white,
                           size: 22,
                         ),
                         onPressed: () {},
@@ -206,7 +188,6 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
                       Text(
                         'Favourite',
                         style: TextStyle(
-                          color: Colors.white,
                           fontSize: 12,
                         ),
                       ),
@@ -218,7 +199,6 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
               Text(
                 'CAST',
                 style: TextStyle(
-                    color: Colors.white,
                     fontSize: 13,
                     fontWeight: FontWeight.bold),
               ),
@@ -231,7 +211,6 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
                   Text(
                     'EPISODES',
                     style: TextStyle(
-                      color: Colors.white,
                       fontSize: 13,
                       fontWeight: FontWeight.bold,
                     ),
@@ -240,25 +219,17 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
                     child: Container(
                       width: 105,
                       child: OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(horizontal: 12),
-                          side: BorderSide(color: Colors.white),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
                         onPressed: () {},
                         child: Center(
                           child: Row(
                             children: [
                               Text(
                                 'Season 1',
-                                style:
-                                    TextStyle(color: Colors.white, fontSize: 13),
+                                style: TextStyle(
+                                    fontSize: 13),
                               ),
                               Icon(
                                 Icons.arrow_drop_down,
-                                color: Colors.white,
                               ),
                             ],
                           ),
@@ -277,7 +248,6 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
               Text(
                 'REVIEWS',
                 style: TextStyle(
-                    color: Colors.white,
                     fontSize: 13,
                     fontWeight: FontWeight.bold),
               ),
@@ -291,14 +261,14 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
                   SizedBox(width: 15),
                   Text(
                     "Person 1",
-                    style: TextStyle(fontSize: 18, color: Colors.white),
+                    style: TextStyle(fontSize: 18),
                   ),
                 ],
               ),
               SizedBox(height: 8),
               Text(
                 "An exquisite bit of writing of a story worth retelling and revisited again and again. The story of the mathematician Srinivasa Ramanujam, the unschooled genius who became Fellow of the Royal Society, and who has still left us unsolved riddles",
-                style: TextStyle(fontSize: 12, color: Colors.white),
+                style: TextStyle(fontSize: 12),
               ),
               const SizedBox(height: 15),
               Row(
@@ -310,14 +280,14 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
                   SizedBox(width: 15),
                   Text(
                     "Person 2",
-                    style: TextStyle(fontSize: 18, color: Colors.white),
+                    style: TextStyle(fontSize: 18),
                   ),
                 ],
               ),
               SizedBox(height: 8),
               Text(
                 "An exquisite bit of writing of a story worth retelling and revisited again and again. The story of the mathematician Srinivasa Ramanujam, the unschooled genius who became Fellow of the Royal Society, and who has still left us unsolved riddles",
-                style: TextStyle(fontSize: 12, color: Colors.white),
+                style: TextStyle(fontSize: 12),
               ),
               const SizedBox(height: 15),
               Text(
@@ -325,7 +295,7 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
                 style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white),
+                    ),
               ),
               SizedBox(height: 8),
               TextField(
@@ -360,14 +330,6 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
                   widthFactor: 1 / 2.4,
                   child: ElevatedButton(
                     onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.black,
-                      backgroundColor: Colors.white,
-                      minimumSize: const Size(double.infinity, 40),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
                     child: Text(
                       'Post Review',
                       style: TextStyle(
@@ -380,10 +342,7 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
               const SizedBox(height: 20),
               Text(
                 'WHERE TO WATCH',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
               Row(
@@ -406,7 +365,6 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
                         'Now Streaming',
                         style: TextStyle(
                           fontSize: 14,
-                          color: Colors.white,
                         ),
                       ),
                       Text(
@@ -414,7 +372,6 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
                         style: TextStyle(
                           fontSize: 12,
                           fontStyle: FontStyle.italic,
-                          color: Colors.white70,
                         ),
                       ),
                     ],
@@ -424,17 +381,17 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
               const SizedBox(height: 25),
               Text(
                 'RECOMMENDATIONS',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
               Container(
                 height: 150,
-                child: HorizontalList(items: favouriteMovies,                 onTap: (index) {
-                  Navigator.pushNamed(context, '/movie');
-                },),
+                child: HorizontalList(
+                  items: favouriteMovies,
+                  onTap: (index) {
+                    Navigator.pushNamed(context, '/movie');
+                  },
+                ),
               ),
               const SizedBox(height: 20),
             ],

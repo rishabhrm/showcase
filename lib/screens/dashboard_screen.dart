@@ -29,7 +29,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
         leading: IconButton(
           icon: const Icon(
             Icons.keyboard_arrow_down,
-            color: Colors.white,
             size: 40,
           ),
           onPressed: () {
@@ -37,171 +36,108 @@ class _DashboardScreenState extends State<DashboardScreen> {
           },
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 30),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 10),
-            const Text(
-              'Dashboard',
-              style: TextStyle(
-                fontSize: 30,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 30),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 10),
+              const Text(
+                'Dashboard',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            SizedBox(height: 25),
-            Center(
-              child: CircleAvatar(
-                radius: 60,
-                backgroundImage: AssetImage('assets/pfp.jpg'),
+              SizedBox(height: 25),
+              Center(
+                child: CircleAvatar(
+                  radius: 60,
+                  backgroundImage: AssetImage('assets/pfp.jpg'),
+                ),
               ),
-            ),
-            SizedBox(height: 20),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Column(
-                  children: [
-                    Text(
-                      "Watched",
-                      style: TextStyle(fontSize: 12, color: Colors.white),
-                    ),
-                    Text(
-                      "7",
-                      style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    ),
-                  ],
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Column(
+                    children: [
+                      Text("Watched", style: TextStyle(fontSize: 12)),
+                      Text("7", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Text("Planned", style: TextStyle(fontSize: 12)),
+                      Text("70", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Text("Favourites", style: TextStyle(fontSize: 12)),
+                      Text("4", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(height: 20),
+              Text('TIME SPENT WATCHING', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+              SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Column(
+                    children: [
+                      Text('Months', style: TextStyle(fontSize: 12)),
+                      Text('12', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Text('Days', style: TextStyle(fontSize: 12)),
+                      Text('25', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Text('Hours', style: TextStyle(fontSize: 12)),
+                      Text('50', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Text('Episodes', style: TextStyle(fontSize: 12)),
+                      Text('100', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(height: 20),
+              Text('MOST WATCHED SHOWS', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+              const SizedBox(height: 12),
+              SizedBox( // Use SizedBox to give HorizontalList a height
+                height: 150, // Adjust height as needed
+                child: HorizontalList(
+                  items: newMovies,
+                  onTap: (index) {
+                    Navigator.pushNamed(context, '/movie');
+                  },
                 ),
-                Column(
-                  children: [
-                    Text(
-                      "Planned",
-                      style: TextStyle(fontSize: 12, color: Colors.white),
-                    ),
-                    Text(
-                      "70",
-                      style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Text(
-                      "Favourites",
-                      style: TextStyle(fontSize: 12, color: Colors.white),
-                    ),
-                    Text(
-                      "4",
-                      style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-
-            SizedBox(height: 20),
-            Text(
-              'TIME SPENT WATCHING',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 13,
-                  fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Column(
-                  children: [
-                    Text('Months',
-                        style: TextStyle(fontSize: 12, color: Colors.white)),
-                    Text('12',
-                        style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white)),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Text('Days',
-                        style: TextStyle(fontSize: 12, color: Colors.white)),
-                    Text('25',
-                        style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white)),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Text('Hours',
-                        style: TextStyle(fontSize: 12, color: Colors.white)),
-                    Text('50',
-                        style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white)),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Text('Episodes',
-                        style: TextStyle(fontSize: 12, color: Colors.white)),
-                    Text('100',
-                        style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white)),
-                  ],
-                ),
-              ],
-            ),
-            SizedBox(height: 20),
-            Text(
-              'MOST WATCHED SHOWS',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 13,
-                  fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 12),
-            Flexible(
-              child: HorizontalList(items: newMovies,                 onTap: (index) {
-                  Navigator.pushNamed(context, '/movie');
-                },),
-            ),
-            Text(
-              'GENRE BREAKDOWN',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 13,
-                  fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 5),
-            genreBar("Comedy", 0.8),
-            genreBar("Action", 0.6),
-            genreBar("Adventure", 0.5),
-            genreBar("Mystery", 0.4),
-          ],
+              ),
+              Text('GENRE BREAKDOWN', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+              SizedBox(height: 5),
+              genreBar("Comedy", 0.8),
+              genreBar("Action", 0.6),
+              genreBar("Adventure", 0.5),
+              genreBar("Mystery", 0.4),
+            ],
+          ),
         ),
       ),
     );
   }
-
 
   Widget genreBar(String genre, double progress) {
     return Padding(
@@ -212,8 +148,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             flex: 3,
             child: Text(
               genre,
-              style: TextStyle(fontSize:12.5, color: Colors.white),
-              
+              style: TextStyle(fontSize: 12.5),
             ),
           ),
           Expanded(

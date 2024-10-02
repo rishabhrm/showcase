@@ -37,7 +37,6 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
         leading: IconButton(
           icon: Icon(
             Icons.keyboard_arrow_down,
-            color: Colors.white,
             size: 40,
           ),
           onPressed: () {

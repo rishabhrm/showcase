@@ -8,9 +8,6 @@ class Navbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      backgroundColor: Colors.black,
-      selectedItemColor: Colors.white,
-      unselectedItemColor: Colors.white.withOpacity(0.6),
       selectedLabelStyle: TextStyle(fontSize: 12),
       unselectedLabelStyle: TextStyle(fontSize: 12),
       items: [

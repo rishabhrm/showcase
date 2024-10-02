@@ -47,7 +47,6 @@ class _GenreScreenState extends State<GenreScreen> {
         leading: IconButton(
           icon: Icon(
             Icons.keyboard_arrow_down,
-            color: Colors.white,
             size: 38,
           ),
           onPressed: () {
@@ -68,7 +67,6 @@ class _GenreScreenState extends State<GenreScreen> {
                 children: [
                   Icon(
                     Icons.theater_comedy,
-                    color: Colors.white,
                     size: 40,
                   ),
                   const SizedBox(width: 10),

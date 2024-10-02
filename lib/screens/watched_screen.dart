@@ -42,7 +42,6 @@ class _WatchedScreenState extends State<WatchedScreen> {
         leading: IconButton(
           icon: Icon(
             Icons.keyboard_arrow_down,
-            color: Colors.white,
             size: 40,
           ),
           onPressed: () {
@@ -59,7 +58,6 @@ class _WatchedScreenState extends State<WatchedScreen> {
             Text(
               'Watched',
               style: TextStyle(
-                color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 30,
               ),

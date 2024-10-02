@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:showcase/widgets/navbar.dart';
+import '../widgets/navbar.dart';
+import '../widgets/profile_button.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -15,8 +16,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       appBar: AppBar(
         actions: [
           IconButton(
-            icon: const Icon(Icons.settings_outlined,
-                color: Colors.white, size: 30),
+            icon: const Icon(Icons.settings_outlined, size: 30),
             onPressed: () {
               Navigator.pushNamed(context, '/settings');
             },
@@ -31,15 +31,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             const SizedBox(height: 15),
             CircleAvatar(
-              backgroundImage: const AssetImage('assets/pfp.jpg'), // Local image
+              backgroundImage:
+                  const AssetImage('assets/pfp.jpg'), // Local image
               radius: 55,
             ),
             const SizedBox(height: 10),
             const Text(
               'Test User',
-              style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 3),
             const Text(
@@ -71,9 +70,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             const SizedBox(height: 10),
             const Text(
               'About Me',
-              style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
             const Text(
@@ -86,9 +83,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             const SizedBox(height: 15),
             const Text(
               'Member Since: August 21, 2024',
-              style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 30),
             Column(
@@ -164,39 +159,3 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 }
 
-// Unified button widget for action buttons
-class ProfileButton extends StatelessWidget {
-  final String label;
-  final IconData icon;
-  final VoidCallback onPressed;
-
-  const ProfileButton({
-    required this.label,
-    required this.icon,
-    required this.onPressed,
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton.icon(
-      onPressed: onPressed,
-      icon: Icon(icon, color: Colors.white, size: 16), // Smaller icon size
-      label: Text(
-        label,
-        style: const TextStyle(
-            color: Colors.white, fontSize: 10), // Smaller text size
-      ),
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.transparent,
-        side: const BorderSide(color: Colors.white, width: 1),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-        minimumSize: const Size(0, 30),
-        padding: const EdgeInsets.symmetric(
-            vertical: 5, horizontal: 10), // Horizontal padding
-      ),
-    );
-  }
-}
