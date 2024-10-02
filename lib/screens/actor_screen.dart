@@ -31,10 +31,11 @@ class _ActorProfileScreenState extends State<ActorProfileScreen> {
         leading: IconButton(
           icon: const Icon(
             Icons.keyboard_arrow_down,
-            color: Colors.white,
             size: 40,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, '/tv');
+          },
         ),
         centerTitle: false,
       ),
@@ -63,17 +64,13 @@ class _ActorProfileScreenState extends State<ActorProfileScreen> {
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
                 ),
               ),
             ),
             const SizedBox(height: 20),
             Text(
               'PERSONAL INFO',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 13,
-                  fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 7),
             RichText(
@@ -94,30 +91,26 @@ class _ActorProfileScreenState extends State<ActorProfileScreen> {
             const SizedBox(height: 15),
             Text(
               'KNOWN FOR',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 13,
-                  fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
             Flexible(
-              child: HorizontalList(items: mustWatchMovies,                 onTap: (index) {
+              child: HorizontalList(
+                items: mustWatchMovies,
+                onTap: (index) {
                   Navigator.pushNamed(context, '/movie');
-                },),
+                },
+              ),
             ),
             Text(
               'BIOGRAPHY',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 13,
-                  fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 5),
             Text(
               "Benedict Cumberbatch is an English actor. Known for his roles on the screen and stage, he has received various accolades throughout his career, including a Primetime Emmy Award, a British...",
               style: TextStyle(
                 fontSize: 12,
-                color: Colors.white,
               ),
             ),
           ],

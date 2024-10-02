@@ -15,11 +15,8 @@ class Searchbar extends StatelessWidget {
         style: const TextStyle(color: Colors.white),
         decoration: InputDecoration(
           suffixIcon: Icon(Icons.search),
-          suffixIconColor: Colors.white70,
           hintText: 'What are you looking for?',
-          hintStyle: const TextStyle(color: Colors.white70),
           filled: true,
-          fillColor: const Color.fromRGBO(90, 90, 90, 1),
           contentPadding:
               const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
           border: OutlineInputBorder(

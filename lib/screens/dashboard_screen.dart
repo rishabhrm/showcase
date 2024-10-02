@@ -51,74 +51,90 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 25),
+              SizedBox(height: 30),
               Center(
                 child: CircleAvatar(
                   radius: 60,
                   backgroundImage: AssetImage('assets/pfp.jpg'),
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 35),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Column(
                     children: [
                       Text("Watched", style: TextStyle(fontSize: 12)),
-                      Text("7", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                      Text("7",
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.bold)),
                     ],
                   ),
                   Column(
                     children: [
                       Text("Planned", style: TextStyle(fontSize: 12)),
-                      Text("70", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                      Text("70",
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.bold)),
                     ],
                   ),
                   Column(
                     children: [
                       Text("Favourites", style: TextStyle(fontSize: 12)),
-                      Text("4", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                      Text("4",
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.bold)),
                     ],
                   ),
                 ],
               ),
-              SizedBox(height: 20),
-              Text('TIME SPENT WATCHING', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
-              SizedBox(height: 10),
+              SizedBox(height: 25),
+              Text('TIME SPENT WATCHING',
+                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+              SizedBox(height: 8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Column(
                     children: [
                       Text('Months', style: TextStyle(fontSize: 12)),
-                      Text('12', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                      Text('12',
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.bold)),
                     ],
                   ),
                   Column(
                     children: [
                       Text('Days', style: TextStyle(fontSize: 12)),
-                      Text('25', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                      Text('25',
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.bold)),
                     ],
                   ),
                   Column(
                     children: [
                       Text('Hours', style: TextStyle(fontSize: 12)),
-                      Text('50', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                      Text('50',
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.bold)),
                     ],
                   ),
                   Column(
                     children: [
                       Text('Episodes', style: TextStyle(fontSize: 12)),
-                      Text('100', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                      Text('100',
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.bold)),
                     ],
                   ),
                 ],
               ),
-              SizedBox(height: 20),
-              Text('MOST WATCHED SHOWS', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
-              const SizedBox(height: 12),
-              SizedBox( // Use SizedBox to give HorizontalList a height
-                height: 150, // Adjust height as needed
+              SizedBox(height: 25),
+              Text('MOST WATCHED SHOWS',
+                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+              const SizedBox(height: 10),
+              SizedBox(
+                height: 180,
                 child: HorizontalList(
                   items: newMovies,
                   onTap: (index) {
@@ -126,12 +142,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   },
                 ),
               ),
-              Text('GENRE BREAKDOWN', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+              Text('GENRE BREAKDOWN',
+                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
               SizedBox(height: 5),
               genreBar("Comedy", 0.8),
               genreBar("Action", 0.6),
               genreBar("Adventure", 0.5),
               genreBar("Mystery", 0.4),
+              genreBar("Sci-fi", 0.4),
+              genreBar("Drama", 0.3),
+              genreBar("Romance", 0.1),
             ],
           ),
         ),

@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 class CastSection extends StatelessWidget {
   final List<Map<String, String>> castData;
+  final Function(int index) onTap; // Add onTap callback
 
   const CastSection({
     required this.castData,
+    required this.onTap, // Add required onTap
     Key? key,
   }) : super(key: key);
 
@@ -17,25 +19,31 @@ class CastSection extends StatelessWidget {
           height: 110,
           child: ListView(
             scrollDirection: Axis.horizontal,
-            children: castData.map((cast) {
-              return Container(
-                width: 97,
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Column(
-                  children: [
-                    CircleAvatar(
-                      backgroundImage: cast['imageUrl']!.startsWith('http')
-                          ? NetworkImage(cast['imageUrl']!)
-                          : AssetImage(cast['imageUrl']!) as ImageProvider,
-                      radius: 37,
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      cast['name']!,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: 11),
-                    ),
-                  ],
+            children: castData.asMap().entries.map((entry) {
+              int index = entry.key;
+              Map<String, String> cast = entry.value;
+
+              return GestureDetector(
+                onTap: () => onTap(index), // Trigger onTap when tapped
+                child: Container(
+                  width: 97,
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Column(
+                    children: [
+                      CircleAvatar(
+                        backgroundImage: cast['imageUrl']!.startsWith('http')
+                            ? NetworkImage(cast['imageUrl']!)
+                            : AssetImage(cast['imageUrl']!) as ImageProvider,
+                        radius: 37,
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        cast['name']!,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(fontSize: 11),
+                      ),
+                    ],
+                  ),
                 ),
               );
             }).toList(),

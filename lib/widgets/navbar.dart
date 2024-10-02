@@ -7,10 +7,28 @@ class Navbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get the current route name
+    final String? currentRoute = ModalRoute.of(context)?.settings.name;
+
+    // Determine the current index based on the route
+    int currentIndex = 0;
+    switch (currentRoute) {
+      case '/home':
+        currentIndex = 0;
+        break;
+      case '/search':
+        currentIndex = 1;
+        break;
+      case '/profile':
+        currentIndex = 2;
+        break;
+    }
+
     return BottomNavigationBar(
-      selectedLabelStyle: TextStyle(fontSize: 12),
-      unselectedLabelStyle: TextStyle(fontSize: 12),
-      items: [
+      currentIndex: currentIndex, // Set the current index based on route
+      selectedLabelStyle: const TextStyle(fontSize: 12),
+      unselectedLabelStyle: const TextStyle(fontSize: 12),
+      items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.home_rounded),
           label: 'Home',

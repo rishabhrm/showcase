@@ -14,15 +14,20 @@ class ProfileButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton.icon(
+    return OutlinedButton.icon(
       onPressed: onPressed,
       icon: Icon(icon, size: 16), // Smaller icon size
       label: Text(
         label,
         style: const TextStyle(fontSize: 10),
       ),
-      style: ElevatedButton.styleFrom(
-        side: const BorderSide(width: 1),
+      style: OutlinedButton.styleFrom(
+        side: BorderSide(
+          color: Theme.of(context).brightness == Brightness.dark
+              ? Colors.white // Use white border in dark mode
+              : Colors.black, // Use black border in light mode
+          width: 1,
+        ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),

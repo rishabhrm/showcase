@@ -42,7 +42,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 8),
+              const SizedBox(height: 15),
               Stack(
                 children: [
                   ClipRRect(
@@ -50,7 +50,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                     child: Image.asset(
                       'assets/cover.jpg',
                       width: double.infinity,
-                      height: 220,
+                      height: 200,
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -74,7 +74,6 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
-                 
                   ),
                 ),
               ),
@@ -83,7 +82,6 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   '2016 • 1h 48m • English',
                   style: TextStyle(
                     fontSize: 13,
-                  
                   ),
                 ),
               ),
@@ -103,9 +101,9 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
               Text(
                 'Drama | History',
                 style: TextStyle(
-                   
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold),
+                  fontSize: 13,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: 10),
               Text(
@@ -114,7 +112,6 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   fontSize: 12,
                   decoration: TextDecoration.underline,
                   fontStyle: FontStyle.italic,
-                 
                 ),
               ),
               const SizedBox(height: 5),
@@ -123,7 +120,6 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                 'where he becomes a pioneer in mathematical theories with the guidance of his professor, G.H. Hardy.',
                 style: TextStyle(
                   fontSize: 12,
-                
                 ),
               ),
               const SizedBox(height: 5),
@@ -133,51 +129,36 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   Column(
                     children: [
                       IconButton(
-                        icon: Icon(
-                          Icons.check,
-                          size: 22,
-                        ),
+                        icon: Icon(Icons.check, size: 22),
                         onPressed: () {},
                       ),
                       Text(
                         'Add to list',
-                        style: TextStyle(
-                          fontSize: 12,
-                        ),
+                        style: TextStyle(fontSize: 12),
                       ),
                     ],
                   ),
                   Column(
                     children: [
                       IconButton(
-                        icon: Icon(
-                          Icons.bookmark_border,
-                          size: 22,
-                        ),
+                        icon: Icon(Icons.bookmark_border, size: 22),
                         onPressed: () {},
                       ),
                       Text(
                         'Want to watch',
-                        style: TextStyle(
-                          fontSize: 12,
-                        ),
+                        style: TextStyle(fontSize: 12),
                       ),
                     ],
                   ),
                   Column(
                     children: [
                       IconButton(
-                        icon: Icon(
-                          Icons.favorite_border,
-                          size: 22,
-                        ),
+                        icon: Icon(Icons.favorite_border, size: 22),
                         onPressed: () {},
                       ),
                       Text(
                         'Favourite',
-                        style: TextStyle(
-                          fontSize: 12,
-                        ),
+                        style: TextStyle(fontSize: 12),
                       ),
                     ],
                   ),
@@ -186,30 +167,25 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
               const SizedBox(height: 20),
               Text(
                 'CAST',
-                style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 10),
-              CastSection(castData: castData),
+              CastSection(
+                castData: castData,
+                onTap:  (index) {
+                    Navigator.pushNamed(context, '/actor');
+                  }, // Pass the onTap callback here
+              ),
               Text(
                 'REVIEWS',
-                style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 12),
               Row(
                 children: [
-                  CircleAvatar(
-                    radius: 18,
-                    child: Icon(Icons.person),
-                  ),
+                  CircleAvatar(radius: 18, child: Icon(Icons.person)),
                   SizedBox(width: 15),
-                  Text(
-                    "Person 1",
-                    style: TextStyle(fontSize: 18),
-                  ),
+                  Text("Person 1", style: TextStyle(fontSize: 18)),
                 ],
               ),
               SizedBox(height: 8),
@@ -220,9 +196,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
               const SizedBox(height: 15),
               Text(
                 'Your Review',
-                style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,),
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 8),
               TextField(
@@ -231,10 +205,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                 style: const TextStyle(color: Colors.white),
                 decoration: InputDecoration(
                   hintText: 'Write your review here',
-                  labelStyle: const TextStyle(color: Colors.white70),
-                  hintStyle: const TextStyle(color: Colors.white70),
                   filled: true,
-                  fillColor: const Color.fromRGBO(90, 90, 90, 1),
                   contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -256,22 +227,14 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   widthFactor: 1 / 2.4,
                   child: ElevatedButton(
                     onPressed: () {},
-                    child: Text(
-                      'Post Review',
-                      style: TextStyle(
-                        fontSize: 12,
-                      ),
-                    ),
+                    child: Text('Post Review', style: TextStyle(fontSize: 12)),
                   ),
                 ),
               ),
               const SizedBox(height: 20),
               Text(
                 'WHERE TO WATCH',
-                style: TextStyle(
-                  
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
               Row(
@@ -292,18 +255,11 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                     children: [
                       Text(
                         'Now Streaming',
-                        style: TextStyle(
-                          fontSize: 14,
-                       
-                        ),
+                        style: TextStyle(fontSize: 14),
                       ),
                       Text(
                         'Watch Now',
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontStyle: FontStyle.italic,
-                         
-                        ),
+                        style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
                       ),
                     ],
                   ),
@@ -312,18 +268,18 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
               const SizedBox(height: 25),
               Text(
                 'RECOMMENDATIONS',
-                style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
-              Container( // Changed from Flexible to Container
-                height: 150, // Set a fixed height if needed
-                child: HorizontalList(items: favouriteMovies,                 onTap: (index) {
-                  Navigator.pushNamed(context, '/movie');
-                },),
+              Container(
+                height: 200,
+                child: HorizontalList(
+                  items: favouriteMovies,
+                  onTap: (index) {
+                    Navigator.pushNamed(context, '/movie');
+                  },
+                ),
               ),
-              const SizedBox(height: 20), // Add some spacing at the end
             ],
           ),
         ),

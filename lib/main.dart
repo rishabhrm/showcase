@@ -45,24 +45,30 @@ class MainApp extends StatelessWidget {
             ),
           ),
         ),
-        outlinedButtonTheme: OutlinedButtonThemeData(
-          style: OutlinedButton.styleFrom(
-            padding: EdgeInsets.symmetric(horizontal: 12),
-            side: BorderSide(
-              color: themeNotifier.isDarkMode ? Colors.white : Colors.black,
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-          ),
-        ),
+       
         iconTheme: IconThemeData(
           color: themeNotifier.isDarkMode ? Colors.white : Colors.black,
         ),
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          backgroundColor: themeNotifier.isDarkMode ? Colors.black : Colors.white,
-          selectedItemColor: themeNotifier.isDarkMode ? Colors.white : Colors.black,
-          unselectedItemColor: themeNotifier.isDarkMode ? Colors.white.withOpacity(0.6) : Colors.black.withOpacity(0.6),
+          backgroundColor:
+              themeNotifier.isDarkMode ? Colors.black : Colors.white,
+          selectedItemColor:
+              themeNotifier.isDarkMode ? Colors.white : Colors.black,
+          unselectedItemColor: themeNotifier.isDarkMode
+              ? Colors.white.withOpacity(0.6)
+              : Colors.black.withOpacity(0.6),
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          labelStyle: TextStyle(
+            color: themeNotifier.isDarkMode ? Colors.white70 : Colors.black87,
+          ),
+          hintStyle: TextStyle(
+            color: themeNotifier.isDarkMode ? Colors.white70 : Colors.black54,
+          ),
+          suffixIconColor: themeNotifier.isDarkMode ? Colors.white70 : Colors.black54,
+          fillColor: themeNotifier.isDarkMode
+              ? Color.fromRGBO(90, 90, 90, 1)
+              : Color.fromRGBO(230, 230, 230, 1),
         ),
       ),
       initialRoute: AppRoutes.splash,

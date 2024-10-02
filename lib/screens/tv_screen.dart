@@ -59,7 +59,7 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 8),
+              const SizedBox(height: 15),
               Stack(
                 children: [
                   ClipRRect(
@@ -67,7 +67,7 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
                     child: Image.asset(
                       'assets/cover2.jpg',
                       width: double.infinity,
-                      height: 220,
+                      height: 200,
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -79,7 +79,9 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
                       child: IconButton(
                         icon: Icon(Icons.keyboard_arrow_down,
                             size: 40, color: Colors.white),
-                        onPressed: () => Navigator.pop(context),
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/home');
+                        },
                       ),
                     ),
                   ),
@@ -118,9 +120,7 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
               const SizedBox(height: 10),
               Text(
                 'Crime | Drama | Mystery',
-                style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 10),
               Text(
@@ -198,12 +198,15 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
               const SizedBox(height: 20),
               Text(
                 'CAST',
-                style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 10),
-              CastSection(castData: castData),
+              CastSection(
+                castData: castData,
+                onTap: (index) {
+                  Navigator.pushNamed(context, '/actor');
+                }, // Pass the onTap callback here
+              ),
               const SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -225,8 +228,7 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
                             children: [
                               Text(
                                 'Season 1',
-                                style: TextStyle(
-                                    fontSize: 13),
+                                style: TextStyle(fontSize: 13),
                               ),
                               Icon(
                                 Icons.arrow_drop_down,
@@ -247,9 +249,7 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
               const SizedBox(height: 6),
               Text(
                 'REVIEWS',
-                style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 12),
               Row(
@@ -293,9 +293,9 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
               Text(
                 'Your Review',
                 style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    ),
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               SizedBox(height: 8),
               TextField(
@@ -304,10 +304,7 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
                 style: const TextStyle(color: Colors.white),
                 decoration: InputDecoration(
                   hintText: 'Write your review here',
-                  labelStyle: const TextStyle(color: Colors.white70),
-                  hintStyle: const TextStyle(color: Colors.white70),
                   filled: true,
-                  fillColor: const Color.fromRGBO(90, 90, 90, 1),
                   contentPadding:
                       const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
                   border: OutlineInputBorder(
@@ -385,7 +382,7 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
               ),
               const SizedBox(height: 8),
               Container(
-                height: 150,
+                height: 200,
                 child: HorizontalList(
                   items: favouriteMovies,
                   onTap: (index) {
@@ -393,7 +390,6 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
                   },
                 ),
               ),
-              const SizedBox(height: 20),
             ],
           ),
         ),
