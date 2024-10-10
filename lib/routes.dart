@@ -49,7 +49,7 @@ class AppRoutes {
       auth: (context) => AuthScreen(),
       signup: (context) => SignupScreen(),
       home: (context) => HomeScreen(),
-      movie: (context) => MovieDetailScreen(),
+      movie: (context) => MovieDetailScreen(movieId: 372058),
       tv: (context) => TVDetailScreen(),
       actor: (context) => ActorProfileScreen(),
       search: (context) => SearchScreen(),

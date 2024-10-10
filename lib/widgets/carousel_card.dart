@@ -30,7 +30,7 @@ class CarouselCard extends StatelessWidget {
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 child: Text(
-                  item['text']!,
+                  item['title']!,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 9,

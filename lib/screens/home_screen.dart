@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import '../tmdb_services.dart';
 import '../widgets/carousel_card.dart';
 import '../widgets/horizontal_list.dart';
 import '../widgets/navbar.dart';
+//import '../services/tmdb_service.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -11,50 +13,33 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<Map<String, String>> carouselItems = [
-    {
-      'image': "assets/lotr.jpg",
-      'text': 'LOTR: Rings of Power',
-    },
-    {
-      'image': "assets/pc.jpg",
-      'text': 'The Perfect Couple',
-    },
-    {
-      'image': "assets/mitb.jpg",
-      'text': 'Only Murders in the Building',
-    },
-  ];
+  final TMDBService tmdbService = TMDBService();
+  List<Map<String, String>> carouselItems = [];
+  List<Map<String, String>> mustWatchMovies = [];
+  List<Map<String, String>> mustWatchTV = [];
 
-  final List<Map<String, String>> mustWatchMovies = [
-    {
-      'image': "assets/tom.jpg",
-      'title': 'Tomorrowland',
-    },
-    {
-      'image': "assets/tmwki.jpg",
-      'title': 'The Man Who Knew Infinity',
-    },
-    {
-      'image': "assets/lll.jpg",
-      'title': 'La La Land',
-    },
-  ];
+  @override
+  void initState() {
+    super.initState();
+    fetchCarouselItems();
+    fetchMustWatchMovies();
+    fetchMustWatchTV();
+  }
 
-  final List<Map<String, String>> mustWatchTV = [
-    {
-      'image': "assets/himym.jpg",
-      'title': 'How I Met Your Mother',
-    },
-    {
-      'image': "assets/sherlock.jpg",
-      'title': 'Sherlock',
-    },
-    {
-      'image': "assets/shogun.jpg",
-      'title': 'Shōgun',
-    },
-  ];
+  Future<void> fetchCarouselItems() async {
+    carouselItems = await tmdbService.fetchCarouselItems();
+    setState(() {});
+  }
+
+  Future<void> fetchMustWatchMovies() async {
+    mustWatchMovies = await tmdbService.fetchMustWatchMovies();
+    setState(() {});
+  }
+
+  Future<void> fetchMustWatchTV() async {
+    mustWatchTV = await tmdbService.fetchMustWatchTV();
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             const SizedBox(height: 50),
             Text(
-              "WHAT'S TRENDING",
+              "NOW PLAYING",
               style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 15),
@@ -80,12 +65,14 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             const SizedBox(height: 15),
             Flexible(
-              child: HorizontalList(
-                items: mustWatchMovies,
-                onTap: (index) {
-                  Navigator.pushNamed(context, '/movie');
-                },
-              ),
+              child: mustWatchMovies.isEmpty
+                  ? Center(child: CircularProgressIndicator())
+                  : HorizontalList(
+                      items: mustWatchMovies,
+                      onTap: (index) {
+                        Navigator.pushNamed(context, '/movie');
+                      },
+                    ),
             ),
             const SizedBox(height: 17),
             Text(
@@ -94,9 +81,14 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             const SizedBox(height: 15),
             Flexible(
-              child: HorizontalList(items: mustWatchTV,                 onTap: (index) {
-                  Navigator.pushNamed(context, '/tv');
-                },),
+              child: mustWatchTV.isEmpty
+                  ? Center(child: CircularProgressIndicator())
+                  : HorizontalList(
+                      items: mustWatchTV,
+                      onTap: (index) {
+                        Navigator.pushNamed(context, '/tv');
+                      },
+                    ),
             ),
           ],
         ),
