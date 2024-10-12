@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-//import '../models/movie.dart'; // Ensure you have your Movie model defined properly
 import '../movie_data.dart';
 import '../widgets/cast_list.dart';
 import '../widgets/horizontal_list.dart';
 
 class MovieDetailScreen extends StatefulWidget {
-  final int movieId; // Receive movieId from the previous screen
+  final int movieId;
   const MovieDetailScreen({super.key, required this.movieId});
 
   @override

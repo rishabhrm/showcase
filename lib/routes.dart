@@ -49,7 +49,14 @@ class AppRoutes {
       auth: (context) => AuthScreen(),
       signup: (context) => SignupScreen(),
       home: (context) => HomeScreen(),
-      movie: (context) => MovieDetailScreen(movieId: 372058),
+movie: (context) {
+  final movieId = ModalRoute.of(context)!.settings.arguments as int?; // Safely cast to int
+  if (movieId != null) {
+    return MovieDetailScreen(movieId: movieId);
+  } else {
+    return HomeScreen(); // Handle the error case
+  }
+},
       tv: (context) => TVDetailScreen(),
       actor: (context) => ActorProfileScreen(),
       search: (context) => SearchScreen(),

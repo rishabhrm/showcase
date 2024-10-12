@@ -1,12 +1,13 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-class TMDBService {
+class APIService {
   final String apiKey = '7f9aa6577f017c199547b077ae33f882';
 
   Future<List<Map<String, String>>> fetchMustWatchMovies() async {
     final response = await http.get(
-      Uri.parse('https://api.themoviedb.org/3/movie/top_rated?api_key=$apiKey&page=1'),
+      Uri.parse(
+          'https://api.themoviedb.org/3/movie/top_rated?api_key=$apiKey&page=1'),
     );
 
     if (response.statusCode == 200) {
@@ -16,6 +17,7 @@ class TMDBService {
                 'image':
                     'https://image.tmdb.org/t/p/w500${movie['poster_path']}',
                 'title': movie['title'] as String,
+                'id': movie['id'].toString(), // Make sure 'id' is included
               })
           .toList()
           .cast<Map<String, String>>();
@@ -46,14 +48,16 @@ class TMDBService {
 
   Future<List<Map<String, String>>> fetchCarouselItems() async {
     final response = await http.get(
-      Uri.parse('https://api.themoviedb.org/3/movie/now_playing?api_key=$apiKey&page=1'),
+      Uri.parse(
+          'https://api.themoviedb.org/3/movie/now_playing?api_key=$apiKey&page=1'),
     );
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       return (data['results'] as List)
           .map((movie) => {
-                'image': 'https://image.tmdb.org/t/p/w500${movie['backdrop_path']}',
+                'image':
+                    'https://image.tmdb.org/t/p/w500${movie['backdrop_path']}',
                 'title': movie['title'] as String,
               })
           .toList()

@@ -3,7 +3,6 @@ import '../tmdb_services.dart';
 import '../widgets/carousel_card.dart';
 import '../widgets/horizontal_list.dart';
 import '../widgets/navbar.dart';
-//import '../services/tmdb_service.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,7 +12,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final TMDBService tmdbService = TMDBService();
+  final APIService tmdbService = APIService();
   List<Map<String, String>> carouselItems = [];
   List<Map<String, String>> mustWatchMovies = [];
   List<Map<String, String>> mustWatchTV = [];
@@ -44,56 +43,68 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 50),
-            Text(
-              "NOW PLAYING",
-              style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 15),
-            Flexible(
-              child: CarouselCard(carouselItems: carouselItems),
-            ),
-            const SizedBox(height: 20),
-            Text(
-              'MUST WATCH MOVIES',
-              style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 15),
-            Flexible(
-              child: mustWatchMovies.isEmpty
-                  ? Center(child: CircularProgressIndicator())
-                  : HorizontalList(
-                      items: mustWatchMovies,
-                      onTap: (index) {
-                        Navigator.pushNamed(context, '/movie');
-                      },
-                    ),
-            ),
-            const SizedBox(height: 17),
-            Text(
-              'MUST WATCH TV SHOWS',
-              style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 15),
-            Flexible(
-              child: mustWatchTV.isEmpty
-                  ? Center(child: CircularProgressIndicator())
-                  : HorizontalList(
-                      items: mustWatchTV,
-                      onTap: (index) {
-                        Navigator.pushNamed(context, '/tv');
-                      },
-                    ),
-            ),
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 50),
+              const Text(
+                "NOW PLAYING",
+                style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 10),
+              SizedBox(
+                height: 200, // Set a fixed height
+                child: CarouselCard(carouselItems: carouselItems),
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                'MUST WATCH MOVIES',
+                style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 10),
+              Container(
+                height: 177,
+                child: mustWatchMovies.isEmpty
+                    ? Center(child: CircularProgressIndicator())
+                    : HorizontalList(
+                        items: mustWatchMovies,
+                        onTap: (index) {
+                          final movieId = mustWatchMovies[index]['id'];
+                          if (movieId != null) {
+                            Navigator.pushNamed(
+                              context,
+                              '/movie',
+                              arguments: int.parse(movieId),
+                            );
+                          }
+                        },
+                      ),
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                'MUST WATCH TV SHOWS',
+                style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 10),
+              Container(
+                height: 177,
+                child: mustWatchTV.isEmpty
+                    ? Center(child: CircularProgressIndicator())
+                    : HorizontalList(
+                        items: mustWatchTV,
+                        onTap: (index) {
+                          Navigator.pushNamed(context, '/tv');
+                        },
+                      ),
+              ),
+            ],
+          ),
         ),
       ),
-      bottomNavigationBar: Navbar(),
+      bottomNavigationBar: const Navbar(),
     );
   }
 }
