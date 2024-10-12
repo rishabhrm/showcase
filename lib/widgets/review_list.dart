@@ -15,7 +15,6 @@ class ReviewList extends StatelessWidget {
       itemBuilder: (context, index) {
         final review = movieReviews[index];
         return Card(
-          color: Colors.transparent,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: Column(
@@ -24,7 +23,6 @@ class ReviewList extends StatelessWidget {
                 Text(
                   review['title']!,
                   style: TextStyle(
-                    //color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                   ),
@@ -36,8 +34,10 @@ class ReviewList extends StatelessWidget {
                       TextSpan(
                         text: review['review']!,
                         style: TextStyle(
-                          //color: Colors.white,
                           fontSize: 13,
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? Colors.white
+                              : Colors.black,
                         ),
                       ),
                     ],

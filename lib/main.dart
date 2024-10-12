@@ -45,7 +45,6 @@ class MainApp extends StatelessWidget {
             ),
           ),
         ),
-       
         iconTheme: IconThemeData(
           color: themeNotifier.isDarkMode ? Colors.white : Colors.black,
         ),
@@ -58,6 +57,11 @@ class MainApp extends StatelessWidget {
               ? Colors.white.withOpacity(0.6)
               : Colors.black.withOpacity(0.6),
         ),
+
+        cardTheme: CardTheme(
+          color: themeNotifier.isDarkMode ? Colors.black : Colors.white,
+        ),
+
         inputDecorationTheme: InputDecorationTheme(
           labelStyle: TextStyle(
             color: themeNotifier.isDarkMode ? Colors.white70 : Colors.black87,
@@ -65,7 +69,23 @@ class MainApp extends StatelessWidget {
           hintStyle: TextStyle(
             color: themeNotifier.isDarkMode ? Colors.white70 : Colors.black54,
           ),
-          suffixIconColor: themeNotifier.isDarkMode ? Colors.white70 : Colors.black54,
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(
+              color: themeNotifier.isDarkMode ? Colors.white : Colors.black,
+            ),
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(
+              color: themeNotifier.isDarkMode ? Colors.white : Colors.black,
+            ),
+          ),
+          suffixIconColor:
+              themeNotifier.isDarkMode ? Colors.white70 : Colors.black54,
           fillColor: themeNotifier.isDarkMode
               ? Color.fromRGBO(90, 90, 90, 1)
               : Color.fromRGBO(230, 230, 230, 1),

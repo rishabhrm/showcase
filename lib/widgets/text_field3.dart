@@ -37,28 +37,12 @@ class _CustomTextField3State extends State<CustomTextField3> {
       height: 200,
       child: TextField(
         controller: _controller,
-        cursorColor: Colors.white,
-        style: const TextStyle(color: Colors.white),
         maxLines: null,
         decoration: InputDecoration(
           labelText: widget.labelText,
           hintText: widget.hintText,
-          labelStyle: const TextStyle(color: Colors.white70),
-          hintStyle: const TextStyle(color: Colors.white70),
           filled: true,
-          fillColor: const Color.fromRGBO(90, 90, 90, 1),
           contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: const BorderSide(color: Colors.white),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: const BorderSide(color: Colors.white),
-          ),
         ),
       ),
     );

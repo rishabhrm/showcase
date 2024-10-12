@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import '../widgets/elevated_button.dart';
 import '../widgets/icon_label.dart';
 import '../widgets/navbar.dart';
-import '../theme_notifier.dart'; // Import the ThemeNotifier
+import '../theme_notifier.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -69,7 +69,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             Container(
               height: 48,
               decoration: BoxDecoration(
-                color: const Color.fromRGBO(90, 90, 90, 1),
+                color: themeNotifier.isDarkMode
+              ? Color.fromRGBO(90, 90, 90, 1)
+              : Color.fromRGBO(230, 230, 230, 1),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Row(
@@ -81,12 +83,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       children: [
                         Icon(
                           Icons.dark_mode,
-                          color: Colors.white,
+                          //color: Colors.white,
                         ),
                         const SizedBox(width: 10),
                         Text(
                           'Dark Mode',
-                          style: const TextStyle(color: Colors.white),
+                          //style: const TextStyle(color: Colors.white),
                         ),
                       ],
                     ),
@@ -104,7 +106,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             const SizedBox(height: 140),
             CustomElevatedButton(
               label: 'Log Out',
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/');
+              },
             ),
           ],
         ),

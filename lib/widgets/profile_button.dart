@@ -16,16 +16,27 @@ class ProfileButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return OutlinedButton.icon(
       onPressed: onPressed,
-      icon: Icon(icon, size: 16), // Smaller icon size
+      icon: Icon(
+        icon,
+        size: 16,
+        color: Theme.of(context).brightness == Brightness.dark
+            ? Colors.white
+            : Colors.black,
+      ),
       label: Text(
         label,
-        style: const TextStyle(fontSize: 10),
+        style: TextStyle(
+          fontSize: 10,
+          color: Theme.of(context).brightness == Brightness.dark
+              ? Colors.white
+              : Colors.black,
+        ),
       ),
       style: OutlinedButton.styleFrom(
         side: BorderSide(
           color: Theme.of(context).brightness == Brightness.dark
-              ? Colors.white // Use white border in dark mode
-              : Colors.black, // Use black border in light mode
+              ? Colors.white
+              : Colors.black,
           width: 1,
         ),
         shape: RoundedRectangleBorder(

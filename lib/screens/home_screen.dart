@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 50),
+              const SizedBox(height: 45),
               const Text(
                 "NOW PLAYING",
                 style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
@@ -83,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         },
                       ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 15),
               const Text(
                 'MUST WATCH TV SHOWS',
                 style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),

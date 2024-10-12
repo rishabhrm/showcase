@@ -17,7 +17,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
         leading: IconButton(
           icon: const Icon(
             Icons.keyboard_arrow_down,
-            color: Colors.white,
             size: 40,
           ),
           onPressed: () {
@@ -36,7 +35,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               'Change Password',
               style: TextStyle(
                 fontSize: 27,
-                color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -63,7 +61,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     "Note: You can change your password only once a month.",
                     style: TextStyle(
                       fontSize: 11,
-                      color: Colors.white,
                     ),
                   ),
                   const SizedBox(height: 100),

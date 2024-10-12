@@ -38,6 +38,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
         releaseDate: jsonResponse['release_date'] ?? 'N/A',
         runtime: jsonResponse['runtime'] ?? 0,
         language: jsonResponse['original_language'] ?? 'N/A',
+        tagline: jsonResponse['tagline'] ?? 'No Tagline available',
         overview: jsonResponse['overview'] ?? 'No Overview available',
         genres: (jsonResponse['genres'] as List<dynamic>?)
                 ?.map((genre) => genre['name'].toString())
@@ -88,13 +89,12 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
         future: movieDetails,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData) {
-            return Center(child: Text('No data found'));
+            return const Center(child: Text('No data found'));
           }
-
           Movie movie = snapshot.data!;
           return SingleChildScrollView(
             child: Padding(
@@ -121,7 +121,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         child: CircleAvatar(
                           backgroundColor: Colors.transparent,
                           child: IconButton(
-                            icon: Icon(Icons.keyboard_arrow_down,
+                            icon: const Icon(Icons.keyboard_arrow_down,
                                 size: 40, color: Colors.white),
                             onPressed: () => Navigator.pop(context),
                           ),
@@ -133,24 +133,24 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   Center(
                     child: Text(
                       movie.title,
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
+                      style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold,
                       ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                     ),
                   ),
                   Center(
                     child: Text(
                       '${movie.releaseDate.split('-')[0]} • ${movie.runtime} min • ${movie.language}', // Year and duration
-                      style: TextStyle(
-                        fontSize: 13,
+                      style: const TextStyle(
+                        fontSize: 12,
                       ),
                     ),
                   ),
                   const SizedBox(height: 10),
                   ElevatedButton(
                     onPressed: () {},
-                    child: Row(
+                    child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(Icons.play_arrow),
@@ -159,32 +159,42 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       ],
                     ),
                   ),
+
                   const SizedBox(height: 10),
                   Text(
-                    movie.genres.join(' | '), // Display genres
-                    style: TextStyle(
+                    movie.genres.join(' | '),
+                    style: const TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 5),
                   Text(
-                    movie.overview,
-                    style: TextStyle(
+                    movie.tagline,
+                    style: const TextStyle(
                       fontSize: 12,
+                      decoration: TextDecoration.underline,
+                      fontStyle: FontStyle.italic,
                     ),
                   ),
                   const SizedBox(height: 5),
+                  Text(
+                    movie.overview,
+                    style: const TextStyle(
+                      fontSize: 12,
+                    ),
+                  ),
+                  const SizedBox(height: 15),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Column(
                         children: [
                           IconButton(
-                            icon: Icon(Icons.check, size: 22),
+                            icon: const Icon(Icons.check, size: 22),
                             onPressed: () {},
                           ),
-                          Text(
+                          const Text(
                             'Add to list',
                             style: TextStyle(fontSize: 12),
                           ),
@@ -193,10 +203,10 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       Column(
                         children: [
                           IconButton(
-                            icon: Icon(Icons.bookmark_border, size: 22),
+                            icon: const Icon(Icons.bookmark_border, size: 22),
                             onPressed: () {},
                           ),
-                          Text(
+                          const Text(
                             'Want to watch',
                             style: TextStyle(fontSize: 12),
                           ),
@@ -205,10 +215,10 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       Column(
                         children: [
                           IconButton(
-                            icon: Icon(Icons.favorite_border, size: 22),
+                            icon: const Icon(Icons.favorite_border, size: 22),
                             onPressed: () {},
                           ),
-                          Text(
+                          const Text(
                             'Favourite',
                             style: TextStyle(fontSize: 12),
                           ),
@@ -217,11 +227,11 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                     ],
                   ),
                   const SizedBox(height: 20),
-                  Text(
+                  const Text(
                     'CAST',
                     style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 15),
                   CastSection(
                     castData: movie.cast
                         .map((cast) => {
@@ -234,13 +244,13 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       Navigator.pushNamed(context, '/actor');
                     },
                   ),
-                  const SizedBox(height: 20),
-                  Text(
+                  const SizedBox(height: 15),
+                  const Text(
                     'REVIEWS',
                     style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 12),
-                  Row(
+                  const SizedBox(height: 15),
+                  const Row(
                     children: [
                       CircleAvatar(
                         radius: 18,
@@ -253,13 +263,13 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 8),
-                  Text(
+                  const SizedBox(height: 8),
+                  const Text(
                     "An exquisite bit of writing of a story worth retelling and revisited again and again. The story of the mathematician Srinivasa Ramanujam, the unschooled genius who became Fellow of the Royal Society, and who has still left us unsolved riddles",
                     style: TextStyle(fontSize: 12),
                   ),
                   const SizedBox(height: 15),
-                  Row(
+                  const Row(
                     children: [
                       CircleAvatar(
                         radius: 18,
@@ -272,64 +282,50 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 8),
-                  Text(
+                  const SizedBox(height: 8),
+                  const Text(
                     "An exquisite bit of writing of a story worth retelling and revisited again and again. The story of the mathematician Srinivasa Ramanujam, the unschooled genius who became Fellow of the Royal Society, and who has still left us unsolved riddles",
                     style: TextStyle(fontSize: 12),
                   ),
-                  const SizedBox(height: 15),
-                  Text(
+                  const SizedBox(height: 20),
+                  const Text(
                     'Your Review',
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 8),
-                  TextField(
+                  const SizedBox(height: 5),
+                  const TextField(
                     maxLines: 4,
-                    cursorColor: Colors.white,
-                    style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       hintText: 'Write your review here',
                       filled: true,
-                      contentPadding: const EdgeInsets.symmetric(
+                      contentPadding: EdgeInsets.symmetric(
                           vertical: 8, horizontal: 15),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: const BorderSide(color: Colors.white),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: const BorderSide(color: Colors.white),
-                      ),
                     ),
                   ),
-                  SizedBox(height: 2),
                   Align(
                     alignment: Alignment.centerRight,
                     child: FractionallySizedBox(
                       widthFactor: 1 / 2.4,
                       child: ElevatedButton(
                         onPressed: () {},
-                        child: Text(
+                        child: const Text(
                           'Post Review',
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 13.5,
                           ),
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20),
-                  Text(
+                  const SizedBox(height: 10),
+                  const Text(
                     'WHERE TO WATCH',
                     style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 10),
                   Column(
                     children: movie.watchProviders.map((provider) {
                       return Row(
@@ -343,22 +339,20 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                     height: 40,
                                     fit: BoxFit.cover,
                                   )
-                                : Container(
-                                    width: 40,
-                                    height: 40), // Placeholder if logo is empty
+                                : Container(width: 40, height: 40),
                           ),
-                          SizedBox(width: 20),
+                          const SizedBox(width: 15),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 provider.name,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 14,
                                 ),
                               ),
-                              Text(
+                              const Text(
                                 'Now Streaming',
                                 style: TextStyle(
                                   fontSize: 12,
@@ -371,15 +365,14 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       );
                     }).toList(),
                   ),
-                  const SizedBox(height: 25),
-                  // Recommendations section
-                  Text(
+                  const SizedBox(height: 20),
+                  const Text(
                     'RECOMMENDATIONS',
                     style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 10),
                   Container(
-                    height: 200,
+                    height: 177,
                     child: HorizontalList(
                       items: movie.recommendations.map((recommendedMovie) {
                         return {
@@ -388,10 +381,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                           'title': recommendedMovie.title,
                         };
                       }).toList(),
-                      onTap: (index) {
-                        // Navigate to the selected movie's detail page
-                        //Navigator.pushNamed(context, '/movie', arguments: movie.recommendations[index].id);
-                      },
+                      onTap: (index) {},
                     ),
                   ),
                 ],

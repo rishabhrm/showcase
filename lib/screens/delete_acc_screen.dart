@@ -17,7 +17,6 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
         leading: IconButton(
           icon: const Icon(
             Icons.keyboard_arrow_down,
-            color: Colors.white,
             size: 40,
           ),
           onPressed: () {
@@ -36,7 +35,6 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
               'Delete Account',
               style: TextStyle(
                 fontSize: 30,
-                color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -45,7 +43,6 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
               "Are you sure you want to delete your account? This will erase all of your account data from this app. To delete your account enter your password below:",
               style: TextStyle(
                 fontSize: 12,
-                color: Colors.white,
               ),
             ),
             const SizedBox(height: 20),

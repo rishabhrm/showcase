@@ -53,7 +53,6 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
             Text(
               'Reviews',
               style: TextStyle(
-                color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 30,
               ),

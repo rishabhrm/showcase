@@ -4,6 +4,7 @@ class Movie {
   final String releaseDate;
   final int runtime;
   final String language;
+  final String tagline;
   final String overview;
   final List<String> genres;
   final List<Cast> cast;
@@ -15,7 +16,9 @@ class Movie {
     required this.backdropPath,
     required this.releaseDate,
     required this.runtime,
-        required this.language,
+    required this.language,
+    //required this.trailerUrl,
+    required this.tagline,   
     required this.overview,
     required this.genres,
     required this.cast,
@@ -30,6 +33,7 @@ class Movie {
       releaseDate: json['release_date'] ?? 'N/A',
       runtime: json['runtime'] ?? 0,
       language: json['original_language'] ?? 'N/A',
+      tagline: json['tagline'] ?? 'No Tagline available',
       overview: json['overview'] ?? 'No Overview available',
       genres: (json['genres'] as List<dynamic>?)?.map((genre) => genre['name'].toString()).toList() ?? [],
       cast: (json['credits']['cast'] as List<dynamic>?)?.map((castMember) {
@@ -42,7 +46,7 @@ class Movie {
         return RecommendedMovie(
           id: rec['id'],
           title: rec['title'],
-          backdropPath: rec['backdrop_path'] ?? '',
+          backdropPath: rec['poster_path'] ?? '',
         );
       }).toList() ?? [],
       watchProviders: (json['watch/providers']['results']['US']['flatrate'] as List<dynamic>?)?.map((provider) {

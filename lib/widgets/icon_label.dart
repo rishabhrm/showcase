@@ -17,7 +17,9 @@ class IconLabelButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        backgroundColor: const Color.fromRGBO(90, 90, 90, 1),
+        backgroundColor: Theme.of(context).brightness == Brightness.dark
+              ? Color.fromRGBO(90, 90, 90, 1)
+              : Color.fromRGBO(230, 230, 230, 1),
         padding: const EdgeInsets.symmetric(vertical: 12),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
@@ -30,12 +32,18 @@ class IconLabelButton extends StatelessWidget {
           children: [
             Icon(
               icon,
-              color: Colors.white,
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.white
+                  : Colors.black,
             ),
             const SizedBox(width: 10),
             Text(
               label,
-              style: const TextStyle(color: Colors.white),
+              style: TextStyle(
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.white
+                    : Colors.black,
+              ),
             ),
           ],
         ),

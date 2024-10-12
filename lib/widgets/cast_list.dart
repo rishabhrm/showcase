@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class CastSection extends StatelessWidget {
   final List<Map<String, String>> castData;
-  final Function(int index) onTap; // Add onTap callback
+  final Function(int index) onTap;
 
   const CastSection({
     required this.castData,
-    required this.onTap, // Add required onTap
+    required this.onTap,
     Key? key,
   }) : super(key: key);
 
@@ -16,7 +16,7 @@ class CastSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
-          height: 110,
+          height: 100,
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: castData.asMap().entries.map((entry) {
@@ -40,7 +40,9 @@ class CastSection extends StatelessWidget {
                       Text(
                         cast['name']!,
                         textAlign: TextAlign.center,
-                        style: const TextStyle(fontSize: 11),
+                        style: const TextStyle(fontSize: 10),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ],
                   ),
