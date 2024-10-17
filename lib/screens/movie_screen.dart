@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import '../movie_data.dart';
+import '../models/movie_data.dart';
 import '../widgets/cast_list.dart';
 import '../widgets/horizontal_list.dart';
 
@@ -19,8 +19,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
   @override
   void initState() {
     super.initState();
-    movieDetails = fetchMovieDetails(
-        widget.movieId); // Fetch movie details based on movieId
+    movieDetails = fetchMovieDetails(widget.movieId);
   }
 
   Future<Movie> fetchMovieDetails(int movieId) async {
@@ -37,6 +36,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
         backdropPath: jsonResponse['backdrop_path'] ?? '',
         releaseDate: jsonResponse['release_date'] ?? 'N/A',
         runtime: jsonResponse['runtime'] ?? 0,
+        numberOfSeasons: jsonResponse['numberOfSeasons'] ?? 0,
         language: jsonResponse['original_language'] ?? 'N/A',
         tagline: jsonResponse['tagline'] ?? 'No Tagline available',
         overview: jsonResponse['overview'] ?? 'No Overview available',
@@ -47,6 +47,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
         cast: (jsonResponse['credits']['cast'] as List<dynamic>?)
                 ?.map((castMember) {
               return Cast(
+                id: castMember['id'], // Cast ID
                 name: castMember['name'],
                 profilePath: castMember['profile_path'] ?? '',
               );
@@ -58,7 +59,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   return RecommendedMovie(
                     id: rec['id'],
                     title: rec['title'],
-                    backdropPath: rec['backdrop_path'] ?? '',
+                    backdropPath: rec['poster_path'] ?? '',
                   );
                 }).toList() ??
                 [],
@@ -133,10 +134,12 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   Center(
                     child: Text(
                       movie.title,
-                      style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold,
+                      style: const TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
                       ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                   Center(
@@ -159,7 +162,6 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       ],
                     ),
                   ),
-
                   const SizedBox(height: 10),
                   Text(
                     movie.genres.join(' | '),
@@ -241,7 +243,11 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                             })
                         .toList(),
                     onTap: (index) {
-                      Navigator.pushNamed(context, '/actor');
+                      Navigator.pushNamed(
+                        context,
+                        '/actor',
+                        arguments: movie.cast[index].id, // Pass the cast id
+                      );
                     },
                   ),
                   const SizedBox(height: 15),
@@ -301,8 +307,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                     decoration: InputDecoration(
                       hintText: 'Write your review here',
                       filled: true,
-                      contentPadding: EdgeInsets.symmetric(
-                          vertical: 8, horizontal: 15),
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 8, horizontal: 15),
                     ),
                   ),
                   Align(
@@ -371,7 +377,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                     style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 10),
-                  Container(
+                  SizedBox(
                     height: 177,
                     child: HorizontalList(
                       items: movie.recommendations.map((recommendedMovie) {
@@ -381,7 +387,17 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                           'title': recommendedMovie.title,
                         };
                       }).toList(),
-                      onTap: (index) {},
+                      onTap: (index) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MovieDetailScreen(
+                              movieId: movie.recommendations[index]
+                                  .id, // Pass the movie ID
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ],

@@ -16,9 +16,9 @@ import '../screens/home_screen.dart';
 import '../screens/search_screen.dart';
 import '../screens/genre_screen.dart';
 import '../screens/profile_screen.dart';
-import '../screens/actor_screen.dart';
-import '../screens/movie_screen.dart';
-import '../screens/tv_screen.dart';
+import '../screens/actor_screen.dart'; // ActorProfileScreen
+import '../screens/movie_screen.dart'; // MovieDetailScreen
+import '../screens/tv_screen.dart'; // TVDetailScreen
 
 class AppRoutes {
   static const String splash = '/';
@@ -50,16 +50,29 @@ class AppRoutes {
       signup: (context) => SignupScreen(),
       home: (context) => HomeScreen(),
       movie: (context) {
-        final movieId = ModalRoute.of(context)!.settings.arguments
-            as int?; // Safely cast to int
+        final movieId = ModalRoute.of(context)!.settings.arguments as int?;
         if (movieId != null) {
           return MovieDetailScreen(movieId: movieId);
         } else {
-          return HomeScreen(); // Handle the error case
+          return const HomeScreen(); // Handle the error case
         }
       },
-      tv: (context) => TVDetailScreen(),
-      actor: (context) => ActorProfileScreen(),
+        tv: (context) {
+        final tvId = ModalRoute.of(context)!.settings.arguments as int?;
+        if (tvId != null) {
+          return TVDetailScreen(tvId: tvId);
+        } else {
+          return const HomeScreen(); // Handle the error case
+        }
+      },
+      actor: (context) {
+        final actorId = ModalRoute.of(context)!.settings.arguments as int?;
+        if (actorId != null) {
+          return ActorProfileScreen(actorId: actorId);
+        } else {
+          return const HomeScreen(); // Handle the error case
+        }
+      },
       search: (context) => SearchScreen(),
       genre: (context) => GenreScreen(),
       profile: (context) => ProfileScreen(),

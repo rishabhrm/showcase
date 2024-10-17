@@ -58,6 +58,8 @@ class MainApp extends StatelessWidget {
               : Colors.black.withOpacity(0.6),
         ),
 
+        
+
         cardTheme: CardTheme(
           color: themeNotifier.isDarkMode ? Colors.black : Colors.white,
         ),

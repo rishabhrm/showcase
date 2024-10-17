@@ -96,7 +96,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     : HorizontalList(
                         items: mustWatchTV,
                         onTap: (index) {
-                          Navigator.pushNamed(context, '/tv');
+                          final tvId = mustWatchTV[index]['id'];
+                          if (tvId != null) {
+                            Navigator.pushNamed(
+                              context,
+                              '/tv',
+                              arguments: int.parse(tvId),
+                            );
+                          }
                         },
                       ),
               ),

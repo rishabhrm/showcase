@@ -12,14 +12,14 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
   final List<Map<String, String>> favouriteMovies = [
     {
       'image':
-          'assets/tom.jpg',
+          'assets/dw.jpg',
       'title': 'Tomorrowland',
       'genre': 'sci-fi, comedy, adventure',
       'rating': '8.2/10',
       'added on': 'Aug 11, 2024',
     },
     {
-      'image': 'assets/tmwki.jpg',
+      'image': 'assets/dw.jpg',
       'title': 'The Man Who Knew Infinity',
       'genre': 'sci-fi, comedy, adventure',
       'rating': '8.2/10',
@@ -27,7 +27,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
     },
     {
       'image':
-          'assets/lll.jpg',
+          'assets/dw.jpg',
       'title': 'La La Land',
       'genre': 'sci-fi, comedy, adventure',
       'rating': '8.2/10',
