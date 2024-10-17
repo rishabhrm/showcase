@@ -19,7 +19,7 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
   @override
   void initState() {
     super.initState();
-    tvDetails = fetchTVDetails(widget.tvId); // Fetch TV details based on tvId
+    tvDetails = fetchTVDetails(widget.tvId);
   }
 
   Future<TV> fetchTVDetails(int tvId) async {
@@ -34,14 +34,12 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
 
       return TV(
         title: jsonResponse['name'] as String,
-        backdropPath: jsonResponse['backdrop_path'] as String? ??
-            '', // If you still want to keep this as nullable
+        backdropPath: jsonResponse['backdrop_path'] as String? ?? '',
         releaseDate: jsonResponse['first_air_date'] as String? ?? 'N/A',
         numberOfSeasons: jsonResponse['number_of_seasons'] as int? ?? 0,
         language: jsonResponse['original_language'] as String,
         tagline: jsonResponse['tagline'] as String? ?? 'No Tagline available',
-        overview:
-            jsonResponse['overview'] as String? ?? 'No Overview available',
+        overview: jsonResponse['overview'] as String? ?? 'No Overview available',
         genres: (jsonResponse['genres'] as List<dynamic>?)
                 ?.map((genre) => genre['name'].toString())
                 .toList() ??
@@ -64,7 +62,6 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
                   );
                 }).toList() ??
                 [],
-
         watchProviders: (jsonResponse['watch/providers']['results']['US']
                         ['flatrate'] as List<dynamic>?)
                     ?.isNotEmpty ??
@@ -89,8 +86,7 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder<TV>(
-        // Change to TV
-        future: tvDetails, // Change to tvDetails
+        future: tvDetails,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -100,7 +96,7 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
             return const Center(child: Text('No data found'));
           }
 
-          TV tv = snapshot.data!; // Change movie to tv
+          TV tv = snapshot.data!;
           return SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 18),
@@ -114,7 +110,7 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8),
                         child: Image.network(
-                          'https://image.tmdb.org/t/p/w500${tv.backdropPath}', // Backdrop image
+                          'https://image.tmdb.org/t/p/w500${tv.backdropPath}',
                           width: double.infinity,
                           height: 200,
                           fit: BoxFit.fill,
@@ -148,7 +144,7 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
                   ),
                   Center(
                     child: Text(
-                      '${tv.releaseDate.split('-')[0]} • ${tv.numberOfSeasons} Seasons • ${tv.language}', // Year and duration
+                      '${tv.releaseDate.split('-')[0]} • ${tv.numberOfSeasons} Seasons • ${tv.language}',
                       style: const TextStyle(
                         fontSize: 12,
                       ),
@@ -156,7 +152,7 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
                   ),
                   const SizedBox(height: 10),
                   ElevatedButton(
-                    onPressed: () {}, // Implement your trailer logic here
+                    onPressed: () {},
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -198,7 +194,7 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
                         children: [
                           IconButton(
                             icon: const Icon(Icons.check, size: 22),
-                            onPressed: () {}, // Implement your logic here
+                            onPressed: () {},
                           ),
                           const Text(
                             'Add to list',
@@ -210,7 +206,7 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
                         children: [
                           IconButton(
                             icon: const Icon(Icons.bookmark_border, size: 22),
-                            onPressed: () {}, // Implement your logic here
+                            onPressed: () {},
                           ),
                           const Text(
                             'Want to watch',
@@ -222,7 +218,7 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
                         children: [
                           IconButton(
                             icon: const Icon(Icons.favorite_border, size: 22),
-                            onPressed: () {}, // Implement your logic here
+                            onPressed: () {},
                           ),
                           const Text(
                             'Favourite',
@@ -250,7 +246,7 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
                       Navigator.pushNamed(
                         context,
                         '/actor',
-                        arguments: tv.cast[index].id, // Pass the cast id
+                        arguments: tv.cast[index].id,
                       );
                     },
                   ),
@@ -344,7 +340,7 @@ class _TVDetailScreenState extends State<TVDetailScreen> {
                             borderRadius: BorderRadius.circular(10),
                             child: provider.logoPath.isNotEmpty
                                 ? Image.network(
-                                    'https://image.tmdb.org/t/p/w500${provider.logoPath}', // TMDB logo path
+                                    'https://image.tmdb.org/t/p/w500${provider.logoPath}',
                                     width: 40,
                                     height: 40,
                                     fit: BoxFit.cover,

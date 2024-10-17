@@ -47,7 +47,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
         cast: (jsonResponse['credits']['cast'] as List<dynamic>?)
                 ?.map((castMember) {
               return Cast(
-                id: castMember['id'], // Cast ID
+                id: castMember['id'],
                 name: castMember['name'],
                 profilePath: castMember['profile_path'] ?? '',
               );
@@ -393,7 +393,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                           MaterialPageRoute(
                             builder: (context) => MovieDetailScreen(
                               movieId: movie.recommendations[index]
-                                  .id, // Pass the movie ID
+                                  .id,
                             ),
                           ),
                         );

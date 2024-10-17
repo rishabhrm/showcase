@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:showcase/tmdb_services.dart';
+import 'package:showcase/api.dart';
 import '../models/actor_data.dart';
 import '../widgets/horizontal_list.dart';
 

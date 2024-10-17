@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../tmdb_services.dart';
+import '../api.dart';
 import '../widgets/carousel_card.dart';
 import '../widgets/horizontal_list.dart';
 import '../widgets/navbar.dart';
