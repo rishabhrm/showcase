@@ -8,6 +8,7 @@ class MovieList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      shrinkWrap: true,
       itemCount: movies.length,
       itemBuilder: (context, index) {
         final movie = movies[index];

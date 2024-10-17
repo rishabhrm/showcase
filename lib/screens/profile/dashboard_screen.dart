@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widgets/horizontal_list.dart';
+import '../../widgets/horizontal_list.dart';
 
 class DashboardScreen extends StatefulWidget {
   @override
@@ -36,14 +36,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
           },
         ),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 30),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 30),
+        child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               const Text(
                 'Dashboard',
                 style: TextStyle(
@@ -51,23 +51,21 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 30),
-              Center(
+              const SizedBox(height: 30),
+              const Center(
                 child: CircleAvatar(
                   radius: 60,
                   backgroundImage: AssetImage('assets/pfp.jpg'),
                 ),
               ),
-              SizedBox(height: 35),
-              Row(
+              const SizedBox(height: 35),
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Column(
                     children: [
                       Text("Watched", style: TextStyle(fontSize: 12)),
-                      Text("7",
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.bold)),
+                      Text("7", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
                     ],
                   ),
                   Column(
@@ -88,11 +86,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ),
                 ],
               ),
-              SizedBox(height: 25),
-              Text('TIME SPENT WATCHING',
+              const SizedBox(height: 25),
+              const Text('TIME SPENT WATCHING',
                   style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
-              SizedBox(height: 8),
-              Row(
+              const SizedBox(height: 8),
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Column(
@@ -129,8 +127,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ),
                 ],
               ),
-              SizedBox(height: 25),
-              Text('MOST WATCHED SHOWS',
+              const SizedBox(height: 25),
+              const Text('MOST WATCHED SHOWS',
                   style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
               const SizedBox(height: 10),
               SizedBox(
@@ -142,9 +140,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   },
                 ),
               ),
-              Text('GENRE BREAKDOWN',
+              const Text('GENRE BREAKDOWN',
                   style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
               genreBar("Comedy", 0.8),
               genreBar("Action", 0.6),
               genreBar("Adventure", 0.5),
@@ -168,7 +166,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             flex: 3,
             child: Text(
               genre,
-              style: TextStyle(fontSize: 12.5),
+              style: const TextStyle(fontSize: 12.5),
             ),
           ),
           Expanded(

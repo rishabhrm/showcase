@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../widgets/navbar.dart';
-import '../widgets/profile_button.dart';
+import '../../widgets/navbar.dart';
+import '../../widgets/profile_button.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -31,9 +31,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const SizedBox(height: 15),
-            CircleAvatar(
+            const CircleAvatar(
               backgroundImage:
-                  const AssetImage('assets/pfp.jpg'), // Local image
+                  AssetImage('assets/pfp.jpg'), // Local image
               radius: 55,
             ),
             const SizedBox(height: 10),
@@ -53,9 +53,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: ProfileButton(
                         icon: Icons.image_outlined,
                         label: 'Change Picture',
-                        onPressed: () {
-                          // Add your change picture logic here
-                        })),
+                        onPressed: () {})),
                 const SizedBox(width: 10),
                 Expanded(
                   child: ProfileButton(
@@ -155,7 +153,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: Navbar(),
+      bottomNavigationBar: const Navbar(),
     );
   }
 }

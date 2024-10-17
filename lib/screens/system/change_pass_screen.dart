@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../widgets/text_field.dart';
-import '../widgets/elevated_button.dart';
+import '../../widgets/text_field.dart';
+import '../../widgets/elevated_button.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
   const ChangePasswordScreen({super.key});

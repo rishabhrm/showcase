@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import '../screens/splash_screen.dart';
-import '../screens/login_screen.dart';
-import '../screens/auth_screen.dart';
-import '../screens/signup_screen.dart';
-import '../screens/settings_screen.dart';
-import '../screens/change_pass_screen.dart';
-import '../screens/delete_acc_screen.dart';
-import '../screens/profile_edit_screen.dart';
-import '../screens/fav_screen.dart';
-import '../screens/watched_screen.dart';
-import '../screens/plan_screen.dart';
-import '../screens/reviews_screen.dart';
-import '../screens/dashboard_screen.dart';
-import '../screens/home_screen.dart';
-import '../screens/search_screen.dart';
-import '../screens/genre_screen.dart';
-import '../screens/profile_screen.dart';
-import '../screens/actor_screen.dart'; // ActorProfileScreen
-import '../screens/movie_screen.dart'; // MovieDetailScreen
-import '../screens/tv_screen.dart'; // TVDetailScreen
+import '../screens/system/welcome_screen.dart';
+import '../screens/system/login_screen.dart';
+import '../screens/system/auth_screen.dart';
+import '../screens/system/signup_screen.dart';
+import '../screens/system/settings_screen.dart';
+import '../screens/system/change_pass_screen.dart';
+import '../screens/system/delete_acc_screen.dart';
+import '../screens/profile/profile_edit_screen.dart';
+import '../screens/profile/fav_screen.dart';
+import '../screens/profile/watched_screen.dart';
+import '../screens/profile/plan_screen.dart';
+import '../screens/profile/reviews_screen.dart';
+import '../screens/profile/dashboard_screen.dart';
+import '../screens/home/home_screen.dart';
+import '../screens/search/search_screen.dart';
+import '../screens/search/genre_screen.dart';
+import '../screens/profile/profile_screen.dart';
+import '../screens/home/actor_screen.dart';
+import '../screens/home/movie_screen.dart';
+import '../screens/home/tv_screen.dart';
 
 class AppRoutes {
   static const String splash = '/';

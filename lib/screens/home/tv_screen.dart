@@ -1,64 +1,63 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import '../models/movie_data.dart';
-import '../widgets/cast_list.dart';
-import '../widgets/horizontal_list.dart';
+import '../../models/tv_data.dart';
+import '../../widgets/cast_list.dart';
+import '../../widgets/horizontal_list.dart';
 
-class MovieDetailScreen extends StatefulWidget {
-  final int movieId;
-  const MovieDetailScreen({super.key, required this.movieId});
+class TVDetailScreen extends StatefulWidget {
+  final int tvId;
+  const TVDetailScreen({super.key, required this.tvId});
 
   @override
-  State<MovieDetailScreen> createState() => _MovieDetailScreenState();
+  State<TVDetailScreen> createState() => _TVDetailScreenState();
 }
 
-class _MovieDetailScreenState extends State<MovieDetailScreen> {
-  late Future<Movie> movieDetails;
+class _TVDetailScreenState extends State<TVDetailScreen> {
+  late Future<TV> tvDetails;
 
   @override
   void initState() {
     super.initState();
-    movieDetails = fetchMovieDetails(widget.movieId);
+    tvDetails = fetchTVDetails(widget.tvId);
   }
 
-  Future<Movie> fetchMovieDetails(int movieId) async {
+  Future<TV> fetchTVDetails(int tvId) async {
     final response = await http.get(
       Uri.parse(
-          'https://api.themoviedb.org/3/movie/$movieId?api_key=7f9aa6577f017c199547b077ae33f882&append_to_response=credits,recommendations,watch/providers'),
+        'https://api.themoviedb.org/3/tv/$tvId?api_key=7f9aa6577f017c199547b077ae33f882&append_to_response=credits,recommendations,watch/providers',
+      ),
     );
 
     if (response.statusCode == 200) {
       var jsonResponse = json.decode(response.body);
 
-      return Movie(
-        title: jsonResponse['title'] ?? 'No Title',
-        backdropPath: jsonResponse['backdrop_path'] ?? '',
-        releaseDate: jsonResponse['release_date'] ?? 'N/A',
-        runtime: jsonResponse['runtime'] ?? 0,
-        numberOfSeasons: jsonResponse['numberOfSeasons'] ?? 0,
-        language: jsonResponse['original_language'] ?? 'N/A',
-        tagline: jsonResponse['tagline'] ?? 'No Tagline available',
-        overview: jsonResponse['overview'] ?? 'No Overview available',
+      return TV(
+        title: jsonResponse['name'] as String,
+        backdropPath: jsonResponse['backdrop_path'] as String? ?? '',
+        releaseDate: jsonResponse['first_air_date'] as String? ?? 'N/A',
+        numberOfSeasons: jsonResponse['number_of_seasons'] as int? ?? 0,
+        language: jsonResponse['original_language'] as String,
+        tagline: jsonResponse['tagline'] as String? ?? 'No Tagline available',
+        overview: jsonResponse['overview'] as String? ?? 'No Overview available',
         genres: (jsonResponse['genres'] as List<dynamic>?)
                 ?.map((genre) => genre['name'].toString())
                 .toList() ??
             [],
         cast: (jsonResponse['credits']['cast'] as List<dynamic>?)
-                ?.map((castMember) {
-              return Cast(
-                id: castMember['id'],
-                name: castMember['name'],
-                profilePath: castMember['profile_path'] ?? '',
-              );
-            }).toList() ??
+                ?.map((castMember) => Cast(
+                      id: castMember['id'] as int,
+                      name: castMember['name'] as String,
+                      profilePath: castMember['profile_path'] as String? ?? '',
+                    ))
+                .toList() ??
             [],
         recommendations:
             (jsonResponse['recommendations']['results'] as List<dynamic>?)
                     ?.map((rec) {
                   return RecommendedMovie(
                     id: rec['id'],
-                    title: rec['title'],
+                    title: rec['name'],
                     backdropPath: rec['poster_path'] ?? '',
                   );
                 }).toList() ??
@@ -79,15 +78,15 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
             : [],
       );
     } else {
-      throw Exception('Failed to load movie details');
+      throw Exception('Failed to load TV details');
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder<Movie>(
-        future: movieDetails,
+      body: FutureBuilder<TV>(
+        future: tvDetails,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -96,7 +95,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
           } else if (!snapshot.hasData) {
             return const Center(child: Text('No data found'));
           }
-          Movie movie = snapshot.data!;
+
+          TV tv = snapshot.data!;
           return SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 18),
@@ -110,7 +110,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8),
                         child: Image.network(
-                          'https://image.tmdb.org/t/p/w500${movie.backdropPath}', // Backdrop image
+                          'https://image.tmdb.org/t/p/w500${tv.backdropPath}',
                           width: double.infinity,
                           height: 200,
                           fit: BoxFit.fill,
@@ -133,7 +133,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   const SizedBox(height: 15),
                   Center(
                     child: Text(
-                      movie.title,
+                      tv.title,
                       style: const TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
@@ -144,7 +144,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   ),
                   Center(
                     child: Text(
-                      '${movie.releaseDate.split('-')[0]} • ${movie.runtime} min • ${movie.language}', // Year and duration
+                      '${tv.releaseDate.split('-')[0]} • ${tv.numberOfSeasons} Seasons • ${tv.language}',
                       style: const TextStyle(
                         fontSize: 12,
                       ),
@@ -164,7 +164,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    movie.genres.join(' | '),
+                    tv.genres.join(' | '),
                     style: const TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.bold,
@@ -172,7 +172,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    movie.tagline,
+                    tv.tagline,
                     style: const TextStyle(
                       fontSize: 12,
                       decoration: TextDecoration.underline,
@@ -181,7 +181,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    movie.overview,
+                    tv.overview,
                     style: const TextStyle(
                       fontSize: 12,
                     ),
@@ -235,18 +235,18 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   ),
                   const SizedBox(height: 15),
                   CastSection(
-                    castData: movie.cast
-                        .map((cast) => {
-                              'imageUrl':
-                                  'https://image.tmdb.org/t/p/w500${cast.profilePath}',
-                              'name': cast.name,
-                            })
-                        .toList(),
+                    castData: tv.cast.map((cast) {
+                      return {
+                        'imageUrl':
+                            'https://image.tmdb.org/t/p/w500${cast.profilePath}',
+                        'name': cast.name,
+                      };
+                    }).toList(),
                     onTap: (index) {
                       Navigator.pushNamed(
                         context,
                         '/actor',
-                        arguments: movie.cast[index].id, // Pass the cast id
+                        arguments: tv.cast[index].id,
                       );
                     },
                   ),
@@ -333,14 +333,14 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   ),
                   const SizedBox(height: 10),
                   Column(
-                    children: movie.watchProviders.map((provider) {
+                    children: tv.watchProviders.map((provider) {
                       return Row(
                         children: [
                           ClipRRect(
                             borderRadius: BorderRadius.circular(10),
                             child: provider.logoPath.isNotEmpty
                                 ? Image.network(
-                                    'https://image.tmdb.org/t/p/w500${provider.logoPath}', // TMDB logo path
+                                    'https://image.tmdb.org/t/p/w500${provider.logoPath}',
                                     width: 40,
                                     height: 40,
                                     fit: BoxFit.cover,
@@ -376,11 +376,11 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                     'RECOMMENDATIONS',
                     style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 15),
                   SizedBox(
                     height: 177,
                     child: HorizontalList(
-                      items: movie.recommendations.map((recommendedMovie) {
+                      items: tv.recommendations.map((recommendedMovie) {
                         return {
                           'image':
                               'https://image.tmdb.org/t/p/w500${recommendedMovie.backdropPath}',
@@ -391,9 +391,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => MovieDetailScreen(
-                              movieId: movie.recommendations[index]
-                                  .id,
+                            builder: (context) => TVDetailScreen(
+                              tvId: tv.recommendations[index].id,
                             ),
                           ),
                         );

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widgets/review_list.dart';
+import '../../widgets/review_list.dart';
 
 class ReviewsScreen extends StatefulWidget {
   const ReviewsScreen({super.key});
@@ -35,7 +35,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.keyboard_arrow_down,
             size: 40,
           ),
@@ -49,17 +49,18 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               'Reviews',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 30,
               ),
             ),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             Expanded(
-              child: ReviewList(movieReviews: movieReviews),
+              child: SingleChildScrollView(
+                  child: ReviewList(movieReviews: movieReviews)),
             ),
           ],
         ),

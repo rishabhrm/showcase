@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import '../api.dart';
-import '../widgets/carousel_card.dart';
-import '../widgets/horizontal_list.dart';
-import '../widgets/navbar.dart';
+import '../../api.dart';
+import '../../widgets/carousel_card.dart';
+import '../../widgets/horizontal_list.dart';
+import '../../widgets/navbar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
-
+  
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const SizedBox(height: 10),
               SizedBox(
-                height: 200, // Set a fixed height
+                height: 200,
                 child: CarouselCard(carouselItems: carouselItems),
               ),
               const SizedBox(height: 20),
@@ -65,10 +65,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 10),
-              Container(
+              SizedBox(
                 height: 177,
                 child: mustWatchMovies.isEmpty
-                    ? Center(child: CircularProgressIndicator())
+                    ? const Center(child: CircularProgressIndicator())
                     : HorizontalList(
                         items: mustWatchMovies,
                         onTap: (index) {
@@ -89,10 +89,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 10),
-              Container(
+              SizedBox(
                 height: 177,
                 child: mustWatchTV.isEmpty
-                    ? Center(child: CircularProgressIndicator())
+                    ? const Center(child: CircularProgressIndicator())
                     : HorizontalList(
                         items: mustWatchTV,
                         onTap: (index) {

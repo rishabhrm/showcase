@@ -23,10 +23,13 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       title: 'showcase',
       theme: themeNotifier.currentTheme.copyWith(
-        textTheme: GoogleFonts.quicksandTextTheme(
+        textTheme: GoogleFonts.montserratTextTheme(
           Theme.of(context).textTheme.apply(
-              bodyColor:
-                  themeNotifier.isDarkMode ? Colors.white : Colors.black),
+                bodyColor:
+                    themeNotifier.isDarkMode ? Colors.white : Colors.black,
+                decorationColor:
+                    themeNotifier.isDarkMode ? Colors.white : Colors.black,
+              ),
         ),
         scaffoldBackgroundColor:
             themeNotifier.isDarkMode ? Colors.black : Colors.white,
@@ -57,13 +60,9 @@ class MainApp extends StatelessWidget {
               ? Colors.white.withOpacity(0.6)
               : Colors.black.withOpacity(0.6),
         ),
-
-        
-
         cardTheme: CardTheme(
           color: themeNotifier.isDarkMode ? Colors.black : Colors.white,
         ),
-
         inputDecorationTheme: InputDecorationTheme(
           labelStyle: TextStyle(
             color: themeNotifier.isDarkMode ? Colors.white70 : Colors.black87,

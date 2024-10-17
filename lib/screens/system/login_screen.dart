@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../widgets/elevated_button.dart';
-import '../widgets/text_field.dart';
+import '../../widgets/elevated_button.dart';
+import '../../widgets/text_field.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

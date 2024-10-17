@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../widgets/elevated_button.dart';
-import '../widgets/text_field.dart';
+import '../../widgets/elevated_button.dart';
+import '../../widgets/text_field.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -29,9 +29,9 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
             ),
             const SizedBox(height: 25),
-            Text(
+            const Text(
               "Let's create an account for you!",
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
               ),

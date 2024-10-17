@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../widgets/elevated_button.dart';
-import '../widgets/icon_label.dart';
-import '../widgets/navbar.dart';
-import '../theme_notifier.dart';
+import '../../widgets/elevated_button.dart';
+import '../../widgets/icon_label.dart';
+import '../../widgets/navbar.dart';
+import '../../theme_notifier.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -20,7 +20,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.chevron_left,
             size: 40,
           ),
@@ -28,7 +28,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             Navigator.pushNamed(context, '/profile');
           },
         ),
-        centerTitle: false,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 50),
@@ -36,7 +35,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Settings',
               style: TextStyle(
                 fontSize: 30,
@@ -70,22 +69,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
               height: 48,
               decoration: BoxDecoration(
                 color: themeNotifier.isDarkMode
-              ? Color.fromRGBO(90, 90, 90, 1)
-              : Color.fromRGBO(230, 230, 230, 1),
+              ? const Color.fromRGBO(90, 90, 90, 1)
+              : const Color.fromRGBO(230, 230, 230, 1),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
                     child: Row(
                       children: [
                         Icon(
                           Icons.dark_mode,
                           //color: Colors.white,
                         ),
-                        const SizedBox(width: 10),
+                        SizedBox(width: 10),
                         Text(
                           'Dark Mode',
                           //style: const TextStyle(color: Colors.white),
@@ -113,7 +112,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: Navbar(),
+      bottomNavigationBar: const Navbar(),
     );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../widgets/horizontal_list.dart';
-import '../widgets/navbar.dart';
+import '../../widgets/horizontal_list.dart';
+import '../../widgets/navbar.dart';
 
 class GenreScreen extends StatefulWidget {
   const GenreScreen({super.key});

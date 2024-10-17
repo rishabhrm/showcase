@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:showcase/api.dart';
-import '../models/actor_data.dart';
-import '../widgets/horizontal_list.dart';
+import '../../models/actor_data.dart';
+import '../../widgets/horizontal_list.dart';
 
 
 class ActorProfileScreen extends StatefulWidget {
   final int actorId;
   const ActorProfileScreen({super.key, required this.actorId});
+  
   @override
   State<ActorProfileScreen> createState() => _ActorProfileScreenState();
 }
@@ -88,18 +89,18 @@ class _ActorProfileScreenState extends State<ActorProfileScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         'Birthday:',
-                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
                       ),
                       Text(
                         actor.birthday ?? 'Unknown',
                         style: const TextStyle(fontSize: 12),
                       ),
                       const SizedBox(height: 2),
-                      Text(
+                      const Text(
                         'Place of Birth:',
-                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
                       ),
                       Text(
                         actor.placeOfBirth ?? 'Unknown',

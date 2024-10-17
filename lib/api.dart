@@ -10,7 +10,6 @@ class APIService {
       Uri.parse(
           'https://api.themoviedb.org/3/movie/top_rated?api_key=$apiKey&page=1'),
     );
-
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       return (data['results'] as List)
@@ -32,7 +31,6 @@ class APIService {
       Uri.parse(
           'https://api.themoviedb.org/3/tv/top_rated?api_key=$apiKey&page=1'),
     );
-
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       return (data['results'] as List)
@@ -53,7 +51,6 @@ class APIService {
       Uri.parse(
           'https://api.themoviedb.org/3/movie/now_playing?api_key=$apiKey&page=1'),
     );
-
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       return (data['results'] as List)
@@ -75,7 +72,6 @@ class APIService {
     final response = await http.get(
       Uri.parse('https://api.themoviedb.org/3/person/$actorId?api_key=$apiKey'),
     );
-
     if (response.statusCode == 200) {
       final jsonResponse = json.decode(response.body);
       return ActorDetails.fromJson(jsonResponse);
@@ -89,7 +85,6 @@ class APIService {
       Uri.parse(
           'https://api.themoviedb.org/3/person/$actorId/movie_credits?api_key=$apiKey'),
     );
-
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       return (data['cast'] as List)

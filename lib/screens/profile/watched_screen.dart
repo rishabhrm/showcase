@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widgets/movie_list.dart';
+import '../../widgets/movie_list.dart';
 
 class WatchedScreen extends StatefulWidget {
   const WatchedScreen({super.key});
@@ -40,7 +40,7 @@ class _WatchedScreenState extends State<WatchedScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.keyboard_arrow_down,
             size: 40,
           ),
@@ -54,17 +54,19 @@ class _WatchedScreenState extends State<WatchedScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 20),
-            Text(
-              'Watched',
+            const SizedBox(height: 20),
+            const Text(
+              'Already watched',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 30,
               ),
             ),
-            SizedBox(height: 35),
+            const SizedBox(height: 35),
             Expanded(
-              child: MovieList(movies: favouriteMovies),
+              child: SingleChildScrollView(
+                child: MovieList(movies: favouriteMovies),
+              ),
             ),
           ],
         ),

@@ -29,7 +29,7 @@ class Movie {
 }
 
 class Cast {
-  final int id; // Assuming each cast member has a unique id
+  final int id;
   final String name;
   final String profilePath;
 

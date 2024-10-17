@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../widgets/elevated_button.dart';
-import '../widgets/text_field2.dart';
-import '../widgets/text_field3.dart';
+import '../../widgets/elevated_button.dart';
+import '../../widgets/text_field2.dart';
+import '../../widgets/text_field3.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
