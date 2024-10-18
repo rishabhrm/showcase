@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class Genre {
+  final int id;
   final String image;
   final String name;
-  Genre({required this.image, required this.name});
+  Genre({required this.id, required this.image, required this.name});
 }
 
 class GenreTile extends StatelessWidget {
@@ -22,7 +23,7 @@ class GenreTile extends StatelessWidget {
           fit: StackFit.expand,
           children: [
             Image(
-              image: _getImageProvider(genre.image),
+              image: NetworkImage(genre.image), // Dynamic image from TMDB API
               fit: BoxFit.cover,
             ),
             Container(
@@ -42,13 +43,5 @@ class GenreTile extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  ImageProvider _getImageProvider(String imagePath) {
-    if (imagePath.startsWith('http')) {
-      return NetworkImage(imagePath);
-    } else {
-      return AssetImage(imagePath);
-    }
   }
 }

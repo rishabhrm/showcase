@@ -54,15 +54,15 @@ class AppRoutes {
         if (movieId != null) {
           return MovieDetailScreen(movieId: movieId);
         } else {
-          return const HomeScreen(); // Handle the error case
+          return const HomeScreen(); // Handle missing argument case
         }
       },
-        tv: (context) {
+      tv: (context) {
         final tvId = ModalRoute.of(context)!.settings.arguments as int?;
         if (tvId != null) {
           return TVDetailScreen(tvId: tvId);
         } else {
-          return const HomeScreen(); // Handle the error case
+          return const HomeScreen(); // Handle missing argument case
         }
       },
       actor: (context) {
@@ -70,11 +70,21 @@ class AppRoutes {
         if (actorId != null) {
           return ActorProfileScreen(actorId: actorId);
         } else {
-          return const HomeScreen(); // Handle the error case
+          return const HomeScreen(); // Handle missing argument case
         }
       },
       search: (context) => SearchScreen(),
-      genre: (context) => GenreScreen(),
+      genre: (context) {
+        final arguments = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
+        final genreId = arguments?['id'] as int?;
+        final genreName = arguments?['name'] as String?;
+
+        if (genreId != null && genreName != null) {
+          return GenreScreen(genreId: genreId, genreName: genreName);
+        } else {
+          return const HomeScreen(); // Handle missing argument case
+        }
+      },
       profile: (context) => ProfileScreen(),
       favourite: (context) => FavouriteScreen(),
       watched: (context) => WatchedScreen(),

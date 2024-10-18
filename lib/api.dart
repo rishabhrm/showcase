@@ -7,20 +7,17 @@ class APIService {
 
   Future<List<Map<String, String>>> fetchMustWatchMovies() async {
     final response = await http.get(
-      Uri.parse(
-          'https://api.themoviedb.org/3/movie/top_rated?api_key=$apiKey&page=1'),
+      Uri.parse('https://api.themoviedb.org/3/movie/top_rated?api_key=$apiKey&page=1'),
     );
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       return (data['results'] as List)
           .map((movie) => {
-                'image':
-                    'https://image.tmdb.org/t/p/w500${movie['poster_path']}',
+                'image': 'https://image.tmdb.org/t/p/w500${movie['poster_path'] ?? ''}',
                 'title': movie['title'] as String,
                 'id': movie['id'].toString(),
               })
-          .toList()
-          .cast<Map<String, String>>();
+          .toList();
     } else {
       throw Exception('Failed to load movies: ${response.statusCode}');
     }
@@ -28,19 +25,17 @@ class APIService {
 
   Future<List<Map<String, String>>> fetchMustWatchTV() async {
     final response = await http.get(
-      Uri.parse(
-          'https://api.themoviedb.org/3/tv/top_rated?api_key=$apiKey&page=1'),
+      Uri.parse('https://api.themoviedb.org/3/tv/top_rated?api_key=$apiKey&page=1'),
     );
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       return (data['results'] as List)
           .map((tv) => {
-                'image': 'https://image.tmdb.org/t/p/w500${tv['poster_path']}',
+                'image': 'https://image.tmdb.org/t/p/w500${tv['poster_path'] ?? ''}',
                 'title': tv['name'] as String,
                 'id': tv['id'].toString(),
               })
-          .toList()
-          .cast<Map<String, String>>();
+          .toList();
     } else {
       throw Exception('Failed to load TV shows: ${response.statusCode}');
     }
@@ -48,23 +43,19 @@ class APIService {
 
   Future<List<Map<String, String>>> fetchCarouselItems() async {
     final response = await http.get(
-      Uri.parse(
-          'https://api.themoviedb.org/3/movie/now_playing?api_key=$apiKey&page=1'),
+      Uri.parse('https://api.themoviedb.org/3/movie/now_playing?api_key=$apiKey&page=1'),
     );
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       return (data['results'] as List)
           .map((movie) => {
-                'image':
-                    'https://image.tmdb.org/t/p/w500${movie['backdrop_path']}',
+                'image': 'https://image.tmdb.org/t/p/w500${movie['backdrop_path'] ?? ''}',
                 'title': movie['title'] as String,
                 'id': movie['id'].toString(),
               })
-          .toList()
-          .cast<Map<String, String>>();
+          .toList();
     } else {
-      throw Exception(
-          'Failed to load now playing movies: ${response.statusCode}');
+      throw Exception('Failed to load now playing movies: ${response.statusCode}');
     }
   }
 
@@ -82,22 +73,55 @@ class APIService {
 
   Future<List<Map<String, String>>> fetchActorKnownForMovies(int actorId) async {
     final response = await http.get(
-      Uri.parse(
-          'https://api.themoviedb.org/3/person/$actorId/movie_credits?api_key=$apiKey'),
+      Uri.parse('https://api.themoviedb.org/3/person/$actorId/movie_credits?api_key=$apiKey'),
     );
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       return (data['cast'] as List)
           .map((movie) => {
-                'image':
-                    'https://image.tmdb.org/t/p/w500${movie['poster_path']}',
+                'image': 'https://image.tmdb.org/t/p/w500${movie['poster_path'] ?? ''}',
                 'title': movie['title'] as String,
                 'id': movie['id'].toString(),
               })
-          .toList()
-          .cast<Map<String, String>>();
+          .toList();
     } else {
       throw Exception('Failed to load actor movies');
+    }
+  }
+
+  Future<List<Map<String, dynamic>>> fetchGenres() async {
+    final response = await http.get(
+      Uri.parse('https://api.themoviedb.org/3/genre/movie/list?api_key=$apiKey&language=en-US'),
+    );
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      return (data['genres'] as List)
+          .map((genre) => {
+                'id': genre['id'],
+                'name': genre['name'],
+              })
+          .toList();
+    } else {
+      throw Exception('Failed to load genres');
+    }
+  }
+
+  Future<List<Map<String, String>>> fetchMoviesByGenre(int genreId) async {
+    final response = await http.get(
+      Uri.parse('https://api.themoviedb.org/3/discover/movie?api_key=$apiKey&with_genres=$genreId'),
+    );
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      final List<dynamic> results = data['results'];
+
+      return results.map((movie) {
+        return {
+          'title': movie['title'] as String,
+          'image': 'https://image.tmdb.org/t/p/w500${movie['poster_path'] ?? ''}',
+        };
+      }).toList();
+    } else {
+      throw Exception('Failed to load movies for genre');
     }
   }
 }
