@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import '../home/movie_screen.dart';
+
 class GenreScreen extends StatefulWidget {
   final int genreId;
   final String genreName;
@@ -37,10 +39,9 @@ class _GenreScreenState extends State<GenreScreen> {
         movies = results
             .map((movie) {
               return {
+                'id': movie['id'].toString(),  // Include movie id here
                 'title': movie['title'] as String,
-                'image':
-                    'https://image.tmdb.org/t/p/w500${movie['poster_path']}'
-                        as String,
+                'image': 'https://image.tmdb.org/t/p/w500${movie['poster_path']}',
               };
             })
             .toList()
@@ -97,7 +98,22 @@ class _GenreScreenState extends State<GenreScreen> {
               const Center(child: CircularProgressIndicator())
             else
               Expanded(
-                child: VerticalList(movies: movies),
+                child: VerticalList(
+                  movies: movies,
+                  onTap: (index) {
+                    final movieId = movies[index]['id'];
+                    if (movieId != null) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MovieDetailScreen(
+                            movieId: int.parse(movieId),  // Pass movie id as int
+                          ),
+                        ),
+                      );
+                    }
+                  },
+                ),
               ),
           ],
         ),
@@ -110,9 +126,11 @@ class VerticalList extends StatelessWidget {
   const VerticalList({
     super.key,
     required this.movies,
+    required this.onTap,
   });
 
   final List<Map<String, String>> movies;
+  final void Function(int index) onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -130,16 +148,7 @@ class VerticalList extends StatelessWidget {
         final title = movie['title'] ?? 'No Title';
 
         return GestureDetector(
-          onTap: () {
-            final movieId = movies[index]['id'];
-            if (movieId != null) {
-              Navigator.pushNamed(
-                context,
-                '/movie',
-                arguments: int.parse(movieId),
-              );
-            }
-          },
+          onTap: () => onTap(index),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [

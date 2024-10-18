@@ -3,9 +3,10 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import '../../widgets/navbar.dart';
-import '../../widgets/searchbar.dart';
 import '../../widgets/genre.dart';
+import '../../widgets/searchbar.dart';
 import '../search/genre_screen.dart';
+import '../search/search_result_screen.dart'; // Import the SearchResultsScreen
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -24,52 +25,63 @@ class _SearchScreenState extends State<SearchScreen> {
     fetchGenres();
   }
 
- Future<void> fetchGenres() async {
-  final response = await http.get(
-    Uri.parse('https://api.themoviedb.org/3/genre/movie/list?api_key=$apiKey&language=en-US'),
-  );
+  Future<void> fetchGenres() async {
+    final response = await http.get(
+      Uri.parse('https://api.themoviedb.org/3/genre/movie/list?api_key=$apiKey&language=en-US'),
+    );
 
-  if (response.statusCode == 200) {
-    final data = json.decode(response.body);
-    final List<dynamic> genreList = data['genres'];
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      final List<dynamic> genreList = data['genres'];
 
-    // Sample mapping of genres to image URLs. Update with actual images as needed.
-    Map<int, String> genreImages = {
-      28: 'https://image.tmdb.org/t/p/original/u9tWvLMKCRryraFCoLhDdLC0gP1.jpg', // Action
-      12: 'https://image.tmdb.org/t/p/original/8hSjOHRY4OUEpqxszYbMdem8z9C.jpg', // Adventure
-      16: 'https://image.tmdb.org/t/p/original/s3FiHTdpQVpqIqdBxLLiy40wGut.jpg', // Animation
-      35: 'https://image.tmdb.org/t/p/original/5ESxsJ7oiNJ5PZM4fqDMGQbcK2e.jpg', //com
-      80, //crime
-      99, //documentry
-      18, //drama
-      10751: 'https://image.tmdb.org/t/p/original/79nTeB7ciywvWdv9Uyl6JBQpDZm.jpg', //family
-      14 //fantasy
-      36, //history
-      27, //horror
-      10402, //music
-      9648, //mystery
-      10749: 'https://image.tmdb.org/t/p/original/AjoaBmNAmEPkAcQyhOk08u0mCcu.jpg', //rom
-      878: 'https://image.tmdb.org/t/p/original/r8FD6CC3GgjWaGVkZh00AcedfpA.jpg', //sci-fi
-      10770, //tv movie
-      53, //thriller
-      10752, //war
-      37, //western
-    };
+      // Sample mapping of genres to image URLs. Update with actual images as needed.
+      Map<int, String> genreImages = {
+        28: 'https://image.tmdb.org/t/p/original/u9tWvLMKCRryraFCoLhDdLC0gP1.jpg', // Action
+        12: 'https://image.tmdb.org/t/p/original/8hSjOHRY4OUEpqxszYbMdem8z9C.jpg', // Adventure
+        16: 'https://image.tmdb.org/t/p/original/s3FiHTdpQVpqIqdBxLLiy40wGut.jpg', // Animation
+        35: 'https://image.tmdb.org/t/p/original/5ESxsJ7oiNJ5PZM4fqDMGQbcK2e.jpg', // Comedy
+        80: 'https://image.tmdb.org/t/p/original/vJ8H8skNbNzXWVyDNSgxTZMTPA6.jpg', // Crime
+        99: 'https://image.tmdb.org/t/p/original/6S159wVNvQfwoQh5yBxWKCsI1YL.jpg', // Documentary
+        18: 'https://image.tmdb.org/t/p/original/52AfXWuXCHn3UjD17rBruA9f5qb.jpg', // Drama
+        10751: 'https://image.tmdb.org/t/p/original/79nTeB7ciywvWdv9Uyl6JBQpDZm.jpg', // Family
+        14: 'https://image.tmdb.org/t/p/original/8BeMLO3VRBNbGMj5h6F7raoMLYq.jpg', // Fantasy
+        36: 'https://image.tmdb.org/t/p/original/eHMh7kChaNeD4VTdMCXLJbRTzcI.jpg', // History
+        27: 'https://image.tmdb.org/t/p/original/aQCCpAIdWAp6wyFgjMry4okwrZo.jpg', // Horror
+        10402: 'https://image.tmdb.org/t/p/original/abVpQWJ1pLoR3IPWG94Ed6oKnrH.jpg', // Music
+        9648: 'https://image.tmdb.org/t/p/original/g1eZwt1uXQupUY1WpU8iQXkcaK6.jpg', // Mystery
+        10749: 'https://image.tmdb.org/t/p/original/AjoaBmNAmEPkAcQyhOk08u0mCcu.jpg', // Romance
+        878: 'https://image.tmdb.org/t/p/original/r8FD6CC3GgjWaGVkZh00AcedfpA.jpg', // Sci-Fi
+        10770: 'https://image.tmdb.org/t/p/original/6gvocf4kU9qJyUVZEDveOtLkaMu.jpg', // TV Movie
+        53: 'https://image.tmdb.org/t/p/original/8xt8AMb1OKC63AdhNSaYBWxB4Iq.jpg', // Thriller
+        10752: 'https://image.tmdb.org/t/p/original/ut4ALkOwEl01nqODS3s6q4C2uWp.jpg', // War
+        37: 'https://image.tmdb.org/t/p/original/cpkvb8y35zNTb20ym09ohkoB157.jpg', // Western
+      };
 
-    setState(() {
-      genres = genreList.map((genre) {
-        return Genre(
-          id: genre['id'],
-          name: genre['name'],
-          image: genreImages[genre['id']] ?? '',
-        );
-      }).toList();
-    });
-  } else {
-    throw Exception('Failed to load genres');
+      setState(() {
+        genres = genreList.map((genre) {
+          return Genre(
+            id: genre['id'],
+            name: genre['name'],
+            image: genreImages[genre['id']] ?? '',
+          );
+        }).toList();
+      });
+    } else {
+      throw Exception('Failed to load genres');
+    }
   }
-}
 
+  // Function to handle search
+  void handleSearch(String query) {
+    if (query.isNotEmpty) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => SearchResultsScreen(searchQuery: query), // Navigate to SearchResultsScreen
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +100,7 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
             const SizedBox(height: 20),
-            const Searchbar(),
+            Searchbar(onSearch: handleSearch), // Pass the handleSearch function
             const SizedBox(height: 30),
             const Text(
               'Prefer a specific genre? We’ve got it covered!',

@@ -13,9 +13,9 @@ class APIService {
       final data = json.decode(response.body);
       return (data['results'] as List)
           .map((movie) => {
-                'image': 'https://image.tmdb.org/t/p/w500${movie['poster_path'] ?? ''}',
-                'title': movie['title'] as String,
                 'id': movie['id'].toString(),
+                'title': movie['title'] as String,
+                'image': 'https://image.tmdb.org/t/p/w500${movie['poster_path'] ?? ''}',
               })
           .toList();
     } else {
@@ -31,9 +31,9 @@ class APIService {
       final data = json.decode(response.body);
       return (data['results'] as List)
           .map((tv) => {
-                'image': 'https://image.tmdb.org/t/p/w500${tv['poster_path'] ?? ''}',
-                'title': tv['name'] as String,
                 'id': tv['id'].toString(),
+                'title': tv['name'] as String,
+                'image': 'https://image.tmdb.org/t/p/w500${tv['poster_path'] ?? ''}',
               })
           .toList();
     } else {
@@ -49,9 +49,9 @@ class APIService {
       final data = json.decode(response.body);
       return (data['results'] as List)
           .map((movie) => {
-                'image': 'https://image.tmdb.org/t/p/w500${movie['backdrop_path'] ?? ''}',
-                'title': movie['title'] as String,
                 'id': movie['id'].toString(),
+                'title': movie['title'] as String,
+                'image': 'https://image.tmdb.org/t/p/w500${movie['backdrop_path'] ?? ''}',
               })
           .toList();
     } else {
@@ -79,9 +79,9 @@ class APIService {
       final data = json.decode(response.body);
       return (data['cast'] as List)
           .map((movie) => {
-                'image': 'https://image.tmdb.org/t/p/w500${movie['poster_path'] ?? ''}',
-                'title': movie['title'] as String,
                 'id': movie['id'].toString(),
+                'title': movie['title'] as String,
+                'image': 'https://image.tmdb.org/t/p/w500${movie['poster_path'] ?? ''}',
               })
           .toList();
     } else {
@@ -116,6 +116,7 @@ class APIService {
 
       return results.map((movie) {
         return {
+          'id': movie['id'].toString(),
           'title': movie['title'] as String,
           'image': 'https://image.tmdb.org/t/p/w500${movie['poster_path'] ?? ''}',
         };

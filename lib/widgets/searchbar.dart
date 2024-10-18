@@ -1,24 +1,28 @@
 import 'package:flutter/material.dart';
 
 class Searchbar extends StatelessWidget {
+  final Function(String) onSearch;
 
-  const Searchbar({
-    super.key,
-  });
+  const Searchbar({super.key, required this.onSearch});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 45,
+    final TextEditingController searchController = TextEditingController();
+
+    return SizedBox(
+      height: 44,
       child: TextFormField(
-        // cursorColor: Colors.white,
-        // style: const TextStyle(color: Colors.white),
+        controller: searchController,
         decoration: InputDecoration(
-          suffixIcon: Icon(Icons.search),
+          suffixIcon: IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () {
+              onSearch(searchController.text);
+            },
+          ),
           hintText: 'What are you looking for?',
           filled: true,
-          contentPadding:
-              const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+          contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
         ),
       ),
     );
