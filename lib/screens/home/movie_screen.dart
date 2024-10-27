@@ -104,7 +104,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 35),
                   Stack(
                     children: [
                       ClipRRect(
@@ -112,13 +112,13 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         child: Image.network(
                           'https://image.tmdb.org/t/p/w500${movie.backdropPath}', // Backdrop image
                           width: double.infinity,
-                          height: 200,
+                          height: 190,
                           fit: BoxFit.fill,
                         ),
                       ),
                       Positioned(
-                        top: 12,
-                        left: -12,
+                        top: -4,
+                        left: -8,
                         child: CircleAvatar(
                           backgroundColor: Colors.transparent,
                           child: IconButton(
@@ -130,7 +130,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 10),
                   Center(
                     child: Text(
                       movie.title,

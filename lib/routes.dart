@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../screens/system/splash_screen.dart';
 import '../screens/system/welcome_screen.dart';
 import '../screens/system/login_screen.dart';
 import '../screens/system/auth_screen.dart';
@@ -6,6 +7,7 @@ import '../screens/system/signup_screen.dart';
 import '../screens/system/settings_screen.dart';
 import '../screens/system/change_pass_screen.dart';
 import '../screens/system/delete_acc_screen.dart';
+import '../screens/system/error_screen.dart';
 import '../screens/profile/profile_edit_screen.dart';
 import '../screens/profile/fav_screen.dart';
 import '../screens/profile/watched_screen.dart';
@@ -22,6 +24,7 @@ import '../screens/home/tv_screen.dart';
 
 class AppRoutes {
   static const String splash = '/';
+  static const String welcome = '/welcome';
   static const String login = '/login';
   static const String auth = '/auth';
   static const String signup = '/signup';
@@ -44,11 +47,12 @@ class AppRoutes {
 
   static Map<String, WidgetBuilder> getRoutes() {
     return {
-      splash: (context) => SplashScreen(),
-      login: (context) => LoginScreen(),
-      auth: (context) => AuthScreen(),
-      signup: (context) => SignupScreen(),
-      home: (context) => HomeScreen(),
+      splash: (context) => const SplashScreen(),
+      welcome: (context) => const WelcomeScreen(),
+      login: (context) => const LoginScreen(),
+      auth: (context) => const AuthScreen(),
+      signup: (context) => const SignupScreen(),
+      home: (context) => const HomeScreen(),
       movie: (context) {
         final movieId = ModalRoute.of(context)!.settings.arguments as int?;
         if (movieId != null) {
@@ -62,7 +66,7 @@ class AppRoutes {
         if (tvId != null) {
           return TVDetailScreen(tvId: tvId);
         } else {
-          return const HomeScreen(); // Handle missing argument case
+          return const ErrorScreen(); // Handle missing argument case
         }
       },
       actor: (context) {
@@ -70,7 +74,7 @@ class AppRoutes {
         if (actorId != null) {
           return ActorProfileScreen(actorId: actorId);
         } else {
-          return const HomeScreen(); // Handle missing argument case
+          return const ErrorScreen(); // Handle missing argument case
         }
       },
       search: (context) => SearchScreen(),
@@ -78,7 +82,6 @@ class AppRoutes {
         final arguments = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
         final genreId = arguments?['id'] as int?;
         final genreName = arguments?['name'] as String?;
-
         if (genreId != null && genreName != null) {
           return GenreScreen(genreId: genreId, genreName: genreName);
         } else {

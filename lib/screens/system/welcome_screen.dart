@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import '../../widgets/elevated_button.dart';
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+class WelcomeScreen extends StatefulWidget {
+  const WelcomeScreen({super.key});
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  State<WelcomeScreen> createState() => _WelcomeScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             const SizedBox(height: 20),
-            Text(
+            const Text(
               'showcase',
               style: TextStyle(
                 fontSize: 30,
@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             const SizedBox(height: 10),
-            Text(
+            const Text(
               'a case for all your shows',
               style: TextStyle(
                 fontSize: 12,
