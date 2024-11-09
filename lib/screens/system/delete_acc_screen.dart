@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../../widgets/text_field.dart';
 import '../../widgets/elevated_button.dart';
 
@@ -10,6 +11,45 @@ class DeleteAccountScreen extends StatefulWidget {
 }
 
 class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
+  final TextEditingController _passwordController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  @override
+  void dispose() {
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  Future<void> deleteAccount() async {
+    try {
+      User? user = _auth.currentUser;
+      final String password = _passwordController.text;
+
+      if (user != null) {
+        // Reauthenticate the user before deleting
+        AuthCredential credential = EmailAuthProvider.credential(
+          email: user.email!,
+          password: password,
+        );
+
+        await user.reauthenticateWithCredential(credential);
+        await user.delete();
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Account deleted successfully')),
+        );
+
+        // Navigate to welcome or logout screen
+        Navigator.pushNamedAndRemoveUntil(context, '/welcome', (route) => false);
+      }
+    } catch (e) {
+      // Show error if reauthentication fails
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Failed to delete account. Check password.')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,14 +89,16 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
             Form(
               child: Column(
                 children: [
-                  const CustomTextField(
+                  CustomTextField(
                     labelText: 'Password',
                     hintText: 'Enter your password',
+                    controller: _passwordController,
+                    isPassword: true,
                   ),
                   const SizedBox(height: 100),
                   CustomElevatedButton(
                     label: 'Delete Account',
-                    onPressed: () {},
+                    onPressed: deleteAccount,
                   ),
                 ],
               ),

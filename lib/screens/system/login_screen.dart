@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart'; // Import Firebase Auth
 import '../../widgets/elevated_button.dart';
 import '../../widgets/text_field.dart';
 
@@ -10,6 +11,30 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  Future<void> signIn() async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+      Navigator.pushNamed(context, '/home'); // Redirect to home on success
+    } on FirebaseAuthException catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(e.message ?? "Login failed")),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,33 +63,39 @@ class _LoginScreenState extends State<LoginScreen> {
             Form(
               child: Column(
                 children: [
-                  const CustomTextField(
+                  CustomTextField(
                     labelText: 'E-mail address',
                     hintText: 'Enter your e-mail address',
+                    controller: _emailController,
                   ),
                   const SizedBox(height: 10),
-                  const CustomTextField(
+                  CustomTextField(
                     labelText: 'Password',
                     hintText: 'Enter your password',
+                    isPassword: true,
+                    controller: _passwordController,
                   ),
                   const SizedBox(height: 15),
-                  const Align(
+                  Align(
                     alignment: Alignment.centerLeft,
-                    child: Text(
-                      'forgot password?',
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                        decoration: TextDecoration.underline,
+                    child: GestureDetector(
+                      onTap: () {
+                        // Implement forgot password logic or route here
+                      },
+                      child: const Text(
+                        'Forgot password?',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          decoration: TextDecoration.underline,
+                        ),
                       ),
                     ),
                   ),
                   const SizedBox(height: 25),
                   CustomElevatedButton(
                     label: 'Sign In',
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/auth');
-                    },
+                    onPressed: signIn,
                   ),
                   const SizedBox(height: 30),
                   InkWell(

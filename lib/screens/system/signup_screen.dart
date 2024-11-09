@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart'; // Import Firebase Auth
 import '../../widgets/elevated_button.dart';
 import '../../widgets/text_field.dart';
 
@@ -10,7 +11,46 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
   bool _isChecked = false;
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  Future<void> signUp() async {
+    if (_passwordController.text != _confirmPasswordController.text) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Passwords do not match")),
+      );
+      return;
+    }
+
+    if (!_isChecked) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Please agree to the terms")),
+      );
+      return;
+    }
+
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+      Navigator.pushNamed(context, '/home'); // Redirect to home after signup
+    } on FirebaseAuthException catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(e.message ?? "Signup failed")),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,24 +80,24 @@ class _SignupScreenState extends State<SignupScreen> {
             Form(
               child: Column(
                 children: [
-                  const CustomTextField(
-                    labelText: 'Name',
-                    hintText: 'Enter your name',
-                  ),
-                  const SizedBox(height: 10),
-                  const CustomTextField(
+                  CustomTextField(
                     labelText: 'E-mail address',
                     hintText: 'Enter your e-mail address',
+                    controller: _emailController,
                   ),
                   const SizedBox(height: 10),
-                  const CustomTextField(
+                  CustomTextField(
                     labelText: 'Password',
                     hintText: 'Enter your password',
+                    isPassword: true,
+                    controller: _passwordController,
                   ),
                   const SizedBox(height: 10),
-                  const CustomTextField(
+                  CustomTextField(
                     labelText: 'Re-enter password',
                     hintText: 'Re-enter your password',
+                    isPassword: true,
+                    controller: _confirmPasswordController,
                   ),
                   const SizedBox(height: 5),
                   Row(
@@ -83,7 +123,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   const SizedBox(height: 12),
                   CustomElevatedButton(
                     label: 'Sign Up',
-                    onPressed: () {},
+                    onPressed: signUp,
                   ),
                   const SizedBox(height: 30),
                   InkWell(
