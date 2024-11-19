@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart'; // Import Firebase Auth
 import '../../widgets/elevated_button.dart';
 import '../../widgets/text_field.dart';
@@ -25,32 +26,49 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   Future<void> signUp() async {
-    if (_passwordController.text != _confirmPasswordController.text) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Passwords do not match")),
-      );
-      return;
-    }
-
-    if (!_isChecked) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Please agree to the terms")),
-      );
-      return;
-    }
-
-    try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
-      );
-      Navigator.pushNamed(context, '/home'); // Redirect to home after signup
-    } on FirebaseAuthException catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(e.message ?? "Signup failed")),
-      );
-    }
+  if (_passwordController.text != _confirmPasswordController.text) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("Passwords do not match")),
+    );
+    return;
   }
+
+  if (!_isChecked) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("Please agree to the terms")),
+    );
+    return;
+  }
+
+  try {
+    // Create user with email and password
+    UserCredential userCredential = await FirebaseAuth.instance
+        .createUserWithEmailAndPassword(
+      email: _emailController.text,
+      password: _passwordController.text,
+    );
+
+    User? user = userCredential.user;
+
+    if (user != null) {
+      // Add user information to Firestore
+      await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+        'name': 'Default Name', // Replace with an input from a TextField
+        'username': 'defaultUsername', // Replace with an input
+        'aboutMe': 'Tell us about yourself', // Replace with an input
+        'profilePicture': '', // URL for profile picture, default empty
+        'userSince': FieldValue.serverTimestamp(), // Firebase timestamp
+      });
+
+      Navigator.pushNamed(context, '/home'); // Redirect to home after signup
+    }
+  } on FirebaseAuthException catch (e) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(e.message ?? "Signup failed")),
+    );
+  }
+}
+
 
   @override
   Widget build(BuildContext context) {

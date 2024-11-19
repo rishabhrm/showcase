@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../../widgets/elevated_button.dart';
 import '../../widgets/text_field2.dart';
 import '../../widgets/text_field3.dart';
@@ -11,6 +13,63 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  // Controllers to hold the updated values
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _aboutMeController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    fetchUserData(); // Fetch user data when the screen loads
+  }
+
+  // Fetch user data from Firestore
+  Future<void> fetchUserData() async {
+    User? user = _auth.currentUser;
+    if (user != null) {
+      DocumentSnapshot userDoc = await _firestore.collection('users').doc(user.uid).get();
+      if (userDoc.exists) {
+        setState(() {
+          _nameController.text = userDoc['name'] ?? 'Test Name';
+          _usernameController.text = userDoc['username'] ?? 'testusername';
+          _emailController.text = userDoc['email'] ?? 'user@testmail.com';
+          _aboutMeController.text = userDoc['aboutMe'] ?? 'No description available';
+        });
+      }
+    }
+  }
+
+  // Update profile information
+  Future<void> updateProfile() async {
+    User? user = _auth.currentUser;
+    if (user != null) {
+      try {
+        await _firestore.collection('users').doc(user.uid).update({
+          'name': _nameController.text,
+          'username': _usernameController.text,
+          'email': _emailController.text,
+          'aboutMe': _aboutMeController.text,
+        });
+
+        // Show a confirmation message
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Profile updated successfully')),
+        );
+        Navigator.pop(context); // Go back to profile screen after update
+      } catch (e) {
+        // Handle any errors
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Failed to update profile')),
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,34 +102,38 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             Form(
               child: Column(
                 children: [
-                  const CustomTextField(
+                  // TextField for name
+                  CustomTextField(
+                    controller: _nameController,
                     labelText: 'Name',
                     hintText: 'Enter your name',
-                    initialValue: 'Test Name',
                   ),
                   const SizedBox(height: 20),
-                  const CustomTextField(
+                  // TextField for username
+                  CustomTextField(
+                    controller: _usernameController,
                     labelText: 'Username',
                     hintText: 'Enter your username',
-                    initialValue: 'testusername',
                   ),
                   const SizedBox(height: 20),
-                  const CustomTextField(
+                  // TextField for email
+                  CustomTextField(
+                    controller: _emailController,
                     labelText: 'E-mail address',
                     hintText: 'Enter your e-mail address',
-                    initialValue: 'user@testmail.com',
                   ),
                   const SizedBox(height: 20),
-                  const CustomTextField3(
+                  // TextField for aboutMe
+                  CustomTextField3(
+                    controller: _aboutMeController,
                     labelText: 'About Me',
                     hintText: 'Something about yourself',
-                    initialValue:
-                        'Lorem ipsum dolor sit amet. In quia voluptas hic amet blanditiis est quae minus. Eos nihil tempora ut pariatur sint aut reiciendis eveniet et Quis eligendi est facere quasi 33 voluptatem aspernatur est velit voluptas.',
                   ),
                   const SizedBox(height: 50),
+                  // Button to update profile
                   CustomElevatedButton(
                     label: 'Update Profile',
-                    onPressed: () {},
+                    onPressed: updateProfile,
                   ),
                 ],
               ),

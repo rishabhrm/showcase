@@ -1,46 +1,27 @@
 import 'package:flutter/material.dart';
 
-class CustomTextField3 extends StatefulWidget {
+class CustomTextField3 extends StatelessWidget {
+  final TextEditingController controller; // Use controller instead of initialValue
   final String labelText;
   final String hintText;
-  final String initialValue;
 
   const CustomTextField3({
     Key? key,
+    required this.controller,
     required this.labelText,
     required this.hintText,
-    required this.initialValue,
   }) : super(key: key);
 
   @override
-  _CustomTextField3State createState() => _CustomTextField3State();
-}
-
-class _CustomTextField3State extends State<CustomTextField3> {
-  late TextEditingController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = TextEditingController(text: widget.initialValue);
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 200,
       child: TextField(
-        controller: _controller,
+        controller: controller, // Bind the controller here
         maxLines: null,
         decoration: InputDecoration(
-          labelText: widget.labelText,
-          hintText: widget.hintText,
+          labelText: labelText,
+          hintText: hintText,
           filled: true,
           contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
         ),
