@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../widgets/elevated_button.dart';
-import '../../widgets/text_field2.dart';
-import '../../widgets/text_field3.dart';
+import '../../widgets/text_field.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
@@ -16,7 +15,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  // Controllers to hold the updated values
   TextEditingController _nameController = TextEditingController();
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
@@ -25,10 +23,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   void initState() {
     super.initState();
-    fetchUserData(); // Fetch user data when the screen loads
+    fetchUserData();
   }
 
-  // Fetch user data from Firestore
   Future<void> fetchUserData() async {
     User? user = _auth.currentUser;
     if (user != null) {
@@ -44,7 +41,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     }
   }
 
-  // Update profile information
   Future<void> updateProfile() async {
     User? user = _auth.currentUser;
     if (user != null) {
@@ -56,13 +52,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           'aboutMe': _aboutMeController.text,
         });
 
-        // Show a confirmation message
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Profile updated successfully')),
         );
-        Navigator.pop(context); // Go back to profile screen after update
+        Navigator.pop(context);
       } catch (e) {
-        // Handle any errors
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Failed to update profile')),
         );
@@ -102,7 +96,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             Form(
               child: Column(
                 children: [
-                  // TextField for name
                   CustomTextField(
                     controller: _nameController,
                     labelText: 'Name',
@@ -116,21 +109,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     hintText: 'Enter your username',
                   ),
                   const SizedBox(height: 20),
-                  // TextField for email
                   CustomTextField(
                     controller: _emailController,
                     labelText: 'E-mail address',
                     hintText: 'Enter your e-mail address',
                   ),
                   const SizedBox(height: 20),
-                  // TextField for aboutMe
-                  CustomTextField3(
+                  CustomTextField(
                     controller: _aboutMeController,
                     labelText: 'About Me',
                     hintText: 'Something about yourself',
                   ),
                   const SizedBox(height: 50),
-                  // Button to update profile
                   CustomElevatedButton(
                     label: 'Update Profile',
                     onPressed: updateProfile,

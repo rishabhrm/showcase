@@ -26,7 +26,6 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
       final String password = _passwordController.text;
 
       if (user != null) {
-        // Reauthenticate the user before deleting
         AuthCredential credential = EmailAuthProvider.credential(
           email: user.email!,
           password: password,
@@ -39,11 +38,9 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
           const SnackBar(content: Text('Account deleted successfully')),
         );
 
-        // Navigate to welcome or logout screen
         Navigator.pushNamedAndRemoveUntil(context, '/welcome', (route) => false);
       }
     } catch (e) {
-      // Show error if reauthentication fails
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Failed to delete account. Check password.')),
       );

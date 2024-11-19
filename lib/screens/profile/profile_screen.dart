@@ -12,18 +12,15 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  // Firebase instance for Firestore and Auth
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  // Variables to hold user data
   String name = '';
   String username = '';
   String aboutMe = '';
   String profilePicture = '';
   String memberSince = '';
 
-  // Fetch user data from Firestore
   Future<void> fetchUserData() async {
     User? user = _auth.currentUser;
     if (user != null) {
@@ -45,7 +42,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
-    fetchUserData(); // Fetch user data when screen loads
+    fetchUserData();
   }
 
   @override
@@ -70,7 +67,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             const SizedBox(height: 15),
             CircleAvatar(
-              backgroundImage: NetworkImage(profilePicture), // Dynamically load profile image
+              backgroundImage: NetworkImage(profilePicture),
               radius: 55,
             ),
             const SizedBox(height: 10),
@@ -80,7 +77,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             const SizedBox(height: 3),
             Text(
-              username,
+              '@$username',
               style: const TextStyle(fontSize: 12),
             ),
             const SizedBox(height: 10),
