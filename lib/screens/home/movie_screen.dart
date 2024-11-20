@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -20,6 +22,66 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
   void initState() {
     super.initState();
     movieDetails = fetchMovieDetails(widget.movieId);
+  }
+
+  Future<void> addToWatchedList(int movieId) async {
+    try {
+      final uid = FirebaseAuth.instance.currentUser?.uid;
+      if (uid == null) {
+        throw Exception("User not logged in");
+      }
+      final userDoc = FirebaseFirestore.instance.collection('users').doc(uid);
+      await userDoc.set({
+        'watched': FieldValue.arrayUnion([movieId])
+      }, SetOptions(merge: true));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Added to your list!')),
+      );
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to add: $error')),
+      );
+    }
+  }
+
+    Future<void> addToPlannedList(int movieId) async {
+    try {
+      final uid = FirebaseAuth.instance.currentUser?.uid;
+      if (uid == null) {
+        throw Exception("User not logged in");
+      }
+      final userDoc = FirebaseFirestore.instance.collection('users').doc(uid);
+      await userDoc.set({
+        'planToWatch': FieldValue.arrayUnion([movieId])
+      }, SetOptions(merge: true));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Added to your list!')),
+      );
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to add: $error')),
+      );
+    }
+  }
+
+    Future<void> addToFavouriteList(int movieId) async {
+    try {
+      final uid = FirebaseAuth.instance.currentUser?.uid;
+      if (uid == null) {
+        throw Exception("User not logged in");
+      }
+      final userDoc = FirebaseFirestore.instance.collection('users').doc(uid);
+      await userDoc.set({
+        'favourites': FieldValue.arrayUnion([movieId])
+      }, SetOptions(merge: true));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Added to your list!')),
+      );
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to add: $error')),
+      );
+    }
   }
 
   Future<Movie> fetchMovieDetails(int movieId) async {
@@ -110,7 +172,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8),
                         child: Image.network(
-                          'https://image.tmdb.org/t/p/w500${movie.backdropPath}', // Backdrop image
+                          'https://image.tmdb.org/t/p/w500${movie.backdropPath}',
                           width: double.infinity,
                           height: 190,
                           fit: BoxFit.fill,
@@ -194,7 +256,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         children: [
                           IconButton(
                             icon: const Icon(Icons.check, size: 22),
-                            onPressed: () {},
+                            onPressed: () => addToWatchedList(widget.movieId)
                           ),
                           const Text(
                             'Add to list',
@@ -206,7 +268,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         children: [
                           IconButton(
                             icon: const Icon(Icons.bookmark_border, size: 22),
-                            onPressed: () {},
+                            onPressed: () => addToPlannedList(widget.movieId)
                           ),
                           const Text(
                             'Want to watch',
@@ -218,7 +280,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         children: [
                           IconButton(
                             icon: const Icon(Icons.favorite_border, size: 22),
-                            onPressed: () {},
+                            onPressed: () => addToFavouriteList(widget.movieId)
                           ),
                           const Text(
                             'Favourite',
@@ -392,8 +454,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => MovieDetailScreen(
-                              movieId: movie.recommendations[index]
-                                  .id,
+                              movieId: movie.recommendations[index].id,
                             ),
                           ),
                         );

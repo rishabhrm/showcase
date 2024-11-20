@@ -23,7 +23,7 @@ class GenreTile extends StatelessWidget {
           fit: StackFit.expand,
           children: [
             Image(
-              image: NetworkImage(genre.image), // Dynamic image from TMDB API
+              image: NetworkImage(genre.image),
               fit: BoxFit.cover,
             ),
             Container(

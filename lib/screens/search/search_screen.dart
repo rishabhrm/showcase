@@ -100,7 +100,7 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
             const SizedBox(height: 20),
-            Searchbar(onSearch: handleSearch), // Pass the handleSearch function
+            Searchbar(onSearch: handleSearch),
             const SizedBox(height: 30),
             const Text(
               'Prefer a specific genre? We’ve got it covered!',

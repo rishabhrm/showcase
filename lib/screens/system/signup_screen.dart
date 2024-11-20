@@ -51,11 +51,16 @@ class _SignupScreenState extends State<SignupScreen> {
 
       if (user != null) {
         await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
-          'name': 'Test Name',
-          'username': 'testusername',
-          'aboutMe': 'Tell us about yourself',
+          'name': _emailController.text,
+          'username': '',
+          'aboutMe': '',
+          'email': _emailController.text,
           'profilePicture': '',
           'userSince': FieldValue.serverTimestamp(),
+          'favourites': [],
+          'watched': [],
+          'planToWatch': [],
+          'reviews': [],
         });
 
         Navigator.pushNamed(context, '/home');

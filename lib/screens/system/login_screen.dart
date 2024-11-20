@@ -27,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
         email: _emailController.text,
         password: _passwordController.text,
       );
-      Navigator.pushNamed(context, '/home'); // Redirect to home on success
+      Navigator.pushNamed(context, '/home');
     } on FirebaseAuthException catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(e.message ?? "Login failed")),
@@ -79,9 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Align(
                     alignment: Alignment.centerLeft,
                     child: GestureDetector(
-                      onTap: () {
-                        // Implement forgot password logic or route here
-                      },
+                      onTap: () {},
                       child: const Text(
                         'Forgot password?',
                         style: TextStyle(

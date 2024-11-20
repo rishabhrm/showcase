@@ -106,6 +106,27 @@ class APIService {
     }
   }
 
+  Future<Map<String, String>> fetchMoviesById(int movieId) async {
+  final response = await http.get(
+    Uri.parse('https://api.themoviedb.org/3/movie/$movieId?api_key=$apiKey'),
+  );
+  if (response.statusCode == 200) {
+    final movie = json.decode(response.body);
+    return {
+      'image': 'https://image.tmdb.org/t/p/w500${movie['poster_path'] ?? ''}',
+      'title': movie['title'] ?? 'Unknown',
+      'genre': (movie['genres'] as List)
+              .map((genre) => genre['name'])
+              .join(', ') ??
+          'Unknown',
+      'rating': '${movie['vote_average']?.toStringAsFixed(1)}/10',
+    };
+  } else {
+    throw Exception('Failed to fetch movie details for ID $movieId');
+  }
+}
+
+
   Future<List<Map<String, String>>> fetchMoviesByGenre(int genreId) async {
     final response = await http.get(
       Uri.parse('https://api.themoviedb.org/3/discover/movie?api_key=$apiKey&with_genres=$genreId'),
