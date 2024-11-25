@@ -48,7 +48,7 @@ class AppRoutes {
   static Map<String, WidgetBuilder> getRoutes() {
     return {
       splash: (context) => const SplashScreen(),
-      welcome: (context) => const WelcomeScreen(),
+      welcome: (context) => const WelcomeScreen(), // Get Started Screen
       login: (context) => const LoginScreen(),
       auth: (context) => const AuthScreen(),
       signup: (context) => const SignupScreen(),
@@ -58,7 +58,7 @@ class AppRoutes {
         if (movieId != null) {
           return MovieDetailScreen(movieId: movieId);
         } else {
-          return const HomeScreen(); // Handle missing argument case
+          return const ErrorScreen(); // Handle missing argument case
         }
       },
       tv: (context) {
@@ -79,13 +79,14 @@ class AppRoutes {
       },
       search: (context) => SearchScreen(),
       genre: (context) {
-        final arguments = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
+        final arguments =
+            ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
         final genreId = arguments?['id'] as int?;
         final genreName = arguments?['name'] as String?;
         if (genreId != null && genreName != null) {
           return GenreScreen(genreId: genreId, genreName: genreName);
         } else {
-          return const HomeScreen(); // Handle missing argument case
+          return const ErrorScreen(); // Handle missing argument case
         }
       },
       profile: (context) => ProfileScreen(),
@@ -95,9 +96,9 @@ class AppRoutes {
       reviews: (context) => ReviewsScreen(),
       dashboard: (context) => DashboardScreen(),
       profileEdit: (context) => EditProfileScreen(),
-      settings: (context) => SettingsScreen(),
-      deleteAccount: (context) => DeleteAccountScreen(),
-      changePassword: (context) => ChangePasswordScreen(),
+      settings: (context) => const SettingsScreen(),
+      deleteAccount: (context) => const DeleteAccountScreen(),
+      changePassword: (context) => const ChangePasswordScreen(),
     };
   }
 }

@@ -17,6 +17,7 @@ class MovieDetailScreen extends StatefulWidget {
 
 class _MovieDetailScreenState extends State<MovieDetailScreen> {
   late Future<Movie> movieDetails;
+  final TextEditingController _reviewController = TextEditingController();
 
   @override
   void initState() {
@@ -44,7 +45,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
     }
   }
 
-    Future<void> addToPlannedList(int movieId) async {
+  Future<void> addToPlannedList(int movieId) async {
     try {
       final uid = FirebaseAuth.instance.currentUser?.uid;
       if (uid == null) {
@@ -64,7 +65,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
     }
   }
 
-    Future<void> addToFavouriteList(int movieId) async {
+  Future<void> addToFavouriteList(int movieId) async {
     try {
       final uid = FirebaseAuth.instance.currentUser?.uid;
       if (uid == null) {
@@ -80,6 +81,35 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
     } catch (error) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Failed to add: $error')),
+      );
+    }
+  }
+
+  Future<void> postReview(int movieId, String reviewText) async {
+    try {
+      final uid = FirebaseAuth.instance.currentUser?.uid;
+      if (uid == null) {
+        throw Exception("User not logged in");
+      }
+      final reviewData = {
+        'movieId': movieId,
+        'reviewText': reviewText,
+        'timestamp': FieldValue.serverTimestamp(), // Optional timestamp
+      };
+
+      // Push to Firestore
+      final userDoc = FirebaseFirestore.instance.collection('users').doc(uid);
+      await userDoc.collection('reviews').add(reviewData);
+
+      // Clear the review text field
+      _reviewController.clear();
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Review posted successfully!')),
+      );
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to post review: $error')),
       );
     }
   }
@@ -255,9 +285,9 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       Column(
                         children: [
                           IconButton(
-                            icon: const Icon(Icons.check, size: 22),
-                            onPressed: () => addToWatchedList(widget.movieId)
-                          ),
+                              icon: const Icon(Icons.check, size: 22),
+                              onPressed: () =>
+                                  addToWatchedList(widget.movieId)),
                           const Text(
                             'Add to list',
                             style: TextStyle(fontSize: 12),
@@ -267,9 +297,9 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       Column(
                         children: [
                           IconButton(
-                            icon: const Icon(Icons.bookmark_border, size: 22),
-                            onPressed: () => addToPlannedList(widget.movieId)
-                          ),
+                              icon: const Icon(Icons.bookmark_border, size: 22),
+                              onPressed: () =>
+                                  addToPlannedList(widget.movieId)),
                           const Text(
                             'Want to watch',
                             style: TextStyle(fontSize: 12),
@@ -279,9 +309,9 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       Column(
                         children: [
                           IconButton(
-                            icon: const Icon(Icons.favorite_border, size: 22),
-                            onPressed: () => addToFavouriteList(widget.movieId)
-                          ),
+                              icon: const Icon(Icons.favorite_border, size: 22),
+                              onPressed: () =>
+                                  addToFavouriteList(widget.movieId)),
                           const Text(
                             'Favourite',
                             style: TextStyle(fontSize: 12),
@@ -333,7 +363,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   ),
                   const SizedBox(height: 8),
                   const Text(
-                    "An exquisite bit of writing of a story worth retelling and revisited again and again. The story of the mathematician Srinivasa Ramanujam, the unschooled genius who became Fellow of the Royal Society, and who has still left us unsolved riddles",
+                    "An absolute masterpiece! The storytelling was immersive, the performances were stellar, and every moment kept me hooked. Definitely worth every second of your time.",
                     style: TextStyle(fontSize: 12),
                   ),
                   const SizedBox(height: 15),
@@ -352,7 +382,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   ),
                   const SizedBox(height: 8),
                   const Text(
-                    "An exquisite bit of writing of a story worth retelling and revisited again and again. The story of the mathematician Srinivasa Ramanujam, the unschooled genius who became Fellow of the Royal Society, and who has still left us unsolved riddles",
+                    "Brilliantly crafted and emotionally gripping. The visuals, pacing, and heart of the film make it unforgettable. This is a film that leaves a lasting impact—truly a must-watch!",
                     style: TextStyle(fontSize: 12),
                   ),
                   const SizedBox(height: 20),
@@ -364,9 +394,10 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                     ),
                   ),
                   const SizedBox(height: 5),
-                  const TextField(
+                  TextField(
+                    controller: _reviewController,
                     maxLines: 4,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'Write your review here',
                       filled: true,
                       contentPadding:
@@ -378,7 +409,18 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                     child: FractionallySizedBox(
                       widthFactor: 1 / 2.4,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          final reviewText = _reviewController.text.trim();
+                          if (reviewText.isNotEmpty) {
+                            postReview(widget.movieId, reviewText);
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Review cannot be empty.'),
+                              ),
+                            );
+                          }
+                        },
                         child: const Text(
                           'Post Review',
                           style: TextStyle(

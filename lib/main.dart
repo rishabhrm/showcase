@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:firebase_core/firebase_core.dart'; // Add this import
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'routes.dart';
 import 'theme_notifier.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized(); // Ensure binding is initialized
-  await Firebase.initializeApp(); // Initialize Firebase
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(
     ChangeNotifierProvider(
       create: (context) => ThemeNotifier(),
@@ -91,8 +92,8 @@ class MainApp extends StatelessWidget {
           suffixIconColor:
               themeNotifier.isDarkMode ? Colors.white70 : Colors.black54,
           fillColor: themeNotifier.isDarkMode
-              ? Color.fromRGBO(90, 90, 90, 1)
-              : Color.fromRGBO(230, 230, 230, 1),
+              ? const Color.fromRGBO(90, 90, 90, 1)
+              : const Color.fromRGBO(230, 230, 230, 1),
         ),
       ),
       initialRoute: AppRoutes.splash,

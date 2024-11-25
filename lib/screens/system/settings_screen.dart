@@ -69,8 +69,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               height: 48,
               decoration: BoxDecoration(
                 color: themeNotifier.isDarkMode
-              ? const Color.fromRGBO(90, 90, 90, 1)
-              : const Color.fromRGBO(230, 230, 230, 1),
+                    ? const Color.fromRGBO(90, 90, 90, 1)
+                    : const Color.fromRGBO(230, 230, 230, 1),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Row(
@@ -82,12 +82,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       children: [
                         Icon(
                           Icons.dark_mode,
-                          //color: Colors.white,
                         ),
                         SizedBox(width: 10),
                         Text(
                           'Dark Mode',
-                          //style: const TextStyle(color: Colors.white),
                         ),
                       ],
                     ),
@@ -106,7 +104,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             CustomElevatedButton(
               label: 'Log Out',
               onPressed: () {
-                Navigator.pushNamed(context, '/');
+                // Clear the stack and redirect to the welcome screen
+                Navigator.pushNamedAndRemoveUntil(
+                    context, '/welcome', (route) => false);
               },
             ),
           ],

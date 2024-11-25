@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -12,10 +12,20 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    _checkAuthState();
+  }
 
-    Timer(const Duration(seconds: 3), () {
+  void _checkAuthState() async {
+    // Wait for splash screen animation
+    await Future.delayed(const Duration(seconds: 3));
+
+    // Check user's authentication state
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
       Navigator.pushReplacementNamed(context, '/welcome');
-    });
+    } else {
+      Navigator.pushReplacementNamed(context, '/home');
+    }
   }
 
   @override
@@ -24,7 +34,6 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             ClipRRect(
               child: SizedBox.fromSize(

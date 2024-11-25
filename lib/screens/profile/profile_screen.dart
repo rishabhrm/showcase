@@ -83,12 +83,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
             const SizedBox(height: 10),
             Row(
               children: [
-                Expanded(
-                    child: ProfileButton(
-                        icon: Icons.image_outlined,
-                        label: 'Change Picture',
-                        onPressed: () {})),
-                const SizedBox(width: 10),
+                // Expanded(
+                //     child: ProfileButton(
+                //         icon: Icons.image_outlined,
+                //         label: 'Change Picture',
+                //         onPressed: () {})),
+                // const SizedBox(width: 10),
                 Expanded(
                   child: ProfileButton(
                     icon: Icons.edit,

@@ -1,26 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 import '../../widgets/horizontal_list.dart';
 
 class DashboardScreen extends StatefulWidget {
+  const DashboardScreen({super.key});
+
   @override
   State<DashboardScreen> createState() => _DashboardScreenState();
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  final List<Map<String, String>> newMovies = [
-    {
-      'image': 'assets/hoc.jpg',
-      'title': 'House of Cards',
-    },
-    {
-      'image': 'assets/td.jpg',
-      'title': 'True Detective',
-    },
-    {
-      'image': 'assets/drw.jpg',
-      'title': 'Doctor Who',
-    },
-  ];
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  Future<Map<String, dynamic>> fetchDashboardData() async {
+    try {
+      final userId = _auth.currentUser?.uid;
+      if (userId == null) throw Exception("User not authenticated");
+
+      final userDoc = await _firestore.collection('users').doc(userId).get();
+      return userDoc.data() ?? {};
+    } catch (e) {
+      debugPrint("Error fetching dashboard data: $e");
+      return {};
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,146 +44,72 @@ class _DashboardScreenState extends State<DashboardScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 10),
-              const Text(
-                'Dashboard',
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 30),
-              const Center(
-                child: CircleAvatar(
-                  radius: 60,
-                  backgroundImage: AssetImage('assets/pfp.jpg'),
-                ),
-              ),
-              const SizedBox(height: 35),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Column(
-                    children: [
-                      Text("Watched", style: TextStyle(fontSize: 12)),
-                      Text("7", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Text("Planned", style: TextStyle(fontSize: 12)),
-                      Text("70",
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.bold)),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Text("Favourites", style: TextStyle(fontSize: 12)),
-                      Text("4",
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.bold)),
-                    ],
-                  ),
-                ],
-              ),
-              const SizedBox(height: 25),
-              const Text('TIME SPENT WATCHING',
-                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
-              const SizedBox(height: 8),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Column(
-                    children: [
-                      Text('Months', style: TextStyle(fontSize: 12)),
-                      Text('12',
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.bold)),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Text('Days', style: TextStyle(fontSize: 12)),
-                      Text('25',
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.bold)),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Text('Hours', style: TextStyle(fontSize: 12)),
-                      Text('50',
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.bold)),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Text('Episodes', style: TextStyle(fontSize: 12)),
-                      Text('100',
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.bold)),
-                    ],
-                  ),
-                ],
-              ),
-              const SizedBox(height: 25),
-              const Text('MOST WATCHED SHOWS',
-                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
-              const SizedBox(height: 10),
-              SizedBox(
-                height: 180,
-                child: HorizontalList(
-                  items: newMovies,
-                  onTap: (index) {
-                    Navigator.pushNamed(context, '/movie');
-                  },
-                ),
-              ),
-              const Text('GENRE BREAKDOWN',
-                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
-              const SizedBox(height: 5),
-              genreBar("Comedy", 0.8),
-              genreBar("Action", 0.6),
-              genreBar("Adventure", 0.5),
-              genreBar("Mystery", 0.4),
-              genreBar("Sci-fi", 0.4),
-              genreBar("Drama", 0.3),
-              genreBar("Romance", 0.1),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+        child: FutureBuilder<Map<String, dynamic>>(
+          future: fetchDashboardData(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            }
 
-  Widget genreBar(String genre, double progress) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 3),
-      child: Row(
-        children: [
-          Expanded(
-            flex: 3,
-            child: Text(
-              genre,
-              style: const TextStyle(fontSize: 12.5),
-            ),
-          ),
-          Expanded(
-            flex: 7,
-            child: LinearProgressIndicator(
-              value: progress,
-              backgroundColor: Colors.black,
-              color: Colors.blue,
-            ),
-          ),
-        ],
+            if (snapshot.hasError || !snapshot.hasData || snapshot.data!.isEmpty) {
+              return const Center(child: Text("Error loading data"));
+            }
+
+            final data = snapshot.data!;
+            final watched = List.from(data['watched'] ?? []);
+            final planToWatch = List.from(data['planToWatch'] ?? []);
+            final favourites = List.from(data['favourites'] ?? []);
+
+            return SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 10),
+                  const Text(
+                    'Dashboard',
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 40),
+                  const Center(
+                    child: CircleAvatar(
+                      radius: 60,
+                      backgroundImage: AssetImage('assets/pfp.jpg'),
+                    ),
+                  ),
+                  const SizedBox(height: 65),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Column(
+                        children: [
+                          const Text("Watched", style: TextStyle(fontSize: 18)),
+                          Text("${watched.length}", style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          const Text("Planned", style: TextStyle(fontSize: 18)),
+                          Text("${planToWatch.length}", style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          const Text("Favourites", style: TextStyle(fontSize: 18)),
+                          Text("${favourites.length}", style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 25),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }

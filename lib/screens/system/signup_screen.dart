@@ -49,22 +49,32 @@ class _SignupScreenState extends State<SignupScreen> {
 
       User? user = userCredential.user;
 
-      if (user != null) {
-        await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
-          'name': _emailController.text,
-          'username': '',
-          'aboutMe': '',
-          'email': _emailController.text,
-          'profilePicture': '',
-          'userSince': FieldValue.serverTimestamp(),
-          'favourites': [],
-          'watched': [],
-          'planToWatch': [],
-          'reviews': [],
-        });
+     if (user != null) {
+  // Add the user's main document
+  await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+    'name': _emailController.text,
+    'username': '',
+    'aboutMe': '',
+    'email': _emailController.text,
+    'profilePicture': 'https://i.pinimg.com/originals/23/ab/9e/23ab9e2a4774de95f79b3f81b981e9ec.jpg',
+    'userSince': FieldValue.serverTimestamp(),
+    'favourites': [],
+    'watched': [],
+    'planToWatch': [],
+  });
 
-        Navigator.pushNamed(context, '/home');
-      }
+  await FirebaseFirestore.instance
+      .collection('users')
+      .doc(user.uid)
+      .collection('reviews')
+      .add({
+    'movieId': '',
+    'reviewText': '',
+  });
+
+  Navigator.pushNamed(context, '/home');
+}
+
     } on FirebaseAuthException catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(e.message ?? "Signup failed")),
